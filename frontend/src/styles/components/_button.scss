@@ -1,0 +1,20 @@
+/** @format */
+@use '../abstracts' as *;
+
+.btn {
+	@include button;
+}
+
+.btn__outline {
+	@include button(
+		$color: $primary,
+		$background: transparent,
+		$hoverColor: $light,
+		$hoverBG: $primary
+	);
+}
+
+.btn-lg {
+	font-size: 1.3rem;
+	padding: 0.7rem 2rem;
+}

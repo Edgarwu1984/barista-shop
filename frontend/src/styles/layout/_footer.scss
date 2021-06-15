@@ -1,0 +1,96 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+footer {
+	position: relative;
+	background-color: $dark;
+	color: $primary-dark;
+	.footer__info {
+		padding: 1rem;
+		@include flexbox($content: center, $direction: column);
+
+		&-content {
+			@include flexbox($content: center, $direction: column);
+			max-width: 100%;
+			padding: 2rem 1rem;
+			font-size: 0.9rem;
+
+			.logo {
+				max-height: 72px;
+				max-width: 72px;
+				margin-bottom: 0.7rem;
+			}
+
+			h4 {
+				color: $primary;
+				margin-bottom: 1rem;
+			}
+			ul {
+				li {
+					@include flexbox($content: center);
+					margin-bottom: 1.2rem;
+					font-size: 1rem;
+				}
+			}
+		}
+	}
+
+	.copyright__info {
+		background-color: darken($dark, 5%);
+		text-align: center;
+		p {
+			color: $primary;
+			font-size: 0.7rem;
+			padding: 0.8rem;
+			margin: 0;
+		}
+	}
+
+	@media (min-width: $md) {
+		.footer__info {
+			a,
+			p {
+				font-size: 0.9rem;
+			}
+
+			@include flexbox($content: center, $direction: row);
+			&-content {
+				@include flexbox($items: flex-start, $direction: column);
+				align-self: flex-start;
+				padding: 3rem 1rem;
+				max-width: calc(100% / 3);
+
+				ul {
+					li {
+						@include flexbox($content: flex-start);
+						margin-bottom: 0.7rem;
+						font-size: 1rem;
+					}
+				}
+			}
+		}
+	}
+	@media (min-width: $lg) {
+		.footer__info {
+			@include flexbox($content: space-between);
+			padding: 2rem 4rem;
+			a,
+			p {
+				font-size: 1rem;
+			}
+			&-content {
+				padding: 4rem 2rem;
+			}
+		}
+		.copyright__info {
+			p {
+				font-size: 0.9rem;
+			}
+		}
+	}
+	@media (min-width: $xl) {
+	}
+	@media (min-width: $xl) {
+	}
+}

@@ -1,0 +1,53 @@
+/** @format */
+@use '../abstracts' as *;
+
+.hero {
+	position: relative;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	// background-attachment: fixed;
+
+	&::before {
+		content: '';
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0) 80%, rgba(#000, 1) 100%);
+		background-color: rgba(#000, 0.4);
+	}
+
+	.hero__wrapper {
+		color: $light;
+		height: 100%;
+		@include flexbox($direction: column);
+
+		.title-right,
+		.title-center {
+			@include flexbox($direction: column);
+
+			h1 {
+				font-size: 6.5rem;
+			}
+			p {
+				text-align: center;
+				color: $gray-300;
+				font-size: 1.1rem;
+				margin: 1rem 0 3rem 0;
+			}
+		}
+
+		.title-right {
+			max-width: 50%;
+			margin-left: auto;
+		}
+
+		.title-center {
+			width: 100%;
+			margin: 0 auto;
+			h1 {
+				font-size: 4rem;
+			}
+		}
+	}
+}
