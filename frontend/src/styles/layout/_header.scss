@@ -5,6 +5,7 @@
 .bg-dark {
 	transition: all 0.2s ease-in-out;
 	background-color: rgba(darken($dark, 5%), 1);
+	border-bottom: 1px solid $primary-dark;
 }
 
 header {
@@ -18,37 +19,92 @@ header {
 		.logo {
 			position: relative;
 			background-color: darken($dark, 10%);
-			padding: 0.5rem;
+			padding: 0.2rem;
+			@include shadow($v: 12px);
 
 			&::after {
 				position: absolute;
 				content: '';
-				bottom: -2rem;
+				bottom: -1.98rem;
 				left: 50%;
 				transform: translateX(-50%);
 				width: 100%;
 				height: 2rem;
 				background-color: darken($dark, 10%);
 				clip-path: polygon(50% 60%, 0 0, 100% 0);
+				@include shadow($v: 12px);
 			}
 			img {
-				height: 72px;
-				width: 72px;
+				height: 64px;
+				width: 64px;
 			}
 		}
 
 		.nav {
-			margin-left: auto;
-			@include flexbox();
-			&__item {
-				margin: 0 1.5rem;
-				&-link {
-					position: relative;
-					font-size: 1.2rem;
-					font-family: 'Marcellus', serif;
-					text-transform: uppercase;
-				}
+			display: none;
+			@media (min-width: $md) {
+				display: inline-block;
+				@include flexbox();
+				margin-left: auto;
+				&__item {
+					margin: 0 1.5rem;
+					&-link {
+						position: relative;
+						font-size: 1.2rem;
+						font-family: 'Marcellus', serif;
+						text-transform: uppercase;
+					}
 
+					.active {
+						position: relative;
+						color: $primary;
+						&::before {
+							position: absolute;
+							content: ' ';
+							left: 50%;
+							transform: translateX(-50%);
+							bottom: -0.5rem;
+							background-color: $primary;
+							height: 2px;
+							width: 2rem;
+						}
+					}
+				}
+				.shopify {
+					@include flexbox();
+					margin-left: 1.5rem;
+
+					&::before {
+						content: '';
+						height: 1rem;
+						width: 2px;
+						background-color: rgba($primary-dark, 0.5);
+						margin-right: 1.5rem;
+					}
+
+					&__item {
+						margin: 0 0.5rem;
+					}
+				}
+			}
+		}
+
+		.nav__mobile {
+			background-color: rgba(darken($dark, 5%), 1);
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 6rem 2rem;
+			width: 100%;
+			height: fit-content;
+			z-index: -1;
+			@include flexbox($direction: column);
+			.nav__item {
+				margin: 1.5rem;
+				&-link {
+					text-transform: uppercase;
+					font-size: 1.3rem;
+				}
 				.active {
 					position: relative;
 					color: $primary;
@@ -64,22 +120,22 @@ header {
 					}
 				}
 			}
-		}
 
-		.shopify {
-			@include flexbox();
-			margin-left: 1.5rem;
-
-			&::before {
-				content: '';
-				height: 1rem;
-				width: 2px;
-				background-color: rgba($primary-dark, 0.5);
-				margin-right: 1.5rem;
+			.shopify {
+				margin-top: 4rem;
+				width: 80%;
+				@include flexbox($content: space-between);
 			}
 
-			&__item {
-				margin: 0 0.5rem;
+			@media (min-width: $md) {
+				display: none;
+			}
+		}
+
+		.btn-hamburger {
+			display: block;
+			@media (min-width: $md) {
+				display: none;
 			}
 		}
 	}

@@ -14,7 +14,50 @@
 	);
 }
 
+.btn__outline-light {
+	@include button(
+		$color: $light,
+		$border: $light,
+		$background: transparent,
+		$hoverColor: $light,
+		$hoverBG: $primary
+	);
+}
+
 .btn-lg {
 	font-size: 1.3rem;
 	padding: 0.7rem 2rem;
+}
+
+.btn-back__top {
+	position: fixed;
+	right: 1rem;
+	bottom: 5%;
+	color: $primary;
+	background-color: darken($dark, 10%);
+	padding: 0.5rem;
+	font-size: 1.7rem;
+	outline: none;
+	border: none;
+	opacity: 100;
+	cursor: pointer;
+	z-index: 10;
+}
+
+.hidden {
+	transition: all 0.3s ease;
+	opacity: 0;
+}
+
+.btn-hamburger {
+	color: $primary;
+	font-size: 2rem;
+	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	&:hover {
+		transition: all 0.3s ease;
+		color: $primary-light;
+	}
 }

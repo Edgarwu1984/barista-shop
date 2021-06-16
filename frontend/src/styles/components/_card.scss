@@ -1,0 +1,38 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+.card {
+	max-width: 24rem;
+	background-color: white;
+	padding: 2rem;
+	height: auto;
+	@include shadow;
+	@include flexbox($direction: column);
+	&__info {
+		@include flexbox($direction: column);
+		text-align: center;
+		margin-bottom: 0;
+		height: 100%;
+		img {
+			width: 100%;
+			height: auto;
+			margin-bottom: 1rem;
+		}
+
+		h4 {
+			font-size: 1.3rem;
+			margin-bottom: 1rem;
+		}
+		p {
+			font-size: 1.2rem;
+			margin-top: auto;
+			margin-bottom: 0;
+		}
+	}
+
+	&__btn {
+		display: block;
+		margin-top: auto;
+	}
+}

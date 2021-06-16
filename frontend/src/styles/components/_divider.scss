@@ -6,9 +6,11 @@
 	position: relative;
 	width: 20rem;
 	margin: 1.5rem 0;
+	max-width: 70%;
+
 	@include flexbox($content: space-between);
 	img {
-		padding: 0 2rem;
+		padding: 0 1rem;
 		margin: auto;
 	}
 	&::before,
@@ -24,5 +26,12 @@
 	}
 	&::after {
 		right: 0;
+	}
+
+	@media (min-width: $md) {
+		max-width: 100%;
+		img {
+			padding: 0 2rem;
+		}
 	}
 }

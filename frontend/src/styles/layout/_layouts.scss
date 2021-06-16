@@ -1,0 +1,45 @@
+/** @format */
+@use '../abstracts' as *;
+
+.container {
+	position: relative;
+	max-width: 475px;
+	padding: 0 0.5rem;
+	margin: 0 auto;
+
+	@media (min-width: $sm) {
+		max-width: 640px;
+		padding: 0 1.5rem;
+	}
+	@media (min-width: $md) {
+		max-width: 768px;
+		padding: 0 2rem;
+	}
+	@media (min-width: $lg) {
+		max-width: 1024px;
+	}
+	@media (min-width: $xl) {
+		max-width: 1280px;
+	}
+	@media (min-width: $xxl) {
+		max-width: 1600px;
+	}
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	grid-template-rows: repeat(auto, 1fr);
+	justify-items: center;
+	gap: 2.5rem;
+
+	@media (min-width: $md) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media (min-width: $lg) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@media (min-width: $xl) {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}

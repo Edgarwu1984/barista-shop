@@ -6,7 +6,8 @@
 	$background: $primary,
 	$border: $primary,
 	$hoverColor: $primary,
-	$hoverBG: $light
+	$hoverBG: $light,
+	$hoverBorder: $primary
 ) {
 	color: $color;
 	background: $background;
@@ -22,6 +23,7 @@
 		transition: all 0.3s ease;
 		color: $hoverColor;
 		background-color: $hoverBG;
+		border: 1px solid $hoverBorder;
 	}
 
 	@media (min-width: $md) {
@@ -48,5 +50,33 @@
 }
 
 @mixin shadow($h: 0, $v: 4px, $blur: 12px, $spread: 0) {
-	box-shadow: $h $v $blur $spread rgba($color-gray-800, 0.2);
+	box-shadow: $h $v $blur $spread rgba($gray-800, 0.2);
+}
+
+@mixin backgroundImage(
+	$height: 500px,
+	$position: center,
+	$overlayOpacity: 0.4,
+	$gradient: 'false'
+) {
+	position: relative;
+	height: $height;
+	background-repeat: no-repeat;
+	background-position: $position;
+	background-size: cover;
+	&::before {
+		content: '';
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		background-color: rgba(#000, $overlayOpacity);
+		@if $gradient == 'true' {
+			background: linear-gradient(
+				0deg,
+				rgba(0, 0, 0, 0) 80%,
+				rgba(#000, 1) 100%
+			);
+			background-color: rgba(#000, $overlayOpacity);
+		}
+	}
 }

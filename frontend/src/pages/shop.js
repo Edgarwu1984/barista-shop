@@ -4,11 +4,12 @@ import React from 'react';
 import Hero from 'components/Hero';
 import Layout from 'components/Layout';
 import Divider from 'components/Divider';
+import {bg3}from 'assets'
 
 function ShopPage() {
 	return (
 		<Layout title='Barista - Coffee Shop'>
-			<Hero bgImage='/images/bg3.png'>
+			<Hero bgImage={bg3}>
 				<div className='title-center'>
 					<h1>COFFEE SHOP</h1>
 					<Divider />
