@@ -17,7 +17,6 @@ html {
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: $light;
 }
 
 li {
@@ -45,13 +44,14 @@ video {
 	height: auto;
 }
 
-input {
-	&[type='text'],
-	&[type='search'],
-	&[type='email'] {
-		outline-offset: 0;
-		padding: 0.5rem 0.8rem;
-	}
+input,
+textarea {
+	border: none;
+	outline: none;
+	padding: 0.7rem 1rem;
+	font-size: 1.2rem;
+	font-family: 'Open Sans', sans-serif;
+	background-color: $light;
 }
 
 code {

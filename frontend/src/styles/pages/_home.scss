@@ -42,6 +42,7 @@
 
 // FEATURE SECTION
 .feature {
+	background-color: $light;
 	&__wrapper {
 		@include flexbox($direction: column);
 		padding: 2rem;
@@ -137,7 +138,7 @@
 
 // COFFEE LEARNING
 .learning {
-	@include backgroundImage();
+	@include backgroundImage($height: 500px);
 	background-image: url('../../assets/images/bg6.png');
 	&__wrapper {
 		color: $light;

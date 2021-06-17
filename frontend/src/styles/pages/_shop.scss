@@ -1,0 +1,81 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+.featured__bg {
+	background-image: url('../../assets/images/bg_feature1.png');
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+
+.product__nav {
+	@include flexbox($direction: column);
+	width: 100%;
+	margin: 4rem 0;
+	.product__link {
+		margin-bottom: 4rem;
+	}
+
+	@media (min-width: $md) {
+		@include flexbox($content: space-evenly);
+		margin-bottom: 2rem;
+	}
+}
+
+.section__title {
+	@include flexbox($content: space-between);
+	width: 100%;
+	margin-bottom: 3rem;
+	text-transform: uppercase;
+	h3 {
+		position: relative;
+		&::before {
+			position: absolute;
+			content: ' ';
+			height: 2rem;
+			width: 0.35rem;
+			top: 50%;
+			left: -1.5rem;
+			transform: translateY(-50%);
+			background-color: $primary;
+		}
+	}
+	a {
+		font-size: 1.2rem;
+		color: $primary;
+	}
+}
+
+.product__link {
+	position: relative;
+	background-color: $light;
+	height: 12rem;
+	width: 30rem;
+
+	@include shadow;
+	@include flexbox;
+	&::before {
+		@include triangle-left($size: 6rem);
+	}
+	h3 {
+		text-transform: uppercase;
+		margin-right: auto;
+		padding: 0 5rem;
+	}
+
+	&-icon {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 3rem;
+		height: 3rem;
+	}
+
+	&-image {
+		position: absolute;
+		height: 300px;
+		width: 300px;
+		right: -4rem;
+		bottom: -2rem;
+	}
+}

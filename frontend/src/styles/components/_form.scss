@@ -1,0 +1,33 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+.contact__form {
+	@include backgroundImage($height: fit-content);
+	background-image: url('../../assets/images/bg7.png');
+	.container {
+		@include flexbox($direction: column);
+		padding: 4rem;
+		width: 100%;
+		h2 {
+			color: $light;
+			text-transform: uppercase;
+			text-align: center;
+		}
+		.row {
+			width: 100%;
+			@include flexbox($direction: column);
+
+			input,
+			textarea {
+				width: 100%;
+				margin: 0rem 1rem 2rem 1rem;
+			}
+
+			@media (min-width: $md) {
+				width: 70%;
+				@include flexbox($direction: row);
+			}
+		}
+	}
+}

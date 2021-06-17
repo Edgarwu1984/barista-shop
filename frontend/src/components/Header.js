@@ -64,9 +64,7 @@ export default function Header() {
 								<NavLink to='/shop/coffee' className='dropdown__menu-link'>
 									Coffee
 								</NavLink>
-								<NavLink
-									to='/shop/coffee-machine'
-									className='dropdown__menu-link'>
+								<NavLink to='/shop/equipment' className='dropdown__menu-link'>
 									Equipment
 								</NavLink>
 							</div>

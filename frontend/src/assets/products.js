@@ -1,6 +1,6 @@
 /** @format */
 
-const products = [
+const coffee = [
 	{
 		_id: '1',
 		name: 'COLD BREW COARSE GROUND COFFEE BLEND',
@@ -59,4 +59,4 @@ const products = [
 	},
 ];
 
-export default products;
+export default coffee;

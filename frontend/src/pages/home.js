@@ -6,7 +6,7 @@ import Layout from 'components/Layout';
 import Divider from 'components/Divider';
 import { Link } from 'react-router-dom';
 import { icon2, icon3, icon4, bg1 } from 'assets';
-import Products from 'components/products/Products';
+import Coffee from 'components/products/Coffee';
 
 function HomePage() {
 	return (
@@ -98,7 +98,7 @@ function HomePage() {
 				<div className='container products__wrapper'>
 					<h2>Our Popular Products</h2>
 					<Divider />
-					<Products />
+					<Coffee />
 					<Link to='/shop' className='btn__outline btn-lg'>
 						See More
 					</Link>
