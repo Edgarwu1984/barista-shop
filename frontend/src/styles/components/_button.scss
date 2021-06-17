@@ -44,11 +44,6 @@
 	z-index: 10;
 }
 
-.hidden {
-	transition: all 0.3s ease;
-	opacity: 0;
-}
-
 .btn-hamburger {
 	color: $primary;
 	font-size: 2rem;
@@ -60,4 +55,10 @@
 		transition: all 0.3s ease;
 		color: $primary-light;
 	}
+}
+
+.hidden {
+	transition: all 0.3s ease;
+	opacity: 0;
+	pointer-events: none;
 }

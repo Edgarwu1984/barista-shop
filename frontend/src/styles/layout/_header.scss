@@ -53,6 +53,10 @@ header {
 						font-size: 1.2rem;
 						font-family: 'Marcellus', serif;
 						text-transform: uppercase;
+						.dropdown__arrow {
+							margin-top: 1.5rem;
+							padding-top: 1rem;
+						}
 					}
 
 					.active {
@@ -138,5 +142,43 @@ header {
 				display: none;
 			}
 		}
+	}
+}
+
+.dropdown {
+	position: relative;
+
+	.arrow {
+		position: absolute;
+		top: 0.2rem;
+	}
+
+	&__menu {
+		position: absolute;
+		height: min-content;
+		top: 2rem;
+		left: 0;
+		padding: 2rem;
+		background-color: $dark;
+		@include shadow();
+		@include flexbox(
+			$direction: column,
+			$content: flex-start,
+			$items: flex-start
+		);
+
+		&::after {
+			content: ' ';
+			position: absolute;
+			height: 2rem;
+			width: 100%;
+			left: 0;
+			top: -0.2rem;
+		}
+	}
+	&__menu-link {
+		font-size: 1.1rem;
+		text-transform: uppercase;
+		margin-bottom: 1.2rem;
 	}
 }

@@ -8,12 +8,14 @@ import {
 	BiUser,
 	AiOutlineMenu,
 	AiOutlineClose,
+	IoMdArrowDropdown,
 } from 'lib/icons';
 import { logo } from 'assets';
 
 export default function Header() {
 	const [showEvent, setShowEvent] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
+	const [showDropdown, setShowDropdown] = useState(false);
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleEvent);
@@ -47,10 +49,27 @@ export default function Header() {
 								Home
 							</NavLink>
 						</li>
-						<li className='nav__item'>
+						<li
+							className='nav__item dropdown'
+							onMouseEnter={() => setShowDropdown(true)}
+							onMouseLeave={() => setShowDropdown(false)}>
 							<NavLink to='/shop' className='nav__item-link'>
 								Shop
+								<IoMdArrowDropdown className='arrow' />
 							</NavLink>
+							<div
+								className={
+									!showDropdown ? 'dropdown__menu hidden' : 'dropdown__menu'
+								}>
+								<NavLink to='/shop/coffee' className='dropdown__menu-link'>
+									Coffee
+								</NavLink>
+								<NavLink
+									to='/shop/coffee-machine'
+									className='dropdown__menu-link'>
+									Equipment
+								</NavLink>
+							</div>
 						</li>
 						<div className='shopify'>
 							<li className='shopify__item'>
@@ -64,7 +83,7 @@ export default function Header() {
 								</a>
 							</li>
 							<li className='shopify__item'>
-								<a href='/'>
+								<a href='/cart'>
 									<FiShoppingCart size='1.5rem' />
 								</a>
 							</li>
@@ -88,12 +107,12 @@ export default function Header() {
 								</a>
 							</li>
 							<li className='shopify__item'>
-								<a href='/'>
+								<a href='/login'>
 									<BiUser size='1.5rem' />
 								</a>
 							</li>
 							<li className='shopify__item'>
-								<a href='/'>
+								<a href='/cart'>
 									<FiShoppingCart size='1.5rem' />
 								</a>
 							</li>

@@ -26,6 +26,14 @@
 	}
 }
 
+.wrapper {
+	padding: 4rem 2rem;
+}
+
+.flex__col__center {
+	@include flexbox($direction: column);
+}
+
 .grid {
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);

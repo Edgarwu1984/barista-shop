@@ -5,6 +5,7 @@ import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 import { BiUser } from 'react-icons/bi';
 import { RiArrowUpLine } from 'react-icons/ri';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { IoMdArrowDropdown } from 'react-icons/io';
 
 export {
 	FaMapMarkerAlt,
@@ -16,4 +17,5 @@ export {
 	RiArrowUpLine,
 	AiOutlineMenu,
 	AiOutlineClose,
+	IoMdArrowDropdown
 };
