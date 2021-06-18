@@ -13,9 +13,9 @@ function HomePage() {
 		<Layout title='Barista - Coffee Shop'>
 			<Hero bgImage={bg1} height='100vh'>
 				<div className='title-right'>
-					<h1>COFFEE SHOP</h1>
+					<h1 className='uppercase'>COFFEE SHOP</h1>
 					<Divider />
-					<p>
+					<p className='lead'>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						Exercitationem, quam. Lorem ipsum dolor sit amet consectetur
 						adipisicing elit. Exercitationem, quam.
@@ -26,15 +26,17 @@ function HomePage() {
 				</div>
 			</Hero>
 			<section className='intro'>
-				<div className='container wrapper__center'>
-					<h2>Our delicious offer</h2>
-					<Divider />
-					<p>
-						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta, ab
-						sint fuga error temporibus distinctio accusantium quia. Veritatis id
-						perspiciatis iste repellendus debitis. Dicta expedita veniam autem
-						natus facere! Nostrum?
-					</p>
+				<div className='container'>
+					<div className='wrapper center'>
+						<h2 className='uppercase'>Our delicious offer</h2>
+						<Divider />
+						<p className='lead'>
+							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta,
+							ab sint fuga error temporibus distinctio accusantium quia.
+							Veritatis id perspiciatis iste repellendus debitis. Dicta expedita
+							veniam autem natus facere! Nostrum?
+						</p>
+					</div>
 				</div>
 			</section>
 			<section className='feature'>
@@ -83,25 +85,29 @@ function HomePage() {
 			<section className='shop__link'>
 				<div className='shop__link-bean'>
 					<h2>shop with coffee bean</h2>
-					<Link to='/shop/bean' className='btn__outline-light btn-lg'>
+					<Link to='/shop/coffee' className='btn__outline-light btn-lg'>
 						shop now
 					</Link>
 				</div>
 				<div className='shop__link-machine'>
 					<h2>shop with coffee machine</h2>
-					<Link to='/shop/machine' className='btn__outline-light btn-lg'>
+					<Link to='/shop/equipment' className='btn__outline-light btn-lg'>
 						shop now
 					</Link>
 				</div>
 			</section>
 			<section className='products'>
-				<div className='container products__wrapper'>
-					<h2>Our Popular Products</h2>
-					<Divider />
-					<Coffee />
-					<Link to='/shop' className='btn__outline btn-lg'>
-						See More
-					</Link>
+				<div className='container'>
+					<div className='wrapper center'>
+						<h2>Our Popular Products</h2>
+						<Divider />
+						<Coffee />
+					</div>
+					<div className='wrapper center'>
+						<Link to='/shop' className='btn__outline btn-lg'>
+							See More
+						</Link>
+					</div>
 				</div>
 			</section>
 			<section className='learning'>

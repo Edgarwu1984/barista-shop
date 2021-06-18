@@ -25,6 +25,30 @@ h4 {
 	font-size: 1.2rem;
 }
 
+.lead {
+	font-size: 1.25rem;
+	margin-bottom: 1rem;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.section-title {
+	position: relative;
+	text-transform: uppercase;
+	&::before {
+		position: absolute;
+		content: ' ';
+		height: 60%;
+		width: 0.3rem;
+		top: 50%;
+		left: -1.2rem;
+		transform: translateY(-50%);
+		background-color: $primary;
+	}
+}
+
 body,
 p {
 	font-family: 'Open Sans', sans-serif;

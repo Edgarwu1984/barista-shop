@@ -1,12 +1,13 @@
 /** @format */
 
 import React from 'react';
-import { coffee } from 'assets';
 import Card from 'components/Card';
+import products from 'products';
 
 function Equipment() {
+	const { coffee } = products;
 	return (
-		<div className='grid'>
+		<div className='grid-4'>
 			{coffee.length === 0 ? (
 				<h3>No products</h3>
 			) : (

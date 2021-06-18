@@ -14,10 +14,10 @@ function ShopPage() {
 	return (
 		<Layout title='Barista - Coffee Shop'>
 			<Hero bgImage={bg2}>
-				<div className='title-center'>
-					<h1>COFFEE SHOP</h1>
+				<div className='center'>
+					<h1 className='uppercase'>COFFEE SHOP</h1>
 					<Divider />
-					<p>
+					<p className='lead'>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						Exercitationem, quam. Lorem ipsum dolor sit amet consectetur
 						adipisicing elit. Exercitationem, quam.
@@ -47,16 +47,16 @@ function ShopPage() {
 							<img className='product__link-image' src={pot} alt='coffee-pot' />
 						</Link>
 					</div>
-					<div className='wrapper flex__col__center'>
-						<div className='section__title'>
-							<h3>Coffee</h3>
-							<Link to='/shop'>view all</Link>
+					<div className='wrapper center'>
+						<div className='product__title'>
+							<h3 className='section-title'>Coffee</h3>
+							<Link to='/shop/coffee'>view all</Link>
 						</div>
 						<Coffee />
 					</div>
-					<div className='wrapper flex__col__center'>
-						<div className='section__title'>
-							<h3>equipment</h3>
+					<div className='wrapper center mb-3'>
+						<div className='product__title'>
+							<h3 className='section-title'>equipment</h3>
 							<Link to='/shop/equipment'>view all</Link>
 						</div>
 						<Equipment />

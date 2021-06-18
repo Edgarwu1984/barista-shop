@@ -5,11 +5,8 @@
 // INTRO SECTION
 .intro {
 	background-image: url('../../assets/images/bg9.jpg');
-	@include backgroundImage(
-		$position: bottom,
-		$overlayOpacity: 0,
-		$height: fit-content
-	);
+	padding: 4rem 1rem;
+	@include backgroundImage($position: bottom, $overlayOpacity: 0);
 
 	.wrapper__center {
 		@include flexbox($direction: column);

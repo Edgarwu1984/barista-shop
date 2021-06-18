@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 function NotFoundPage() {
 	return (
-		<Layout>
+		<Layout title='404 Page Not Found'>
 			<Hero bgImage={bg4}>
 				<div className='title-center'>
 					<h1>404 Not Found.</h1>
@@ -17,7 +17,7 @@ function NotFoundPage() {
 				</div>
 			</Hero>
 			<div className='container'>
-				<div className='wrapper flex__col__center'>
+				<div className='wrapper center'>
 					<h3 style={{ marginBottom: '2rem' }}>This page is not exist. </h3>
 					<Link to='/' className='btn__outline'>
 						Go Back

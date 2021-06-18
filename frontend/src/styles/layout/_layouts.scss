@@ -27,17 +27,40 @@
 }
 
 .wrapper {
-	padding: 4rem 2rem;
+	padding: 4rem 0;
 }
 
-.flex__col__center {
+.center {
 	@include flexbox($direction: column);
+	text-align: center;
+	width: 100%;
+	margin: auto;
 }
 
-.grid {
+/* Margin */
+.mb-1 {
+	margin-bottom: 1rem;
+}
+.mb-2 {
+	margin-bottom: 2rem;
+}
+.mb-3 {
+	margin-bottom: 3rem;
+}
+.mt-1 {
+	margin-bottom: 1rem;
+}
+.mt-2 {
+	margin-bottom: 2rem;
+}
+.mt-3 {
+	margin-bottom: 3rem;
+}
+
+/* Grid */
+.grid-4 {
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
-	grid-template-rows: repeat(auto, 1fr);
 	justify-items: center;
 	gap: 2.5rem;
 
@@ -49,5 +72,30 @@
 	}
 	@media (min-width: $xl) {
 		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.grid-3 {
+	display: grid;
+	grid-template-columns: repeat(1, auto);
+	justify-items: center;
+	gap: 2.5rem;
+
+	@media (min-width: $md) {
+		grid-template-columns: repeat(2, auto);
+	}
+	@media (min-width: $lg) {
+		grid-template-columns: repeat(3, auto);
+	}
+}
+
+.grid-2 {
+	display: grid;
+	grid-template-columns: repeat(1, auto);
+	justify-items: center;
+	gap: 2.5rem;
+
+	@media (min-width: $md) {
+		grid-template-columns: repeat(2, auto);
 	}
 }

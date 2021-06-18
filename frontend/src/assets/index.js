@@ -20,7 +20,6 @@ import feature1 from './images/bg_feature1.png';
 import feature2 from './images/bg_feature2.png';
 import cup from './images/cup.png';
 import pot from './images/pot.png';
-import coffee from './products';
 
 export {
 	icon1,
@@ -43,5 +42,4 @@ export {
 	pot,
 	feature1,
 	feature2,
-	coffee,
 };
