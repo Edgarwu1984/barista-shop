@@ -1,14 +1,16 @@
 /** @format */
 
 import React from 'react';
-import Hero from 'components/Hero';
-import Layout from 'components/Layout';
-import Divider from 'components/Divider';
 import { Link } from 'react-router-dom';
+import Hero from 'components/layout/Hero';
+import Layout from 'components/layout/Layout';
+import Divider from 'components/layout/Divider';
+import Products from 'components/Products';
 import { icon2, icon3, icon4, bg1 } from 'assets';
-import Coffee from 'components/products/Coffee';
+import db from 'products';
 
 function HomePage() {
+	const { coffee } = db;
 	return (
 		<Layout title='Barista - Coffee Shop'>
 			<Hero bgImage={bg1} height='100vh'>
@@ -101,7 +103,7 @@ function HomePage() {
 					<div className='wrapper center'>
 						<h2>Our Popular Products</h2>
 						<Divider />
-						<Coffee />
+						<Products products={coffee} />
 					</div>
 					<div className='wrapper center'>
 						<Link to='/shop' className='btn__outline btn-lg'>

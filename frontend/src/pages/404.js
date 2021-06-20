@@ -1,11 +1,11 @@
 /** @format */
 
 import React from 'react';
-import Layout from 'components/Layout';
-import Hero from 'components/Hero';
-import Divider from 'components/Divider';
-import { bg4 } from 'assets';
 import { Link } from 'react-router-dom';
+import Layout from 'components/layout/Layout';
+import Hero from 'components/layout/Hero';
+import Divider from 'components/layout/Divider';
+import { bg4 } from 'assets';
 
 function NotFoundPage() {
 	return (

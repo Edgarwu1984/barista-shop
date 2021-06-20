@@ -76,7 +76,7 @@ export default function Header() {
 								</a>
 							</li>
 							<li className='shopify__item'>
-								<a href='/'>
+								<a href='/login'>
 									<BiUser size='1.5rem' />
 								</a>
 							</li>

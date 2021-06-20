@@ -1,0 +1,40 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+.image {
+	width: 100%;
+	margin-right: 2rem;
+	img {
+		width: 100%;
+	}
+
+	@media (min-width: $md) {
+		width: 300px;
+	}
+	@media (min-width: $lg) {
+		width: 500px;
+	}
+}
+
+.product__info {
+	.description {
+		padding: 1rem 0;
+	}
+	.category {
+		font-size: 1.2rem;
+		margin-bottom: 1rem;
+		span {
+			color: $primary;
+		}
+	}
+	.price {
+		margin: 2rem 0;
+	}
+}
+.cart {
+	input {
+		width: 8rem !important;
+		margin-right: 2rem;
+	}
+}

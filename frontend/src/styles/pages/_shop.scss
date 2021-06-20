@@ -3,17 +3,69 @@
 @use '../abstracts' as *;
 
 .featured__bg {
-	background-image: url('../../assets/images/bg_feature1.png');
-	background-repeat: no-repeat;
-	background-position: bottom right;
+	@include featured-bg;
+}
+.featured__bg-coffee {
+	@include featured-bg($imageUrl: '../../assets/images/cup.png');
+}
+.featured__bg-equipment {
+	@include featured-bg($imageUrl: '../../assets/images/bg_feature2.png');
 }
 
 .product__nav {
 	@include flexbox($direction: column);
-	width: 100%;
-	margin-top: 4rem;
+	width: 80%;
+	margin: 2rem auto;
+	@media (min-width: $md) {
+		width: 100%;
+	}
+
 	.product__link {
-		margin-bottom: 4rem;
+		margin: 1rem;
+		position: relative;
+		background-color: $light;
+		width: 100%;
+		@include shadow;
+		@include flexbox;
+		@media (min-width: $md) {
+			margin: 1rem 2rem;
+		}
+		@media (min-width: $lg) {
+			width: 360px;
+		}
+
+		&::before {
+			@include triangle-left($size: 6rem);
+		}
+		h3 {
+			text-transform: uppercase;
+			text-align: left;
+			display: block;
+			width: 100%;
+			font-size: 1.4rem;
+			padding: 3rem 4rem;
+			@media (min-width: $lg) {
+				font-size: 1.6rem;
+			}
+			@media (min-width: $xl) {
+				font-size: 2rem;
+			}
+		}
+
+		&-icon {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 3rem;
+			height: 3rem;
+		}
+
+		&-image {
+			position: absolute;
+			height: auto;
+			max-width: 192px;
+			right: -3rem;
+		}
 	}
 
 	@media (min-width: $md) {
@@ -33,40 +85,6 @@
 	}
 }
 
-.product__link {
-	position: relative;
-	background-color: $light;
-	height: 12rem;
-	width: 30rem;
-
-	@include shadow;
-	@include flexbox;
-	&::before {
-		@include triangle-left($size: 6rem);
-	}
-	h3 {
-		text-transform: uppercase;
-		margin-right: auto;
-		padding: 0 5rem;
-	}
-
-	&-icon {
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 3rem;
-		height: 3rem;
-	}
-
-	&-image {
-		position: absolute;
-		height: 300px;
-		width: 300px;
-		right: -4rem;
-		bottom: -2rem;
-	}
-}
-
 aside {
 	width: 10rem;
 	height: 100%;
@@ -74,6 +92,11 @@ aside {
 }
 
 .page__url {
-	margin-top: 3rem;
+	padding-top: 3rem;
 	color: $dark;
+
+	.current__page {
+		color: $primary;
+		text-transform: capitalize;
+	}
 }

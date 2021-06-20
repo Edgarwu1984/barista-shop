@@ -1,16 +1,18 @@
 /** @format */
 
 import React from 'react';
-import Hero from 'components/Hero';
-import Layout from 'components/Layout';
-import Divider from 'components/Divider';
-import { bg2, cup, pot, icon5, icon6 } from 'assets';
-import Coffee from 'components/products/Coffee';
-import Equipment from 'components/products/Equipment';
 import { Link } from 'react-router-dom';
+import Hero from 'components/layout/Hero';
+import Layout from 'components/layout/Layout';
+import Divider from 'components/layout/Divider';
 import ContactForm from 'components/ContactForm';
+import Products from 'components/Products';
+import { bg2, cup, pot, icon5, icon6 } from 'assets';
+import db from 'products';
 
 function ShopPage() {
+	const { coffee, equipment } = db;
+
 	return (
 		<Layout title='Barista - Coffee Shop'>
 			<Hero bgImage={bg2}>
@@ -48,18 +50,22 @@ function ShopPage() {
 						</Link>
 					</div>
 					<div className='wrapper center'>
-						<div className='product__title'>
-							<h3 className='section-title'>Coffee</h3>
-							<Link to='/shop/coffee'>view all</Link>
+						<div className='container'>
+							<div className='product__title'>
+								<h3 className='section-title'>Coffee</h3>
+								<Link to='/shop/coffee'>view all</Link>
+							</div>
+							<Products products={coffee} />
 						</div>
-						<Coffee />
 					</div>
 					<div className='wrapper center mb-3'>
-						<div className='product__title'>
-							<h3 className='section-title'>equipment</h3>
-							<Link to='/shop/equipment'>view all</Link>
+						<div className='container'>
+							<div className='product__title'>
+								<h3 className='section-title'>equipment</h3>
+								<Link to='/shop/equipment'>view all</Link>
+							</div>
+							<Products products={equipment} />
 						</div>
-						<Equipment />
 					</div>
 				</div>
 			</div>

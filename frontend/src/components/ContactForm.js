@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState } from 'react';
-import Divider from './Divider';
+import Divider from 'components/layout/Divider';
 
 function ContactForm() {
 	const [username, setUsername] = useState('');

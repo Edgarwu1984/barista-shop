@@ -92,3 +92,16 @@
 	width: $size;
 	background-color: $primary;
 }
+
+@mixin featured-bg(
+	$position: right bottom,
+	$imageUrl: '../../assets/images/bg_feature1.png'
+) {
+	background-repeat: no-repeat;
+	background-position: $position;
+	background-image: none;
+
+	@media (min-width: $xl) {
+		background-image: url($imageUrl);
+	}
+}

@@ -14,19 +14,18 @@ h5 {
 h1 {
 	font-size: 3rem;
 }
-
 h2 {
-	font-size: 2.5rem;
-}
-h3 {
 	font-size: 2.3rem;
 }
+h3 {
+	font-size: 1.8rem;
+}
 h4 {
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 }
 
 .lead {
-	font-size: 1.25rem;
+	font-size: 1rem;
 	margin-bottom: 1rem;
 }
 
@@ -43,7 +42,7 @@ h4 {
 		height: 60%;
 		width: 0.3rem;
 		top: 50%;
-		left: -1.2rem;
+		left: -1rem;
 		transform: translateY(-50%);
 		background-color: $primary;
 	}
@@ -57,20 +56,36 @@ p {
 }
 
 @media (min-width: $md) {
+	h1 {
+		font-size: 3rem;
+	}
+	h2 {
+		font-size: 2.3rem;
+	}
+	h3 {
+		font-size: 1.8rem;
+	}
+	h4 {
+		font-size: 1.3rem;
+	}
 	p {
 		font-size: 1rem;
+	}
+	.lead {
+		font-size: 1.25rem;
+		margin-bottom: 1rem;
 	}
 }
 
 @media (min-width: $lg) {
 	h1 {
-		font-size: 3.5rem;
+		font-size: 3.2rem;
 	}
 	h2 {
-		font-size: 2.8rem;
+		font-size: 2.5rem;
 	}
 	h3 {
-		font-size: 2.3rem;
+		font-size: 2rem;
 	}
 	h4 {
 		font-size: 1.5rem;
