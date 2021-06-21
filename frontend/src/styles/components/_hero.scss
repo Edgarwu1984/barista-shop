@@ -2,20 +2,7 @@
 @use '../abstracts' as *;
 
 .hero {
-	position: relative;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	// background-attachment: fixed;
-
-	&::before {
-		content: '';
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		background: linear-gradient(0deg, rgba(0, 0, 0, 0) 80%, rgba(#000, 1) 100%);
-		background-color: rgba(#000, 0.4);
-	}
+	@include backgroundImage($gradient: 'true');
 
 	.hero__wrapper {
 		color: $light;
@@ -27,26 +14,84 @@
 			@include flexbox($direction: column);
 
 			h1 {
-				font-size: 6.5rem;
+				font-size: 2.5rem;
 			}
 			p {
+				max-width: 70%;
 				text-align: center;
 				color: $gray-300;
 				font-size: 1.1rem;
 				margin: 1rem 0 3rem 0;
 			}
+
+			.btn-lg {
+				font-size: 1rem;
+				padding: 0.7rem 1.5rem;
+			}
 		}
 
 		.title-right {
-			max-width: 50%;
-			margin-left: auto;
+			max-width: 100%;
 		}
 
 		.title-center {
 			width: 100%;
 			margin: 0 auto;
 			h1 {
-				font-size: 4rem;
+				font-size: 2.3rem;
+			}
+		}
+
+		@media (min-width: $md) {
+			.title-right,
+			.title-center {
+				h1 {
+					font-size: 4rem;
+				}
+				p {
+					max-width: 70%;
+				}
+			}
+			.title-right {
+				max-width: 100%;
+			}
+			.title-center {
+				h1 {
+					font-size: 3rem;
+				}
+			}
+		}
+
+		@media (min-width: $lg) {
+			.title-right,
+			.title-center {
+				h1 {
+					font-size: 4.5rem;
+				}
+				.btn-lg {
+					font-size: 1.3rem;
+					padding: 0.7rem 2rem;
+				}
+			}
+		}
+		@media (min-width: $xl) {
+			.title-right,
+			.title-center {
+				h1 {
+					font-size: 6.5rem;
+				}
+				p {
+					max-width: 100%;
+				}
+			}
+			.title-right {
+				max-width: 50%;
+				margin-left: auto;
+			}
+			.title-center {
+				h1 {
+					font-size: 4rem;
+				}
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 /** @format */
 
 import React from 'react';
+import {bg2} from 'assets'
 
 export default function Hero({ bgImage, height, children }) {
 	const backGroundImage = {
@@ -16,6 +17,6 @@ export default function Hero({ bgImage, height, children }) {
 }
 
 Hero.defaultProps = {
-	bgImage: '/images/bg2.png',
+	bgImage: {bg2},
 	height: '600px',
 };

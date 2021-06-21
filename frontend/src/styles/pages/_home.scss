@@ -1,0 +1,160 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+// INTRO SECTION
+.intro {
+	background-image: url('../../assets/images/bg9.jpg');
+	padding: 4rem 0;
+	@include backgroundImage($position: bottom, $overlayOpacity: 0);
+
+	.wrapper__center {
+		@include flexbox($direction: column);
+		padding: 4rem 2rem;
+		text-align: center;
+		height: 100%;
+
+		h2 {
+			font-size: 2rem;
+			text-transform: uppercase;
+		}
+
+		p {
+			font-size: 1rem;
+			line-height: 1.8;
+			max-width: 60%;
+		}
+
+		@media (min-width: $lg) {
+			padding: 8rem 2rem;
+			h2 {
+				font-size: 2.8rem;
+			}
+			p {
+				font-size: 1.2rem;
+			}
+		}
+	}
+}
+
+// FEATURE SECTION
+.feature {
+	background-color: $light;
+	&__wrapper {
+		@include flexbox($direction: column);
+		padding: 2rem;
+
+		@media (min-width: $lg) {
+			@include flexbox();
+		}
+	}
+
+	.feature__item {
+		@include flexbox($direction: column);
+		padding: 0 2rem;
+
+		&-title {
+			@include flexbox($direction: column);
+			margin-bottom: 1rem;
+		}
+		&-body {
+			text-align: center;
+			max-width: 100%;
+		}
+
+		@media (min-width: $md) {
+			&-body {
+				max-width: 60%;
+			}
+		}
+		@media (min-width: $lg) {
+			padding: 2rem;
+		}
+	}
+}
+
+// SHOP LINK SECTION
+.shop__link {
+	height: 600px;
+	width: 100%;
+	@include flexbox($direction: column);
+
+	&-bean,
+	&-machine {
+		height: 100%;
+		width: 100%;
+		padding: 2rem;
+		@include flexbox($direction: column);
+		h2 {
+			font-size: 1.8rem;
+			text-transform: uppercase;
+			text-align: center;
+			color: $light;
+			margin-bottom: 3rem;
+			z-index: 1;
+		}
+		.btn__outline-light {
+			z-index: 1;
+		}
+	}
+
+	&-bean {
+		@include backgroundImage();
+		background-image: url('../../assets/images/bg8.png');
+	}
+	&-machine {
+		@include backgroundImage();
+		background-image: url('../../assets/images/bg4.png');
+	}
+	@media (min-width: $md) {
+		@include flexbox();
+		&-bean,
+		&-machine {
+			width: 50%;
+			h2 {
+				font-size: 2.8rem;
+			}
+		}
+	}
+}
+
+// PRODUCTS
+.products {
+	padding: 4rem 2rem;
+	&__wrapper {
+		@include flexbox($direction: column);
+		h2 {
+			text-transform: uppercase;
+		}
+
+		.btn__outline {
+			margin-top: 4rem;
+		}
+	}
+}
+
+// COFFEE LEARNING
+.learning {
+	@include backgroundImage($height: 500px);
+	background-image: url('../../assets/images/bg6.png');
+	&__wrapper {
+		color: $light;
+		height: 100%;
+		padding: 2rem;
+		@include flexbox($direction: column, $items: flex-start);
+		h2 {
+			font-size: 1.8rem;
+		}
+		.btn__outline-light {
+			margin-top: 2rem;
+		}
+	}
+
+	@media (min-width: $md) {
+		&__wrapper {
+			h2 {
+				font-size: 2.8rem;
+			}
+		}
+	}
+}

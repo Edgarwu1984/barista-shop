@@ -1,0 +1,60 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+.card {
+	width: 100%;
+	background-color: white;
+	padding: 2rem;
+	height: auto;
+	@include shadow;
+	@include flexbox($direction: column);
+	&__img {
+		width: 100%;
+		height: fit-content;
+		margin-bottom: 1rem;
+	}
+	&__body {
+		text-align: center;
+		margin-bottom: 0;
+		height: 100%;
+	}
+	&__text {
+		.reviews {
+			@include flexbox($content: space-between);
+			margin-bottom: 1rem;
+		}
+		.price {
+			font-size: 1.3rem;
+		}
+	}
+
+	&__btn {
+		display: block;
+		margin-top: auto;
+	}
+
+	@media (min-width: $lg) {
+		padding: 2rem 1rem;
+		h4 {
+			font-size: 1.1rem;
+			margin-bottom: 1rem;
+		}
+		p {
+			font-size: 1.2rem;
+			margin-top: auto;
+			margin-bottom: 1rem;
+		}
+	}
+	@media (min-width: $xl) {
+		h4 {
+			font-size: 1.2rem;
+			margin-bottom: 1rem;
+		}
+		p {
+			font-size: 1.5rem;
+			margin-top: auto;
+			margin-bottom: 1rem;
+		}
+	}
+}

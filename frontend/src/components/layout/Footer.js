@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'lib/icons';
+import {logo}from 'assets'
 
 export default function Footer() {
 	const currentYear = new Date().getFullYear();
@@ -11,7 +12,7 @@ export default function Footer() {
 			<div className='container'>
 				<div className='footer__info'>
 					<section className='footer__info-content'>
-						<img className='logo' src='/images/logo.png' alt='barista-logo' />
+						<img className='logo' src={logo} alt='barista-logo' />
 						<p>
 							Lorem ipsum dolor, sit amet consectetur adipisicing elit.
 							Accusantium voluptatibus quisquam quod!

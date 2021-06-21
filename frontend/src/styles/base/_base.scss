@@ -17,7 +17,6 @@ html {
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: $light;
 }
 
 li {
@@ -26,7 +25,7 @@ li {
 
 a {
 	text-decoration: none;
-	color: $gray-400;
+	color: $primary-dark;
 
 	&:hover {
 		transition: all 0.3s ease;
@@ -35,7 +34,6 @@ a {
 }
 
 p {
-	margin-bottom: 2rem;
 	line-height: 1.5;
 }
 
@@ -45,13 +43,14 @@ video {
 	height: auto;
 }
 
-input {
-	&[type='text'],
-	&[type='search'],
-	&[type='email'] {
-		outline-offset: 0;
-		padding: 0.5rem 0.8rem;
-	}
+input,
+textarea {
+	border: none;
+	outline: none;
+	padding: 0.7rem 1rem;
+	font-size: 1rem;
+	font-family: 'Open Sans', sans-serif;
+	background-color: $light;
 }
 
 code {
@@ -71,29 +70,4 @@ svg {
 	left: -9999px;
 	width: 0;
 	height: 0;
-}
-
-.container {
-	position: relative;
-	max-width: 475px;
-	padding: 0 0.5rem;
-	margin: 0 auto;
-
-	@media (min-width: $sm) {
-		max-width: 640px;
-		padding: 0 1.5rem;
-	}
-	@media (min-width: $md) {
-		max-width: 768px;
-		padding: 0 2rem;
-	}
-	@media (min-width: $lg) {
-		max-width: 1024px;
-	}
-	@media (min-width: $xl) {
-		max-width: 1280px;
-	}
-	@media (min-width: $xxl) {
-		max-width: 1600px;
-	}
 }

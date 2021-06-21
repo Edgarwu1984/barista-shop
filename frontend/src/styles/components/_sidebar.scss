@@ -1,0 +1,11 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+.filter {
+	&__list {
+		&-item {
+			// @include flexbox($direction: column);
+		}
+	}
+}
