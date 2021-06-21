@@ -59,4 +59,4 @@ const coffee = [
 	},
 ];
 
-module.exports = coffee;
+export default coffee;

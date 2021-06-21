@@ -7,11 +7,8 @@ import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Rating from 'components/Rating';
 import { bg5 } from 'assets';
-import db from 'products';
 
 function SingleEquipmentPage({ match }) {
-	// const { equipment } = db;
-	// const product = equipment.find((p) => p._id === match.params.id);
 	const [product, setProduct] = useState({});
 	useEffect(() => {
 		const fetchProduct = async () => {
@@ -19,7 +16,7 @@ function SingleEquipmentPage({ match }) {
 			setProduct(res.data);
 		};
 		fetchProduct();
-	}, []);
+	}, [match]);
 
 	return (
 		<Layout>

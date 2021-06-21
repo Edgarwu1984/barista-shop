@@ -81,4 +81,4 @@ const equipment = [
 	},
 ];
 
-module.exports = equipment;
+export default equipment;

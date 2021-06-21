@@ -7,7 +7,7 @@ import { bg1 } from 'assets';
 function LoginPage() {
 	return (
 		<Hero height='100vh' bgImage={bg1}>
-			<div className='container center'>
+			{/* <div className='container center'>
 				<form>
 					<div>
 						<label>Username</label>
@@ -20,7 +20,7 @@ function LoginPage() {
 						<input className='btn btn-block' type='submit' id='login' />
 					</div>
 				</form>
-			</div>
+			</div> */}
 		</Hero>
 	);
 }

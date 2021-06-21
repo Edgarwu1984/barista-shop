@@ -1,10 +1,14 @@
 {
 	"name": "barista-shop",
 	"version": "1.0.0",
+	"type": "module",
 	"description": "MERN stack eCommerce website",
 	"main": "index.js",
 	"scripts": {
-		"start": "node backend/server"
+		"start": "node backend/server",
+		"server": "nodemon backend/server",
+		"client": "npm start --prefix frontend",
+		"dev": "concurrently \"npm run server\" \"npm run client \""
 	},
 	"repository": {
 		"type": "git",
@@ -21,6 +25,11 @@
 	},
 	"homepage": "https://github.com/Edgarwu1984/barista-shop#readme",
 	"dependencies": {
+		"dotenv": "^10.0.0",
 		"express": "^4.17.1"
+	},
+	"devDependencies": {
+		"concurrently": "^6.2.0",
+		"nodemon": "^2.0.7"
 	}
 }

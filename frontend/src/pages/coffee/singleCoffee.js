@@ -7,7 +7,6 @@ import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Rating from 'components/Rating';
 import { bg5 } from 'assets';
-import db from 'products';
 
 function SingleCoffeePage({ match }) {
 	const [product, setProduct] = useState({});
@@ -17,12 +16,7 @@ function SingleCoffeePage({ match }) {
 			setProduct(res.data);
 		};
 		fetchProduct();
-	}, []);
-
-	// const { coffee } = db;
-	// const product = coffee.find((p) => p._id === match.params.id);
-
-	console.log(!product.price ? 'empty' : product.price.toFixed(2));
+	}, [match]);
 
 	return (
 		<Layout>
