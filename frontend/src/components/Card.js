@@ -4,7 +4,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Rating from 'components/Rating';
 
-function Card({ image, name, id, price, rating, reviews, productCategory }) {
+function Card({
+	image,
+	name,
+	id,
+	price,
+	rating,
+	reviews,
+	stock,
+	productCategory,
+}) {
 	return (
 		<div className='card'>
 			<img className='card__img' src={image} alt={name} />
@@ -19,7 +28,13 @@ function Card({ image, name, id, price, rating, reviews, productCategory }) {
 				</div>
 				<h4 className='price'>$ {price.toFixed(2)}</h4>
 			</div>
-			<button className='card__btn btn__outline'>add to cart</button>
+			{stock === 0 ? (
+				<button className='card__btn btn__outline__disabled'>
+					out of stock
+				</button>
+			) : (
+				<button className='card__btn btn__outline'>add to cart</button>
+			)}
 		</div>
 	);
 }

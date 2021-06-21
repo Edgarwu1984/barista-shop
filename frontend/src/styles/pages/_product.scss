@@ -22,8 +22,19 @@
 		padding: 1rem 0;
 	}
 	.category {
-		font-size: 1.2rem;
-		margin-bottom: 1rem;
+		margin-top: 0.5rem;
+		@include flexbox($content: flex-start);
+		p {
+			font-size: 1.1rem;
+			margin-right: 1.5rem;
+			span {
+				color: $primary;
+			}
+		}
+	}
+
+	.stock {
+		margin-top: 1rem;
 		span {
 			color: $primary;
 		}

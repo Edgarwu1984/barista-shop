@@ -20,7 +20,7 @@ function SingleCoffeePage({ match }) {
 			<div className='container'>
 				<h4 className='page__url'>
 					<Link to='/shop'>{match.url.slice(1, 5)}</Link> /{' '}
-					<Link to='/shop/equipment'>{match.url.slice(6, 12)}</Link> /{' '}
+					<Link to='/shop/coffee'>{match.url.slice(6, 12)}</Link> /{' '}
 					<span className='current__page'>{product.name}</span>
 				</h4>
 				<div className='wrapper grid-2'>
@@ -30,19 +30,48 @@ function SingleCoffeePage({ match }) {
 					<div>
 						<div className='product__info'>
 							<h3 className='name'>{product.name}</h3>
+							<div className='category'>
+								<p>
+									Roast: <span>{product.roast}</span>
+								</p>
+								<p>
+									Region: <span>{product.region}</span>
+								</p>
+								<p>
+									Type: <span>{product.type}</span>
+								</p>
+							</div>
 							<p className='description'>{product.description}</p>
-							<h4 className='category'>
-								Categories: <span>{product.category}</span>
-							</h4>
 							<Rating
 								value={product.rating}
 								text={`${product.numReviews} reviews`}
 							/>
+							<div className='stock'>
+								{product.countInStock === 0 ? (
+									<p>
+										Stock: <span>Out of stock</span>
+									</p>
+								) : product.countInStock <= 3 ? (
+									<p>
+										Stock:
+										<span>Low in stock ({product.countInStock} left)</span>
+									</p>
+								) : (
+									<p>
+										Stock: <span>{product.countInStock}</span>
+									</p>
+								)}
+							</div>
 							<h3 className='price'>$ {product.price.toFixed(2)}</h3>
 						</div>
 						<div className='cart'>
 							<input type='number' min='1' defaultValue='1' />
-							<button className='btn'>add to cart</button>
+							<button
+								className={
+									product.countInStock === 0 ? 'btn btn__disabled' : 'btn'
+								}>
+								add to cart
+							</button>
 						</div>
 					</div>
 				</div>

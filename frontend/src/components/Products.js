@@ -19,6 +19,7 @@ function Products({ products, productCategory }) {
 						price={product.price}
 						rating={product.rating}
 						reviews={product.numReviews}
+						stock={product.countInStock}
 					/>
 				))
 			)}

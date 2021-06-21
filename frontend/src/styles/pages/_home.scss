@@ -5,7 +5,7 @@
 // INTRO SECTION
 .intro {
 	background-image: url('../../assets/images/bg9.jpg');
-	padding: 4rem 1rem;
+	padding: 4rem 0;
 	@include backgroundImage($position: bottom, $overlayOpacity: 0);
 
 	.wrapper__center {
@@ -22,7 +22,7 @@
 		p {
 			font-size: 1rem;
 			line-height: 1.8;
-			max-width: 70%;
+			max-width: 60%;
 		}
 
 		@media (min-width: $lg) {

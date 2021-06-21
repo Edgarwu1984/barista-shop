@@ -4,6 +4,10 @@
 .btn {
 	@include button;
 }
+.btn__disabled {
+	@include button($background: $gray-400, $border: $gray-400);
+	pointer-events: none;
+}
 
 .btn__outline {
 	@include button(
@@ -12,6 +16,14 @@
 		$hoverColor: $light,
 		$hoverBG: $primary
 	);
+}
+.btn__outline__disabled {
+	@include button(
+		$color: $gray-400,
+		$background: transparent,
+		$border: $gray-400
+	);
+	pointer-events: none;
 }
 
 .btn__outline-light {

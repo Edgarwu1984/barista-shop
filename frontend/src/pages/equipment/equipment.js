@@ -25,7 +25,7 @@ function EquipmentPage({ match }) {
 			<div className='featured__bg-equipment'>
 				<div className='container'>
 					<h4 className='page__url'>
-						/ <Link to='/shop'>{match.url.slice(1, 5)}</Link> /{' '}
+						<Link to='/shop'>{match.url.slice(1, 5)}</Link> /{' '}
 						<span className='current__page'>{match.url.slice(6, 15)} </span>
 					</h4>
 					<div className='wrapper grid-2'>

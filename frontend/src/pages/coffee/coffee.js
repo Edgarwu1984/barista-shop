@@ -26,7 +26,7 @@ function CoffeePage({ match }) {
 			<div className='featured__bg-coffee'>
 				<div className='container'>
 					<h4 className='page__url'>
-						/ <Link to='/shop'>{match.url.slice(1, 5)}</Link> /{' '}
+						<Link to='/shop'>{match.url.slice(1, 5)}</Link> /{' '}
 						<Link to='/shop/coffee'>{match.url.slice(6, 12)}</Link>
 					</h4>
 					<div className='wrapper grid-2'>
