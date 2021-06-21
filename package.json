@@ -1,0 +1,26 @@
+{
+	"name": "barista-shop",
+	"version": "1.0.0",
+	"description": "MERN stack eCommerce website",
+	"main": "index.js",
+	"scripts": {
+		"start": "node backend/server"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Edgarwu1984/barista-shop.git"
+	},
+	"keywords": [
+		"MERN",
+		"stack"
+	],
+	"author": "Edgar Wu",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Edgarwu1984/barista-shop/issues"
+	},
+	"homepage": "https://github.com/Edgarwu1984/barista-shop#readme",
+	"dependencies": {
+		"express": "^4.17.1"
+	}
+}

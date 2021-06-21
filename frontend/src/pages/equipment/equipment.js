@@ -1,7 +1,8 @@
 /** @format */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Divider from 'components/layout/Divider';
@@ -12,7 +13,16 @@ import { bg4 } from 'assets';
 import db from 'products';
 
 function EquipmentPage({ match }) {
-	const { equipmentCategories, equipment } = db;
+	const { equipmentCategories } = db;
+
+	const [equipment, setEquipment] = useState([]);
+	useEffect(() => {
+		const fetchEquipment = async () => {
+			const res = await axios.get('/api/equipment');
+			setEquipment(res.data);
+		};
+		fetchEquipment();
+	}, []);
 
 	return (
 		<Layout title='Barista - Equipment'>

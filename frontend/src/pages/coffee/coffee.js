@@ -1,7 +1,8 @@
 /** @format */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Hero from 'components/layout/Hero';
 import Layout from 'components/layout/Layout';
 import Divider from 'components/layout/Divider';
@@ -12,7 +13,17 @@ import { bg3 } from 'assets';
 import products from 'products';
 
 function CoffeePage({ match }) {
-	const { coffeeCategories, coffee } = products;
+	const { coffeeCategories } = products;
+	const [coffee, setCoffee] = useState([]);
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			const res = await axios.get('/api/coffee');
+			setCoffee(res.data);
+		};
+
+		fetchProducts();
+	}, []);
 
 	return (
 		<Layout title='Barista - Coffee'>

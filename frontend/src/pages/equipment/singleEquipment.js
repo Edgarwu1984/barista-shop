@@ -1,7 +1,8 @@
 /** @format */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Rating from 'components/Rating';
@@ -9,8 +10,16 @@ import { bg5 } from 'assets';
 import db from 'products';
 
 function SingleEquipmentPage({ match }) {
-	const { equipment } = db;
-	const product = equipment.find((p) => p._id === match.params.id);
+	// const { equipment } = db;
+	// const product = equipment.find((p) => p._id === match.params.id);
+	const [product, setProduct] = useState({});
+	useEffect(() => {
+		const fetchProduct = async () => {
+			const res = await axios.get(`/api/equipment/${match.params.id}`);
+			setProduct(res.data);
+		};
+		fetchProduct();
+	}, []);
 
 	return (
 		<Layout>
@@ -57,7 +66,9 @@ function SingleEquipmentPage({ match }) {
 									</p>
 								)}
 							</div>
-							<h3 className='price'>$ {product.price.toFixed(2)}</h3>
+							<h3 className='price'>
+								$ {!product.price ? '0.00' : product.price.toFixed(2)}
+							</h3>
 						</div>
 						<div className='cart'>
 							<input type='number' min='1' defaultValue='1' />
