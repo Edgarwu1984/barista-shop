@@ -2,7 +2,6 @@
 
 const equipment = [
 	{
-		_id: '1',
 		name: 'Bialetti Moka Express Mint Iced Coffee',
 		image: '/images/products/Bialetti-Moka-Express-Mint-Iced-Coffee.jpg',
 		description:
@@ -11,11 +10,9 @@ const equipment = [
 		price: 40.0,
 		countInStock: 10,
 		rating: 4.1,
-		reviews: 20,
 		numReviews: 12,
 	},
 	{
-		_id: '2',
 		name: 'Bialetti Fiammetta Italia - 3 Cup',
 		image: '/images/products/Bialetti-Fiammetta-Italia-3-Cup.jpg',
 		description:
@@ -24,11 +21,9 @@ const equipment = [
 		price: 42,
 		countInStock: 20,
 		rating: 4.8,
-		reviews: 20,
 		numReviews: 11,
 	},
 	{
-		_id: '3',
 		name: 'Bialetti Moka Express',
 		image: '/images/products/Bialetti-Moka-Express.jpg',
 		description:
@@ -37,11 +32,9 @@ const equipment = [
 		price: 36,
 		countInStock: 20,
 		rating: 4.8,
-		reviews: 20,
 		numReviews: 11,
 	},
 	{
-		_id: '4',
 		name: 'Chemex Pour Over Coffee Maker - 8 cups',
 		image: '/images/products/Chemex-Pour-Over-Coffee-Maker-8-cups.jpg',
 		description:
@@ -50,11 +43,9 @@ const equipment = [
 		price: 90,
 		countInStock: 30,
 		rating: 4.9,
-		reviews: 20,
 		numReviews: 32,
 	},
 	{
-		_id: '5',
 		name: 'Bodum Sustainable Coffee Press - Black - 633ml',
 		image: '/images/products/Bodum-Sustainable-Coffee-Press-Black-633ml.jpg',
 		description:
@@ -63,11 +54,9 @@ const equipment = [
 		price: 35,
 		countInStock: 30,
 		rating: 4.9,
-		reviews: 20,
 		numReviews: 32,
 	},
 	{
-		_id: '6',
 		name: 'Bodum Chambord French Press 19535',
 		image: '/images/products/BODUM-CHAMBORD-FRENCH-PRESS-19535.jpg',
 		description:
@@ -76,7 +65,6 @@ const equipment = [
 		price: 70,
 		countInStock: 8,
 		rating: 4.2,
-		reviews: 20,
 		numReviews: 20,
 	},
 ];

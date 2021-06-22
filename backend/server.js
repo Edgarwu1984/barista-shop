@@ -4,8 +4,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
 import connectDB from './config/db.js';
-import coffee from './data/coffee.js';
-import equipment from './data/equipment.js';
+import coffeeRoutes from './routes/coffeeRoutes.js';
+import equipmentRoutes from './routes/equipmentRoutes.js';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
 
@@ -17,25 +18,13 @@ app.get('/', (req, res) => {
 	res.send('API is running...');
 });
 
-// COFFEE
-app.get('/api/coffee', (req, res) => {
-	res.json(coffee);
-});
+app.use('/api/coffee', coffeeRoutes);
 
-app.get('/api/coffee/:id', (req, res) => {
-	const product = find((c) => c._id === req.params.id);
-	res.json(product);
-});
+app.use('/api/equipment', equipmentRoutes);
 
-// EQUIPMENT
-app.get('/api/equipment', (req, res) => {
-	res.json(equipment);
-});
-
-app.get('/api/equipment/:id', (req, res) => {
-	const product = _find((e) => e._id === req.params.id);
-	res.json(product);
-});
+// Error Middleware
+app.use(notFound);
+app.use(errorHandler);
 
 // START SERVER
 const PORT = process.env.PORT || 5000;
