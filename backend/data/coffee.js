@@ -2,7 +2,6 @@
 
 const coffee = [
 	{
-		_id: '1',
 		name: 'Cold Brew Coarse Ground Coffee Blend',
 		image: '/images/products/ground-coffee-cold-brew.jpg',
 		description:
@@ -16,7 +15,6 @@ const coffee = [
 		numReviews: 12,
 	},
 	{
-		_id: '2',
 		name: 'Bali Blue Moon Dark Roast Coffee',
 		image: '/images/products/Bali-Blue-Moon-Dark-Roast-Coffee.jpg',
 		description:
@@ -30,7 +28,6 @@ const coffee = [
 		numReviews: 11,
 	},
 	{
-		_id: '3',
 		name: 'Costa Rica La Cascada Tarrazu Medium Roast Coffee',
 		image: '/images/products/costa-rica-la-cascada-tarrazu-coffee.jpg',
 		description:
@@ -44,7 +41,6 @@ const coffee = [
 		numReviews: 11,
 	},
 	{
-		_id: '4',
 		name: 'Espresso Roast Blend Coffee',
 		image: '/images/products/Espresso-Roast-Blend-Coffee.jpg',
 		description:
