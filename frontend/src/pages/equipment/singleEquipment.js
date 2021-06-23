@@ -1,83 +1,91 @@
 /** @format */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { listEquipmentDetails } from '../../actions/productActions';
 import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Rating from 'components/Rating';
 import { bg5 } from 'assets';
 
 function SingleEquipmentPage({ match }) {
-	const [product, setProduct] = useState({});
+	const dispatch = useDispatch();
+	const equipmentDetails = useSelector((state) => state.equipmentDetails);
 	useEffect(() => {
-		const fetchProduct = async () => {
-			const res = await axios.get(`/api/equipment/${match.params.id}`);
-			setProduct(res.data);
-		};
-		fetchProduct();
-	}, [match]);
+		dispatch(listEquipmentDetails(match.params.id));
+	}, [match, dispatch]);
+	const { loading, error, equipment } = equipmentDetails;
 
 	return (
 		<Layout>
 			<Hero bgImage={bg5} height='320px'>
-				<h2>{product.name}</h2>
+				<h2>{equipment.name}</h2>
 			</Hero>
 			<div className='container'>
 				<h4 className='page__url'>
 					<Link to='/shop'>{match.url.slice(1, 5)}</Link> /{' '}
 					<Link to='/shop/equipment'>{match.url.slice(6, 15)}</Link> /{' '}
-					<span className='current__page'>{product.name}</span>
+					<span className='current__page'>{equipment.name}</span>
 				</h4>
-				<div className='wrapper grid-2'>
-					<div className='image'>
-						<img src={product.image} alt={product.name} />
+				{loading ? (
+					<div className='center'>
+						<img src='/images/loader.svg' alt='loading' />
+						<p>Loading....</p>
 					</div>
-					<div>
-						<div className='product__info'>
-							<h3 className='name'>{product.name}</h3>
-							<div className='category'>
-								<p>
-									Category: <span>{product.category}</span>
-								</p>
-							</div>
-							<p className='description'>{product.description}</p>
+				) : error ? (
+					<h3>{error}</h3>
+				) : (
+					<div className='wrapper grid-2'>
+						<div className='image'>
+							<img src={equipment.image} alt={equipment.name} />
+						</div>
+						<div>
+							<div className='equipment__info'>
+								<h3 className='name'>{equipment.name}</h3>
+								<div className='category'>
+									<p>
+										Category: <span>{equipment.category}</span>
+									</p>
+								</div>
+								<p className='description'>{equipment.description}</p>
 
-							<Rating
-								value={product.rating}
-								text={`${product.numReviews} reviews`}
-							/>
-							<div className='stock'>
-								{product.countInStock === 0 ? (
-									<p>
-										Stock: <span>Out of stock</span>
-									</p>
-								) : product.countInStock <= 3 ? (
-									<p>
-										Stock:
-										<span>Low in stock ({product.countInStock} left)</span>
-									</p>
-								) : (
-									<p>
-										Stock: <span>{product.countInStock}</span>
-									</p>
-								)}
+								<Rating
+									value={equipment.rating}
+									text={`${equipment.numReviews} reviews`}
+								/>
+								<div className='stock'>
+									{equipment.countInStock === 0 ? (
+										<p>
+											Stock: <span>Out of stock</span>
+										</p>
+									) : equipment.countInStock <= 3 ? (
+										<p>
+											Stock:
+											<span>Low in stock ({equipment.countInStock} left)</span>
+										</p>
+									) : (
+										<p>
+											Stock: <span>{equipment.countInStock}</span>
+										</p>
+									)}
+								</div>
+								<h3 className='price'>
+									$ {!equipment.price ? '0.00' : equipment.price.toFixed(2)}
+								</h3>
 							</div>
-							<h3 className='price'>
-								$ {!product.price ? '0.00' : product.price.toFixed(2)}
-							</h3>
-						</div>
-						<div className='cart'>
-							<input type='number' min='1' defaultValue='1' />
-							<button
-								className={
-									product.countInStock === 0 ? 'btn btn__disabled' : 'btn'
-								}>
-								add to cart
-							</button>
+							<div className='cart'>
+								<input type='number' min='1' defaultValue='1' />
+								<button
+									className={
+										equipment.countInStock === 0 ? 'btn btn__disabled' : 'btn'
+									}>
+									add to cart
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>
+				)}
 			</div>
 		</Layout>
 	);

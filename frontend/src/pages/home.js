@@ -1,16 +1,24 @@
 /** @format */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { listCoffee } from '../actions/productActions';
 import Hero from 'components/layout/Hero';
 import Layout from 'components/layout/Layout';
 import Divider from 'components/layout/Divider';
 import Products from 'components/Products';
 import { icon2, icon3, icon4, bg1 } from 'assets';
-import db from 'products';
 
 function HomePage() {
-	const { coffee } = db;
+	const dispatch = useDispatch();
+	const coffeeList = useSelector((state) => state.coffeeList);
+	const { loading, error, coffees } = coffeeList;
+
+	useEffect(() => {
+		dispatch(listCoffee());
+	}, [dispatch]);
+
 	return (
 		<Layout title='Barista - Coffee Shop'>
 			<Hero bgImage={bg1} height='100vh'>
@@ -103,7 +111,16 @@ function HomePage() {
 					<div className='wrapper center'>
 						<h2>Our Popular Products</h2>
 						<Divider />
-						<Products products={coffee} />
+						{loading ? (
+							<div className='center'>
+								<img src='/images/loader.svg' alt='loading' />
+								<p>Loading....</p>
+							</div>
+						) : error ? (
+							<h3>{error}</h3>
+						) : (
+							<Products products={coffees} productCategory='coffee' />
+						)}
 					</div>
 					<div className='wrapper center'>
 						<Link to='/shop' className='btn__outline btn-lg'>

@@ -1,28 +1,24 @@
 /** @format */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { listEquipment } from '../../actions/productActions';
 import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Divider from 'components/layout/Divider';
-import Sidebar from 'components/layout/Sidebar';
 import ContactForm from 'components/ContactForm';
 import Products from 'components/Products';
 import { bg4 } from 'assets';
-import db from 'products';
 
 function EquipmentPage({ match }) {
-	const { equipmentCategories } = db;
+	const dispatch = useDispatch();
+	const equipmentList = useSelector((state) => state.equipmentList);
+	const { loading, error, equipments } = equipmentList;
 
-	const [equipment, setEquipment] = useState([]);
 	useEffect(() => {
-		const fetchEquipment = async () => {
-			const res = await axios.get('/api/equipment');
-			setEquipment(res.data);
-		};
-		fetchEquipment();
-	}, []);
+		dispatch(listEquipment());
+	}, [dispatch]);
 
 	return (
 		<Layout title='Barista - Equipment'>
@@ -40,11 +36,18 @@ function EquipmentPage({ match }) {
 					</h4>
 					<div className='wrapper grid-2'>
 						<main>
-							<Products products={equipment} productCategory='equipment' />
+							{loading ? (
+								<div className='center'>
+									<img src='/images/loader.svg' alt='loading' />
+									<p>Loading....</p>
+								</div>
+							) : error ? (
+								<h3>{error}</h3>
+							) : (
+								<Products products={equipments} productCategory='equipment' />
+							)}
 						</main>
-						<aside>
-							<Sidebar category={equipmentCategories} />
-						</aside>
+						{/* <aside><Sidebar  /></aside> */}
 					</div>
 				</div>
 			</div>

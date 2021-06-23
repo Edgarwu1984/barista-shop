@@ -87,6 +87,7 @@ export default function Header() {
 							</li>
 						</div>
 					</nav>
+
 					<nav className={showMenu ? 'nav__mobile' : 'nav__mobile hidden'}>
 						<li className='nav__item'>
 							<NavLink exact to='/' className='nav__item-link'>

@@ -1,17 +1,28 @@
 /** @format */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { listCoffee, listEquipment } from '../actions/productActions';
 import Hero from 'components/layout/Hero';
 import Layout from 'components/layout/Layout';
 import Divider from 'components/layout/Divider';
 import ContactForm from 'components/ContactForm';
 import Products from 'components/Products';
 import { bg2, cup, pot, icon5, icon6 } from 'assets';
-import db from 'products';
 
 function ShopPage() {
-	const { coffee, equipment } = db;
+	const dispatch = useDispatch();
+	const coffeeList = useSelector((state) => state.coffeeList);
+	const equipmentList = useSelector((state) => state.equipmentList);
+
+	useEffect(() => {
+		dispatch(listCoffee());
+		dispatch(listEquipment());
+	}, [dispatch]);
+
+	const { loading, error, coffees } = coffeeList;
+	const { loading: eLoading, error: eError, equipments } = equipmentList;
 
 	return (
 		<Layout title='Barista - Coffee Shop'>
@@ -55,7 +66,16 @@ function ShopPage() {
 								<h3 className='section-title'>Coffee</h3>
 								<Link to='/shop/coffee'>view all</Link>
 							</div>
-							<Products products={coffee} />
+							{loading ? (
+								<div className='center'>
+									<img src='/images/loader.svg' alt='loading' />
+									<p>Loading....</p>
+								</div>
+							) : error ? (
+								<h3>{error}</h3>
+							) : (
+								<Products products={coffees} productCategory='coffee' />
+							)}
 						</div>
 					</div>
 					<div className='wrapper center mb-3'>
@@ -64,7 +84,16 @@ function ShopPage() {
 								<h3 className='section-title'>equipment</h3>
 								<Link to='/shop/equipment'>view all</Link>
 							</div>
-							<Products products={equipment} />
+							{eLoading ? (
+								<div className='center'>
+									<img src='/images/loader.svg' alt='loading' />
+									<p>Loading....</p>
+								</div>
+							) : eError ? (
+								<h3>{eError}</h3>
+							) : (
+								<Products products={equipments} productCategory='equipment' />
+							)}
 						</div>
 					</div>
 				</div>

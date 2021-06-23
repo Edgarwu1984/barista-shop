@@ -1,29 +1,24 @@
 /** @format */
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { listCoffee } from '../../actions/productActions';
 import Hero from 'components/layout/Hero';
 import Layout from 'components/layout/Layout';
 import Divider from 'components/layout/Divider';
-import Sidebar from 'components/layout/Sidebar';
 import Products from 'components/Products';
 import ContactForm from 'components/ContactForm';
 import { bg3 } from 'assets';
-import products from 'products';
 
 function CoffeePage({ match }) {
-	const { coffeeCategories } = products;
-	const [coffee, setCoffee] = useState([]);
+	const dispatch = useDispatch();
+	const coffeeList = useSelector((state) => state.coffeeList);
+	const { loading, error, coffees } = coffeeList;
 
 	useEffect(() => {
-		const fetchProducts = async () => {
-			const res = await axios.get('/api/coffee');
-			setCoffee(res.data);
-		};
-
-		fetchProducts();
-	}, []);
+		dispatch(listCoffee());
+	}, [dispatch]);
 
 	return (
 		<Layout title='Barista - Coffee'>
@@ -38,15 +33,21 @@ function CoffeePage({ match }) {
 				<div className='container'>
 					<h4 className='page__url'>
 						<Link to='/shop'>{match.url.slice(1, 5)}</Link> /{' '}
-						<Link to='/shop/coffee'>{match.url.slice(6, 12)}</Link>
+						<span className='current__page'>{match.url.slice(6, 12)}</span>
 					</h4>
 					<div className='wrapper grid-2'>
 						<main>
-							<Products products={coffee} productCategory='coffee' />
+							{loading ? (
+								<div className='center'>
+									<img src='/images/loader.svg' alt='loading' />
+									<p>Loading....</p>
+								</div>
+							) : error ? (
+								<h3>{error}</h3>
+							) : (
+								<Products products={coffees} productCategory='coffee' />
+							)}
 						</main>
-						<aside>
-							<Sidebar category={coffeeCategories} />
-						</aside>
 					</div>
 				</div>
 			</div>
