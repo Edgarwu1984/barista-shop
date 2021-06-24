@@ -1,0 +1,85 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+.shopping__cart {
+	@media (min-width: $md) {
+		@include flexbox($direction: column-reverse);
+	}
+	@media (min-width: $lg) {
+		@include flexbox();
+	}
+
+	.cart__container {
+		width: 100%;
+
+		.empty {
+			background-color: $light;
+			height: 20rem;
+
+			a {
+				margin-top: 1rem;
+				color: $primary;
+				text-decoration: underline;
+			}
+		}
+
+		.cart__list {
+			&-item {
+				@include flexbox($content: space-between);
+				@include shadow;
+				width: 100%;
+				background-color: white;
+				margin-bottom: 2rem;
+				padding: 1rem 2rem;
+
+				img {
+					width: 160px;
+					height: auto;
+				}
+
+				.item__info {
+					margin: 0 2rem;
+					width: 100%;
+					h4 {
+						text-align: left;
+					}
+				}
+
+				.remove__btn {
+					border: none;
+					background: none;
+					color: $primary-dark;
+					cursor: pointer;
+					&:hover {
+						transition: all 0.3s ease;
+						color: $primary-light;
+					}
+				}
+			}
+		}
+	}
+	.checkout {
+		align-self: flex-start;
+		background-color: white;
+		border: 1px solid $gray-200;
+		height: min-content;
+		padding: 2rem;
+
+		h4 {
+			@include flexbox($content: space-between);
+			width: 100%;
+			margin-bottom: 1rem;
+		}
+
+		@media (min-width: $md) {
+			width: 100%;
+			margin-left: 0;
+			margin-bottom: 4rem;
+		}
+		@media (min-width: $lg) {
+			width: 30rem;
+			margin-left: 3rem;
+		}
+	}
+}

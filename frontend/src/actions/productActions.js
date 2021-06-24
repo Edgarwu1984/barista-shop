@@ -16,6 +16,8 @@ import {
 } from '../constants/productConstants';
 
 export const listCoffee = () => async (dispatch) => {
+	// 'async (dispatch) =>' redux thunk middleware, so we can make asynchronous request to fetch data.
+
 	try {
 		dispatch({ type: COFFEE_LIST_REQUEST });
 
@@ -26,6 +28,7 @@ export const listCoffee = () => async (dispatch) => {
 		dispatch({
 			type: COFFEE_LIST_FAIL,
 			// Get backend error handle middleware error message
+			// To check if we have the custom error message, if true then return the custom error message
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message

@@ -26,7 +26,7 @@ function App() {
 				<Route path='/shop/coffee/:id' component={SingleCoffeePage} />
 				<Route exact path='/shop/equipment' component={EquipmentPage} />
 				<Route path='/shop/equipment/:id' component={SingleEquipmentPage} />
-				<Route path='/cart' component={CartPage} />
+				<Route path='/cart/:id?' component={CartPage} />
 				<Route path='/login' component={LoginPage} />
 				<Route path='/404' component={NotFoundPage} />
 				<Redirect to='/404' />

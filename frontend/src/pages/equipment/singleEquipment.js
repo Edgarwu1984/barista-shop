@@ -8,8 +8,9 @@ import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Rating from 'components/Rating';
 import { bg5 } from 'assets';
+import AddToCart from 'components/AddToCart';
 
-function SingleEquipmentPage({ match }) {
+function SingleEquipmentPage({ match, history }) {
 	const dispatch = useDispatch();
 	const equipmentDetails = useSelector((state) => state.equipmentDetails);
 	useEffect(() => {
@@ -37,11 +38,11 @@ function SingleEquipmentPage({ match }) {
 					<h3>{error}</h3>
 				) : (
 					<div className='wrapper grid-2'>
-						<div className='image'>
+						<div className='product__image'>
 							<img src={equipment.image} alt={equipment.name} />
 						</div>
-						<div>
-							<div className='equipment__info'>
+						<div className='product__info'>
+							<div>
 								<h3 className='name'>{equipment.name}</h3>
 								<div className='category'>
 									<p>
@@ -74,15 +75,7 @@ function SingleEquipmentPage({ match }) {
 									$ {!equipment.price ? '0.00' : equipment.price.toFixed(2)}
 								</h3>
 							</div>
-							<div className='cart'>
-								<input type='number' min='1' defaultValue='1' />
-								<button
-									className={
-										equipment.countInStock === 0 ? 'btn btn__disabled' : 'btn'
-									}>
-									add to cart
-								</button>
-							</div>
+							<AddToCart match={match} history={history} product={equipment} />
 						</div>
 					</div>
 				)}

@@ -11,10 +11,12 @@ import Products from 'components/Products';
 import ContactForm from 'components/ContactForm';
 import { bg3 } from 'assets';
 
-function CoffeePage({ match }) {
+function CoffeePage({ match, history }) {
 	const dispatch = useDispatch();
 	const coffeeList = useSelector((state) => state.coffeeList);
 	const { loading, error, coffees } = coffeeList;
+
+	console.log(match);
 
 	useEffect(() => {
 		dispatch(listCoffee());
@@ -35,7 +37,7 @@ function CoffeePage({ match }) {
 						<Link to='/shop'>{match.url.slice(1, 5)}</Link> /{' '}
 						<span className='current__page'>{match.url.slice(6, 12)}</span>
 					</h4>
-					<div className='wrapper grid-2'>
+					<div className='wrapper'>
 						<main>
 							{loading ? (
 								<div className='center'>
@@ -45,7 +47,12 @@ function CoffeePage({ match }) {
 							) : error ? (
 								<h3>{error}</h3>
 							) : (
-								<Products products={coffees} productCategory='coffee' />
+								<Products
+									products={coffees}
+									productCategory='coffee'
+									matchId={match}
+									historyUrl={history}
+								/>
 							)}
 						</main>
 					</div>

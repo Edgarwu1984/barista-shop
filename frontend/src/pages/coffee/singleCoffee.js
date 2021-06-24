@@ -8,8 +8,9 @@ import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Rating from 'components/Rating';
 import { bg5 } from 'assets';
+import AddToCart from 'components/AddToCart';
 
-function SingleCoffeePage({ match }) {
+function SingleCoffeePage({ match, history }) {
 	const dispatch = useDispatch();
 
 	const coffeeDetails = useSelector((state) => state.coffeeDetails);
@@ -81,15 +82,7 @@ function SingleCoffeePage({ match }) {
 									$ {!coffee.price ? '0.00' : coffee.price.toFixed(2)}
 								</h3>
 							</div>
-							<div className='cart'>
-								<input type='number' min='1' defaultValue='1' />
-								<button
-									className={
-										coffee.countInStock === 0 ? 'btn btn__disabled' : 'btn'
-									}>
-									add to cart
-								</button>
-							</div>
+							<AddToCart match={match} history={history} product={coffee} />
 						</div>
 					</div>
 				)}

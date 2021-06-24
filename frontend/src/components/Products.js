@@ -5,8 +5,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Rating from 'components/Rating';
 
-function Products({ products, productCategory }) {
-	console.log(products);
+function Products({ products, productCategory, match, history }) {
+	const addToCartHandler = () => {
+		history.push(`/cart/${match.params.id}?qty=1`);
+	};
+
+	console.log(match);
+
 	return (
 		<div className='grid-4'>
 			{!products ? (
@@ -34,7 +39,11 @@ function Products({ products, productCategory }) {
 								out of stock
 							</button>
 						) : (
-							<button className='card__btn btn__outline'>add to cart</button>
+							<button
+								className='card__btn btn__outline'
+								onClick={addToCartHandler}>
+								add to cart
+							</button>
 						)}
 					</div>
 				))

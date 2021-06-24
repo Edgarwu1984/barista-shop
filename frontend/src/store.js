@@ -9,22 +9,30 @@ import {
 	equipmentListReducer,
 	equipmentDetailsReducer,
 } from './reducers/productReducers';
+import { cartReducer } from './reducers/cartReducers';
 
 const reducer = combineReducers({
-	coffeeList: coffeeListReducer,
+	coffeeList: coffeeListReducer, // 'coffeeList' will show as your state.
 	coffeeDetails: coffeeDetailsReducer,
 	equipmentList: equipmentListReducer,
 	equipmentDetails: equipmentDetailsReducer,
+	cart: cartReducer,
 });
 
-const initialState = {};
+const cartItemsFromStorage = localStorage.getItem('cartItems')
+	? JSON.parse(localStorage.getItem('cartItems'))
+	: [];
 
-const middleware = [thunk]; // In order to using Redux devtool plugin in Chrome
+const initialState = {
+	cart: { cartItems: cartItemsFromStorage },
+};
+
+const middleware = [thunk]; //  lets you write async logic that interacts with the store.
 
 const store = createStore(
 	reducer,
 	initialState,
-	composeWithDevTools(applyMiddleware(...middleware))
+	composeWithDevTools(applyMiddleware(...middleware)) // '...middleware' apply all the middleware that we created in middleware array, for now we only have 'thunk' at the moment.
 );
 
 export default store;

@@ -34,7 +34,7 @@ function EquipmentPage({ match }) {
 						<Link to='/shop'>{match.url.slice(1, 5)}</Link> /{' '}
 						<span className='current__page'>{match.url.slice(6, 15)} </span>
 					</h4>
-					<div className='wrapper grid-2'>
+					<div className='wrapper'>
 						<main>
 							{loading ? (
 								<div className='center'>
