@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../actions/cartActions';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Divider from 'components/layout/Divider';
@@ -22,7 +24,6 @@ function CartPage({ match, location, history }) {
 	const cart = useSelector((state) => state.cart);
 
 	const { cartItems } = cart;
-	console.log(cartItems);
 
 	const category = location.search.split('&')[0].split('=')[1]; // Get added item's category
 
@@ -34,6 +35,7 @@ function CartPage({ match, location, history }) {
 
 	const removeFromCartHandler = (id) => {
 		dispatch(removeFromCart(id));
+		toast.success('Product removed.');
 	};
 
 	const checkoutHandler = () => {
@@ -42,6 +44,18 @@ function CartPage({ match, location, history }) {
 
 	return (
 		<Layout>
+			<ToastContainer
+				position='top-center'
+				autoClose={3000}
+				hideProgressBar
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss={false}
+				draggable
+				pauseOnHover
+				transition={Slide}
+			/>
 			<Hero bgImage={bg8} height='400px'>
 				<div className='title-center'>
 					<h1 className='mb-4'>Shopping Cart</h1>

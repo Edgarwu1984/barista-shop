@@ -7,14 +7,14 @@
 		@include flexbox($direction: column-reverse);
 	}
 	@media (min-width: $lg) {
-		@include flexbox();
+		@include flexbox($items: flex-start);
 	}
 
 	.cart__container {
 		width: 100%;
 
 		.empty {
-			background-color: $light;
+			background-color: $gray-50;
 			height: 20rem;
 
 			a {
@@ -28,6 +28,7 @@
 			&-item {
 				@include flexbox($content: space-between);
 				@include shadow;
+				margin-bottom: auto;
 				width: 100%;
 				background-color: white;
 				margin-bottom: 2rem;

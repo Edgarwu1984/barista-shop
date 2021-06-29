@@ -3,12 +3,40 @@
 @use '../abstracts' as *;
 
 .card {
+	position: relative;
 	width: 100%;
 	background-color: white;
+	color: $dark;
 	padding: 2rem;
 	height: auto;
 	@include shadow;
 	@include flexbox($direction: column);
+
+	&:hover {
+		transition: all 0.3s ease;
+		color: initial;
+		overflow: hidden;
+		@include shadow($v: 8px, $blur: 16px, $spread: 4px);
+		.card__img {
+			transition: all 0.3s ease;
+			transform: scale(1.02);
+		}
+	}
+
+	&__status {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: $gray-500;
+		color: $light;
+		padding: 0.3rem 0.6rem;
+		z-index: 1;
+	}
+
+	.unavailable {
+		background-color: $gray-500;
+	}
+
 	&__img {
 		width: 100%;
 		height: fit-content;
@@ -27,11 +55,6 @@
 		.price {
 			font-size: 1.3rem;
 		}
-	}
-
-	&__btn {
-		display: block;
-		margin-top: auto;
 	}
 
 	@media (min-width: $lg) {

@@ -12,6 +12,7 @@ import ContactForm from 'components/ContactForm';
 import { bg3 } from 'assets';
 
 function ProductsPage({ match, history }) {
+	const category = match.path.split('/')[2];
 	const dispatch = useDispatch();
 	const childProductList = useSelector((state) => state.childProductList);
 	const { loading, error, products } = childProductList;
@@ -28,16 +29,21 @@ function ProductsPage({ match, history }) {
 		<Layout title='Barista - Coffee'>
 			<Hero bgImage={bg3}>
 				<div className='center'>
-					<h1 className='uppercase'>Coffee</h1>
+					<h1 className='uppercase'>{category}</h1>
 					<Divider />
-					<p className='lead'>Find Your Favorite Coffee from our shop</p>
+					<p className='lead'>Find your favorite products from our shop</p>
 				</div>
 			</Hero>
-			<div className='featured__bg-coffee'>
+			<div
+				className={
+					category === 'coffee'
+						? 'featured__bg-coffee'
+						: 'featured__bg-equipment'
+				}>
 				<div className='container'>
 					<h4 className='page__url'>
 						<Link to='/shop'>{match.path.split('/')[1]}</Link> /{' '}
-						<span className='current__page'>{match.path.split('/')[2]}</span>
+						<span className='current__page'>{category}</span>
 					</h4>
 					<div className='wrapper'>
 						<main>

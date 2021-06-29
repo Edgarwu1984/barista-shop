@@ -4,18 +4,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Rating from 'components/Rating';
 
-export default function Product({ history, product }) {
-	const addToCartHandler = () => {
-		history.push(`/cart/${product._id}?category=${product.category}&qty=1`);
-	};
-
+export default function Product({ product }) {
 	return (
-		<div className='card'>
+		<Link className='card' to={`/shop/${product.category}/${product._id}`}>
+			{product.countInStock === 0 ? (
+				<div className='card__status unavailable'>
+					<span>Out Of Stock</span>
+				</div>
+			) : null}
+
 			<img className='card__img' src={product.image} alt={product.name} />
 			<div className='card__body center'>
-				<Link to={`/shop/${product.category}/${product._id}`}>
-					<h4>{product.name}</h4>
-				</Link>
+				<h4>{product.name}</h4>
 			</div>
 			<div className='card__text center'>
 				<div className='reviews'>
@@ -26,15 +26,6 @@ export default function Product({ history, product }) {
 				</div>
 				<h4 className='price'>$ {product.price.toFixed(2)}</h4>
 			</div>
-			{product.countInStock === 0 ? (
-				<button className='card__btn btn__outline__disabled'>
-					out of stock
-				</button>
-			) : (
-				<button className='card__btn btn__outline' onClick={addToCartHandler}>
-					add to cart
-				</button>
-			)}
-		</div>
+		</Link>
 	);
 }

@@ -1,30 +1,71 @@
 /** @format */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails } from '../../actions/productActions';
-import { Link } from 'react-router-dom';
+import { addToCart } from 'actions/cartActions';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Rating from 'components/Rating';
 import { bg5 } from 'assets';
-import AddToCart from 'components/AddToCart';
 
-function SingleProductPage({ match, history }) {
+function SingleProductPage({ match }) {
+	const [qty, setQty] = useState(1);
+	const [hasAdded, setHasAdded] = useState(false);
+	const category = match.path.split('/')[2];
+	const productId = match.params.id;
+
 	const dispatch = useDispatch();
 
 	const productDetails = useSelector((state) => state.productDetails);
+
+	const { cartItems } = useSelector((state) => state.cart);
+
+	// console.log(cartItems);
 	const { loading, error, product } = productDetails;
 
-	const category = match.path.split('/')[2];
+	const checkCart = () => {
+		const cartItemId = cartItems.map((item) => item.id);
+		const id = match.url.split('/')[3];
+		const existItem = cartItemId.find((itemId) => itemId === id);
+		if (existItem) {
+			setHasAdded(true);
+		}
+	};
 
 	useEffect(() => {
-		dispatch(listProductDetails(category, match.params.id));
-	}, [dispatch, match, category]);
+		dispatch(listProductDetails(category, productId));
+	}, [dispatch, productId, category]);
+
+	useEffect(() => {
+		checkCart();
+	});
+
+	const addToCartHandler = () => {
+		if (productId) {
+			dispatch(addToCart(productId, qty, category));
+			toast.success('New Product added.');
+		}
+	};
 
 	return (
 		<Layout>
-			<Hero bgImage={bg5} height='320px'>
+			<ToastContainer
+				position='top-center'
+				autoClose={3000}
+				hideProgressBar
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss={false}
+				draggable
+				pauseOnHover
+				transition={Slide}
+			/>
+			<Hero bgImage={bg5} height='400px'>
 				{loading ? (
 					<h2>loading..</h2>
 				) : error ? (
@@ -33,22 +74,24 @@ function SingleProductPage({ match, history }) {
 					<h2>{product.name}</h2>
 				)}
 			</Hero>
-			<div className='container'>
-				<h4 className='page__url'>
-					<Link to='/shop'>{match.path.split('/')[1]}</Link> /{' '}
-					<Link to={`/shop/${product.category}`}>
-						{match.path.split('/')[2]}
-					</Link>{' '}
-					/ <span className='current__page'>{product.name}</span>
-				</h4>
-				{loading ? (
-					<div className='center'>
-						<img src='/images/loader.svg' alt='loading' />
-						<p>Loading....</p>
+			{loading ? (
+				<div className='center'>
+					<img src='/images/loader.svg' alt='loading' />
+					<p>Loading....</p>
+				</div>
+			) : error ? (
+				<div className='container'>
+					<div className='wrapper center' style={{ height: '35vh' }}>
+						<h3>{error}</h3>
 					</div>
-				) : error ? (
-					<h3>{error}</h3>
-				) : (
+				</div>
+			) : (
+				<div className='container'>
+					<h4 className='page__url'>
+						<Link to='/shop'>{match.path.split('/')[1]}</Link> /{' '}
+						<Link to={`/shop/${product.category}`}>{category}</Link> /{' '}
+						<span className='current__page'>{product.name}</span>
+					</h4>
 					<div className='wrapper grid-2'>
 						<div className='product__image'>
 							<img src={product.image} alt={product.name} />
@@ -56,7 +99,7 @@ function SingleProductPage({ match, history }) {
 						<div className='product__info'>
 							<div>
 								<h3 className='name'>{product.name}</h3>
-								<div className='category'>
+								{/* <div className='category'>
 									<p>
 										Roast: <span>{product.roast}</span>
 									</p>
@@ -66,7 +109,7 @@ function SingleProductPage({ match, history }) {
 									<p>
 										Type: <span>{product.type}</span>
 									</p>
-								</div>
+								</div> */}
 								<p className='description'>{product.description}</p>
 								<Rating
 									value={product.rating}
@@ -92,11 +135,37 @@ function SingleProductPage({ match, history }) {
 									$ {!product.price ? '0.00' : product.price.toFixed(2)}
 								</h3>
 							</div>
-							<AddToCart match={match} history={history} product={product} />
+							<div className='cart'>
+								{product.countInStock > 0 && (
+									<input
+										type='number'
+										min='0'
+										max={product.countInStock}
+										value={qty}
+										onChange={(e) => setQty(e.target.value)}
+									/>
+								)}
+								{hasAdded === true ? (
+									<Link className='btn__outline' to='/cart'>
+										Go to Cart
+									</Link>
+								) : (
+									<button
+										className={
+											product.countInStock > 0 && qty !== 0
+												? 'btn'
+												: 'btn btn__disabled'
+										}
+										onClick={addToCartHandler}>
+										add to cart
+									</button>
+								)}
+							</div>
+							{/* <AddToCart match={match} history={history} product={product} /> */}
 						</div>
 					</div>
-				)}
-			</div>
+				</div>
+			)}
 		</Layout>
 	);
 }
