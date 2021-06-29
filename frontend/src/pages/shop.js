@@ -3,26 +3,22 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { listCoffee, listEquipment } from '../actions/productActions';
+import { listProduct } from '../actions/productActions';
 import Hero from 'components/layout/Hero';
 import Layout from 'components/layout/Layout';
 import Divider from 'components/layout/Divider';
 import ContactForm from 'components/ContactForm';
-import Products from 'components/Products';
+import Product from 'components/Product';
 import { bg2, cup, pot, icon5, icon6 } from 'assets';
 
-function ShopPage() {
+function ShopPage({ history }) {
 	const dispatch = useDispatch();
-	const coffeeList = useSelector((state) => state.coffeeList);
-	const equipmentList = useSelector((state) => state.equipmentList);
+	const productList = useSelector((state) => state.productList);
+	const { loading, error, products } = productList;
 
 	useEffect(() => {
-		dispatch(listCoffee());
-		dispatch(listEquipment());
+		dispatch(listProduct());
 	}, [dispatch]);
-
-	const { loading, error, coffees } = coffeeList;
-	const { loading: eLoading, error: eError, equipments } = equipmentList;
 
 	return (
 		<Layout title='Barista - Coffee Shop'>
@@ -74,7 +70,22 @@ function ShopPage() {
 							) : error ? (
 								<h3>{error}</h3>
 							) : (
-								<Products products={coffees} productCategory='coffee' />
+								<div className='grid-4'>
+									{!products ? (
+										<h3>No products.</h3>
+									) : (
+										products.map(
+											(product) =>
+												product.category === 'coffee' && (
+													<Product
+														key={product._id}
+														product={product}
+														history={history}
+													/>
+												)
+										)
+									)}
+								</div>
 							)}
 						</div>
 					</div>
@@ -84,15 +95,30 @@ function ShopPage() {
 								<h3 className='section-title'>equipment</h3>
 								<Link to='/shop/equipment'>view all</Link>
 							</div>
-							{eLoading ? (
+							{loading ? (
 								<div className='center'>
 									<img src='/images/loader.svg' alt='loading' />
 									<p>Loading....</p>
 								</div>
-							) : eError ? (
-								<h3>{eError}</h3>
+							) : error ? (
+								<h3>{error}</h3>
 							) : (
-								<Products products={equipments} productCategory='equipment' />
+								<div className='grid-4'>
+									{!products ? (
+										<h3>No products.</h3>
+									) : (
+										products.map(
+											(product) =>
+												product.category === 'equipment' && (
+													<Product
+														key={product._id}
+														product={product}
+														history={history}
+													/>
+												)
+										)
+									)}
+								</div>
 							)}
 						</div>
 					</div>

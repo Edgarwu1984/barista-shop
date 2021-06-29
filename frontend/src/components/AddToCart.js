@@ -5,9 +5,11 @@ import PropTypes from 'prop-types';
 
 export default function AddToCart({ history, match, product }) {
 	const [qty, setQty] = useState(1);
+	const [category, setCategory] = useState('');
 
 	const addToCartHandler = () => {
-		history.push(`/cart/${match.params.id}?qty=${qty}`);
+		setCategory(product.category);
+		history.push(`/cart/${match.params.id}?category=${category}&qty=${qty}`);
 	};
 
 	return (

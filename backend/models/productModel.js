@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 
-const coffeeSchema = mongoose.Schema(
+const productSchema = mongoose.Schema(
 	{
 		user: {
 			/* To know which Admin/User create the product */
@@ -10,6 +10,7 @@ const coffeeSchema = mongoose.Schema(
 			required: true,
 			ref: 'User' /* References User Model*/,
 		},
+		category: { type: String, required: true },
 		name: {
 			type: String,
 			required: true,
@@ -19,18 +20,6 @@ const coffeeSchema = mongoose.Schema(
 			required: true,
 		},
 		description: {
-			type: String,
-			required: true,
-		},
-		roast: {
-			type: String,
-			required: true,
-		},
-		region: {
-			type: String,
-			required: true,
-		},
-		type: {
 			type: String,
 			required: true,
 		},
@@ -63,6 +52,6 @@ const coffeeSchema = mongoose.Schema(
 	}
 );
 
-const Coffee = mongoose.model('Coffee', coffeeSchema);
+const Product = mongoose.model('Product', productSchema);
 
-export default Coffee;
+export default Product;

@@ -4,8 +4,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
 import connectDB from './config/db.js';
-import coffeeRoutes from './routes/coffeeRoutes.js';
-import equipmentRoutes from './routes/equipmentRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -18,9 +17,7 @@ app.get('/', (req, res) => {
 	res.send('API is running...');
 });
 
-app.use('/api/coffee', coffeeRoutes);
-
-app.use('/api/equipment', equipmentRoutes);
+app.use('/api/products', productRoutes);
 
 // Error Middleware
 app.use(notFound);

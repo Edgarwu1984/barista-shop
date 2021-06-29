@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import {
 	FiSearch,
@@ -16,6 +17,10 @@ export default function Header() {
 	const [showEvent, setShowEvent] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
 	const [showDropdown, setShowDropdown] = useState(false);
+
+	const cart = useSelector((state) => state.cart);
+
+	const { cartItems } = cart;
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleEvent);
@@ -81,6 +86,9 @@ export default function Header() {
 								</a>
 							</li>
 							<li className='shopify__item'>
+								{cartItems.length > 0 && (
+									<span className='item__count'>{cartItems.length}</span>
+								)}
 								<a href='/cart'>
 									<FiShoppingCart size='1.5rem' />
 								</a>

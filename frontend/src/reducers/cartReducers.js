@@ -1,6 +1,6 @@
 /** @format */
 
-import { CART_ADD_ITEM } from '../constants/cartConstants';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants';
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
 	switch (action.type) {
@@ -11,7 +11,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 			// For the existence of the specific product
 			// That is defined by item (by the action.payload)
 			// If we find a match assign the result to the existItem variable
-			const existItem = state.cartItems.find((i) => i.product === item.product);
+			const existItem = state.cartItems.find((i) => i.id === item.id);
 
 			// If there is already a product matching the item in the state.cartItems array
 			if (existItem) {
@@ -22,7 +22,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 					// Replace the matching product with the new item
 					// Leave the rest products as they were
 					cartItems: state.cartItems.map((i) =>
-						i.product === existItem.product ? item : i
+						i.id === existItem.id ? item : i
 					),
 				};
 				// Otherwise if the item is NOT already a product matching the item in the state.cartItems array
@@ -34,6 +34,12 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 					cartItems: [...state.cartItems, item],
 				};
 			}
+
+		case CART_REMOVE_ITEM:
+			return {
+				...state,
+				cartItems: state.cartItems.filter((i) => i.id !== action.payload),
+			};
 
 		default:
 			return state;

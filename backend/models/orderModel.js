@@ -11,6 +11,10 @@ const orderSchema = mongoose.Schema(
 		},
 		orderItems: [
 			{
+				category: {
+					type: String,
+					required: true,
+				},
 				name: {
 					type: String,
 					required: true,
@@ -27,15 +31,10 @@ const orderSchema = mongoose.Schema(
 					type: Number,
 					required: true,
 				},
-				coffee: {
+				product: {
 					type: mongoose.Schema.Types.ObjectId,
 					required: true,
-					ref: 'Coffee',
-				},
-				equipment: {
-					type: mongoose.Schema.Types.ObjectId,
-					required: true,
-					ref: 'Equipment',
+					ref: 'Product',
 				},
 			},
 		],

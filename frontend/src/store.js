@@ -4,18 +4,16 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
-	coffeeListReducer,
-	coffeeDetailsReducer,
-	equipmentListReducer,
-	equipmentDetailsReducer,
+	productListReducer,
+	childProductListReducer,
+	productDetailsReducer,
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 
 const reducer = combineReducers({
-	coffeeList: coffeeListReducer, // 'coffeeList' will show as your state.
-	coffeeDetails: coffeeDetailsReducer,
-	equipmentList: equipmentListReducer,
-	equipmentDetails: equipmentDetailsReducer,
+	productList: productListReducer, // 'productList' will show as your state.
+	productDetails: productDetailsReducer,
+	childProductList: childProductListReducer,
 	cart: cartReducer,
 });
 

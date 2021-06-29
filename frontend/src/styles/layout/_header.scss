@@ -87,7 +87,18 @@ header {
 					}
 
 					&__item {
+						position: relative;
 						margin: 0 0.5rem;
+
+						.item__count {
+							position: absolute;
+							background-color: $primary-light;
+							border-radius: 50%;
+							padding: 0rem 0.4rem;
+							font-weight: 600;
+							top: 0.5rem;
+							left: 1.5rem;
+						}
 					}
 				}
 			}

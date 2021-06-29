@@ -3,20 +3,20 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { listCoffee } from '../actions/productActions';
+import { listProduct } from '../actions/productActions';
 import Hero from 'components/layout/Hero';
 import Layout from 'components/layout/Layout';
 import Divider from 'components/layout/Divider';
-import Products from 'components/Products';
+import Product from 'components/Product';
 import { icon2, icon3, icon4, bg1 } from 'assets';
 
-function HomePage() {
+function HomePage({ history }) {
 	const dispatch = useDispatch();
-	const coffeeList = useSelector((state) => state.coffeeList);
-	const { loading, error, coffees } = coffeeList;
+	const productList = useSelector((state) => state.productList);
+	const { loading, error, products } = productList;
 
 	useEffect(() => {
-		dispatch(listCoffee());
+		dispatch(listProduct());
 	}, [dispatch]);
 
 	return (
@@ -119,7 +119,22 @@ function HomePage() {
 						) : error ? (
 							<h3>{error}</h3>
 						) : (
-							<Products products={coffees} productCategory='coffee' />
+							<div className='grid-4'>
+								{!products ? (
+									<h3>No products.</h3>
+								) : (
+									products.map(
+										(product) =>
+											product.rating > 4.5 && (
+												<Product
+													key={product._id}
+													product={product}
+													history={history}
+												/>
+											)
+									)
+								)}
+							</div>
 						)}
 					</div>
 					<div className='wrapper center'>

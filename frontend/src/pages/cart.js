@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Divider from 'components/layout/Divider';
@@ -13,19 +13,33 @@ import { bg8 } from 'assets';
 function CartPage({ match, location, history }) {
 	const productId = match.params.id;
 
-	const qty = location.search ? Number(location.search.split('=')[1]) : 1;
+	const qty = location.search
+		? Number(location.search.split('&')[1].split('=')[1])
+		: 1;
 
 	const dispatch = useDispatch();
 
 	const cart = useSelector((state) => state.cart);
 
 	const { cartItems } = cart;
+	console.log(cartItems);
+
+	const category = location.search.split('&')[0].split('=')[1]; // Get added item's category
 
 	useEffect(() => {
 		if (productId) {
-			dispatch(addToCart(productId, qty));
+			dispatch(addToCart(productId, qty, category));
 		}
-	}, [dispatch, productId, qty]);
+	}, [dispatch, productId, qty, category]);
+
+	const removeFromCartHandler = (id) => {
+		dispatch(removeFromCart(id));
+	};
+
+	const checkoutHandler = () => {
+		history.push('/login?redirect=shipping');
+	};
+
 	return (
 		<Layout>
 			<Hero bgImage={bg8} height='400px'>
@@ -46,11 +60,11 @@ function CartPage({ match, location, history }) {
 								</div>
 							) : (
 								cartItems.map((item) => (
-									<div className='cart__list' key={item.product}>
+									<div className='cart__list' key={item.id}>
 										<div className='cart__list-item'>
 											<img src={item.image} alt={item.name} />
 											<div className='item__info'>
-												<Link to={`/shop/coffee/${item.product}`}>
+												<Link to={`/shop/${item.category}/${item.id}`}>
 													<h4 className='mb-1'>{item.name}</h4>
 												</Link>
 												<p className='mb-1'>Price: $ {item.price.toFixed(2)}</p>
@@ -63,13 +77,19 @@ function CartPage({ match, location, history }) {
 														value={item.qty}
 														onChange={(e) =>
 															dispatch(
-																addToCart(item.product, Number(e.target.value))
+																addToCart(
+																	item.id,
+																	Number(e.target.value),
+																	item.category
+																)
 															)
 														}
 													/>
 												</p>
 											</div>
-											<button className='remove__btn'>
+											<button
+												className='remove__btn'
+												onClick={() => removeFromCartHandler(item.id)}>
 												<FaTrashAlt fontSize='1.2rem' />
 											</button>
 										</div>
@@ -100,8 +120,9 @@ function CartPage({ match, location, history }) {
 									cartItems.length === 0
 										? 'btn btn-block btn__disabled'
 										: 'btn btn-block'
-								}>
-								check out
+								}
+								onClick={checkoutHandler}>
+								proceed check out
 							</button>
 						</div>
 					</div>
