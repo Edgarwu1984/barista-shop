@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import colors from 'colors';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -13,11 +14,15 @@ connectDB();
 
 const app = express();
 
+app.use(express.json()); // Middleware: Allow us to access JSON data of body
+
 app.get('/', (req, res) => {
 	res.send('API is running...');
 });
 
 app.use('/api/products', productRoutes);
+
+app.use('/api/users', userRoutes);
 
 // Error Middleware
 app.use(notFound);

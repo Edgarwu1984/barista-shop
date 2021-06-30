@@ -1,98 +1,42 @@
 /** @format */
 
 import express from 'express';
-import expressAsyncHandler from 'express-async-handler';
-import Products from '../models/productModel.js';
 const router = express.Router();
+import {
+	getProducts,
+	getCoffees,
+	getEquipments,
+	getSingleCoffee,
+	getSingleEquipment,
+} from '../controllers/productController.js';
 
-// @description Fetch all Products
-// @route GET /api/products
-// @access Public
+router.route('/').get(getProducts);
 
-router.get(
-	'/',
-	expressAsyncHandler(async (req, res) => {
-		const products = await Products.find({});
-		res.json(products);
-	})
-);
+router.route('/coffee').get(getCoffees);
 
-// @description Fetch All Coffee
-// @route GET /api/products/coffee
-// @access Public
-router.get(
-	'/coffee',
-	expressAsyncHandler(async (req, res) => {
-		const product = await Products.find({ category: 'coffee' });
+router.route('/equipment').get(getEquipments);
 
-		if (product) {
-			res.json(product);
-		} else {
-			// res.status(404).json({ message: 'Product not found' });
-			// We have setup custom error handler middleware, so we can throw a new Error
-			res.status(404);
-			throw new Error('Oops..Product not found.');
-		}
-	})
-);
+router.route('/coffee/:id').get(getSingleCoffee);
 
-// @description Fetch All Equipments
-// @route GET /api/products/equipment
-// @access Public
-router.get(
-	'/equipment',
-	expressAsyncHandler(async (req, res) => {
-		const product = await Products.find({ category: 'equipment' });
-
-		if (product) {
-			res.json(product);
-		} else {
-			res.status(404);
-			throw new Error('Oops..Product not found.');
-		}
-	})
-);
-
-// @description Fetch single coffee
-// @route GET /api/products/coffee/:id
-// @access Public
-router.get(
-	'/coffee/:id',
-	expressAsyncHandler(async (req, res) => {
-		// const product = await Products.findById(req.params.id);
-		const product = await Products.findOne({
-			category: 'coffee',
-			_id: req.params.id,
-		}); // Only get the coffee category with its id
-
-		if (product) {
-			res.json(product);
-		} else {
-			res.status(404);
-			throw new Error('Oops..Product not found.');
-		}
-	})
-);
-
-// @description Fetch single equipment
-// @route GET /api/products/equipment/:id
-// @access Public
-router.get(
-	'/equipment/:id',
-	expressAsyncHandler(async (req, res) => {
-		// const product = await Products.findById(req.params.id);
-		const product = await Products.findOne({
-			category: 'equipment',
-			_id: req.params.id,
-		});
-
-		if (product) {
-			res.json(product);
-		} else {
-			res.status(404);
-			throw new Error('Oops..Product not found.');
-		}
-	})
-);
+router.route('/equipment/:id').get(getSingleEquipment);
 
 export default router;
+
+//If you have several methods on the same route, the advantage of using .route is to specify the route once.
+
+// router
+// .route('/')
+// .get(getSomething)
+// .post(addSomething)
+// .delete(removeSomething)
+// is equivalent to
+
+// router
+// .get('/', getSomething)
+// .post('/', addSomething)
+// .delete('/', removeSomething)
+// or
+
+// router.get('/', getSomething)
+// router.post('/', addSomething)
+// router.delete('/', removeSomething)
