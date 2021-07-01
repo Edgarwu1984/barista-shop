@@ -2,12 +2,6 @@
 
 @use '../abstracts' as *;
 
-.bg-dark {
-	transition: all 0.2s ease-in-out;
-	background-color: rgba(darken($dark, 5%), 1);
-	border-bottom: 1px solid $primary-dark;
-}
-
 header {
 	position: fixed;
 	top: 0;
@@ -40,156 +34,139 @@ header {
 			}
 		}
 
-		.nav {
+		.mobile {
 			display: none;
-			@media (min-width: $md) {
-				display: inline-block;
-				@include flexbox();
-				margin-left: auto;
-				&__item {
-					margin: 0 1.5rem;
-					&-link {
+		}
+
+		.nav {
+			position: absolute;
+			width: 100%;
+			height: max-content;
+			top: 0;
+			left: 0;
+			background-color: $dark;
+			padding-top: 7rem;
+
+			z-index: -1;
+
+			&__menu {
+				@include flexbox($direction: column);
+
+				&-item {
+					font-size: 1.5rem;
+					margin-bottom: 2rem;
+					a {
 						position: relative;
 						font-size: 1.2rem;
 						font-family: 'Marcellus', serif;
 						text-transform: uppercase;
-						.dropdown__arrow {
-							margin-top: 1.5rem;
-							padding-top: 1rem;
-						}
-					}
-
-					.active {
-						position: relative;
-						color: $primary;
-						&::before {
+						.arrow {
 							position: absolute;
-							content: ' ';
-							left: 50%;
-							transform: translateX(-50%);
-							bottom: -0.5rem;
-							background-color: $primary;
-							height: 2px;
-							width: 2rem;
+							top: 0.2rem;
 						}
 					}
 				}
-				.shopify {
+			}
+
+			@media (min-width: $lg) {
+				background: none;
+				width: auto;
+				height: auto;
+				position: relative;
+				margin-left: auto;
+				padding-top: 0;
+				@include flexbox();
+				z-index: 1;
+				&__menu {
 					@include flexbox();
-					margin-left: 1.5rem;
-
-					&::before {
-						content: '';
-						height: 1rem;
-						width: 2px;
-						background-color: rgba($primary-dark, 0.5);
-						margin-right: 1.5rem;
-					}
-
-					&__item {
+					&-item {
 						position: relative;
-						margin: 0 0.5rem;
+						margin: 0 1.5rem;
+
+						&:hover {
+							.nav__dropdown {
+								transition: all 0.3s ease;
+								opacity: 1;
+								pointer-events: initial;
+							}
+						}
+
+						.active {
+							position: relative;
+							color: $primary;
+							&::before {
+								position: absolute;
+								content: ' ';
+								left: 50%;
+								transform: translateX(-50%);
+								bottom: -0.5rem;
+								background-color: $primary;
+								height: 2px;
+								width: 2rem;
+							}
+						}
+					}
+				}
+
+				.shopify {
+					@media (min-width: $lg) {
+						margin-left: 1.5rem;
+						& > * {
+							margin: 0 0.5rem !important;
+						}
+
+						&::before {
+							content: '';
+							height: 1rem;
+							width: 2px;
+							background-color: rgba($primary-dark, 0.5);
+							margin-right: 1.5rem;
+						}
 
 						.item__count {
 							position: absolute;
 							background-color: $primary-light;
 							border-radius: 50%;
+							font-size: 1rem;
 							padding: 0rem 0.4rem;
 							font-weight: 600;
 							top: 0.5rem;
 							left: 1.5rem;
+							z-index: 1;
 						}
 					}
 				}
 			}
 		}
 
-		.nav__mobile {
-			background-color: rgba(darken($dark, 5%), 1);
-			position: absolute;
-			top: 0;
-			left: 0;
-			padding: 6rem 2rem;
-			width: 100%;
-			height: fit-content;
-			z-index: -1;
-			@include flexbox($direction: column);
-			.nav__item {
-				margin: 1.5rem;
-				&-link {
-					text-transform: uppercase;
-					font-size: 1.3rem;
-				}
-				.active {
-					position: relative;
-					color: $primary;
-					&::before {
-						position: absolute;
-						content: ' ';
-						left: 50%;
-						transform: translateX(-50%);
-						bottom: -0.5rem;
-						background-color: $primary;
-						height: 2px;
-						width: 2rem;
-					}
-				}
-			}
-
-			.shopify {
-				margin-top: 4rem;
-				width: 80%;
-				@include flexbox($content: space-between);
-			}
-
-			@media (min-width: $md) {
-				display: none;
-			}
-		}
-
 		.btn-hamburger {
 			display: block;
-			@media (min-width: $md) {
+			@media (min-width: $lg) {
 				display: none;
 			}
 		}
 	}
 }
 
-.dropdown {
-	position: relative;
+.bg-dark {
+	transition: all 0.2s ease-in-out;
+	background-color: rgba(darken($dark, 5%), 1);
+	border-bottom: 1px solid $primary-dark;
+}
 
-	.arrow {
-		position: absolute;
-		top: 0.2rem;
-	}
-
-	&__menu {
+.nav__dropdown {
+	@media (min-width: $lg) {
+		opacity: 0;
+		pointer-events: none;
 		position: absolute;
 		height: min-content;
-		top: 2rem;
-		left: 0;
-		padding: 2rem;
+		width: max-content;
+		padding: 1rem 1.5rem;
 		background-color: $dark;
 		@include shadow();
-		@include flexbox(
-			$direction: column,
-			$content: flex-start,
-			$items: flex-start
-		);
 
-		&::after {
-			content: ' ';
-			position: absolute;
-			height: 2rem;
-			width: 100%;
-			left: 0;
-			top: -0.2rem;
+		&-item {
+			margin-bottom: 1rem;
 		}
-	}
-	&__menu-link {
-		font-size: 1.1rem;
-		text-transform: uppercase;
-		margin-bottom: 1.2rem;
 	}
 }

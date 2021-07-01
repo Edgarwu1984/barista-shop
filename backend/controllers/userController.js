@@ -15,9 +15,8 @@ const authUser = expressAsyncHandler(async (req, res) => {
 	const user = await User.findOne({ email: email });
 
 	// Check if user password match with request; Method from userModel that we created;
-	const userPassword = await user.matchPassword(password);
 
-	if (user && userPassword) {
+	if (user && (await user.matchPassword(password))) {
 		res.json({
 			_id: user._id,
 			name: user.name,

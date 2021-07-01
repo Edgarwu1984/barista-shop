@@ -27,9 +27,9 @@ export const listProduct = () => async (dispatch) => {
 			// Get backend error handle middleware error message
 			// To check if we have the custom error message, if true then return the custom error message
 			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
+				error.response && error.response.data.messages
+					? error.response.data.messages
+					: error.messages,
 		});
 	}
 };
@@ -49,9 +49,9 @@ export const listChildProduct = (category) => async (dispatch) => {
 			// Get backend error handle middleware error message
 			// To check if we have the custom error message, if true then return the custom error message
 			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
+				error.response && error.response.data.messages
+					? error.response.data.messages
+					: error.messages,
 		});
 	}
 };
@@ -68,9 +68,9 @@ export const listProductDetails = (category, id) => async (dispatch) => {
 			type: PRODUCT_DETAILS_FAIL,
 			// Get backend error handle middleware error message
 			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
+				error.response && error.response.data.messages
+					? error.response.data.messages
+					: error.messages,
 		});
 	}
 };

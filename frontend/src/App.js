@@ -18,6 +18,7 @@ function App() {
 	return (
 		<Router>
 			<Switch>
+				<Route path='/login' component={LoginPage} />
 				<Route exact path='/' component={HomePage} />
 				<Route exact path='/shop' component={ShopPage} />
 				<Route exact path='/shop/coffee' component={ProductsPage} />
@@ -25,7 +26,6 @@ function App() {
 				<Route path='/shop/coffee/:id' component={SingleProductPage} />
 				<Route path='/shop/equipment/:id' component={SingleProductPage} />
 				<Route path='/cart/:id?' component={CartPage} />
-				<Route path='/login' component={LoginPage} />
 				<Route path='/404' component={NotFoundPage} />
 				<Redirect to='/404' />
 			</Switch>
