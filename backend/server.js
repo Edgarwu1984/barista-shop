@@ -13,7 +13,6 @@ dotenv.config();
 connectDB();
 
 const app = express();
-
 app.use(express.json()); // Middleware: Allow us to access JSON data of body
 
 app.get('/', (req, res) => {

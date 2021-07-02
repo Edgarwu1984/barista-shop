@@ -3,20 +3,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../actions/userLoginActions';
+import { register } from '../actions/userLoginActions';
 import { logo } from 'assets';
 import Message from 'components/Message';
-import Loader from 'components/Loader';
 
-function LoginPage({ location, history }) {
+function RegisterPage({ location, history }) {
 	const currentYear = new Date().getFullYear();
+	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const [message, setMessage] = useState(null);
 	const redirect = location.search ? location.search.split('=')[1] : '/';
 
 	const dispatch = useDispatch();
-	const userLogin = useSelector((state) => state.userLogin);
-	const { loading, error, userInfo } = userLogin;
+	const userRegister = useSelector((state) => state.userRegister);
+	const { error, userInfo } = userRegister;
 
 	useEffect(() => {
 		if (userInfo) {
@@ -26,7 +28,11 @@ function LoginPage({ location, history }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(login(email, password));
+		if (password !== confirmPassword) {
+			setMessage("Password doesn't match.");
+		} else {
+			dispatch(register(name, email, password));
+		}
 	};
 
 	return (
@@ -41,10 +47,20 @@ function LoginPage({ location, history }) {
 				</div>
 			</div>
 			<div className='login center'>
+				{message && <Message message={message} type='danger' duration={5000} />}
 				{error && <Message message={error} type='danger' duration={5000} />}
 				<form className='form' onSubmit={handleSubmit}>
-					<h2 className='form__title'>Login</h2>
-					{loading && <Loader />}
+					<h2 className='form__title'>Sign Up</h2>
+					<div className='form__group'>
+						<label className='form__group-label'>Username</label>
+						<input
+							className='form__group-control'
+							type='text'
+							id='name'
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+						/>
+					</div>
 					<div className='form__group'>
 						<label className='form__group-label'>Email</label>
 						<input
@@ -66,10 +82,20 @@ function LoginPage({ location, history }) {
 						/>
 					</div>
 					<div className='form__group'>
+						<label className='form__group-label'>Confirm Password</label>
+						<input
+							className='form__group-control'
+							type='password'
+							id='confirmPassword'
+							value={confirmPassword}
+							onChange={(e) => setConfirmPassword(e.target.value)}
+						/>
+					</div>
+					<div className='form__group'>
 						<input
 							className='form__group-control btn'
 							type='submit'
-							value='Login'
+							value='Register'
 						/>
 					</div>
 					<div className='form__group'>
@@ -79,14 +105,13 @@ function LoginPage({ location, history }) {
 					</div>
 					<div className='form__group'>
 						<p>
-							Don't have account?{' '}
-							<Link to='/register' style={{ marginLeft: '0.5rem' }}>
-								Sign Up
+							Already have an account?{' '}
+							<Link to='/login' style={{ marginLeft: '0.5rem' }}>
+								Log in
 							</Link>
 						</p>
 					</div>
 				</form>
-
 				<div className='copyright__info'>
 					<p>
 						Copyright &copy; {currentYear} Barista | All Rights Reserved | Built
@@ -98,4 +123,4 @@ function LoginPage({ location, history }) {
 	);
 }
 
-export default LoginPage;
+export default RegisterPage;

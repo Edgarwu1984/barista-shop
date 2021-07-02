@@ -105,15 +105,15 @@ export default function Header() {
 							</li>
 							{userInfo ? (
 								<li className='nav__menu-item'>
-									<Link to='/login'>
+									<p>
 										<BiUser size='1.5rem' />
-									</Link>
+									</p>
 									<ul className='nav__dropdown'>
 										<li className='nav__dropdown-item'>
 											<NavLink to='/profile'>{userInfo.name}</NavLink>
 										</li>
 										<li className='nav__dropdown-item'>
-											<Link href='#' onClick={handleLogout}>
+											<Link to='#' onClick={handleLogout}>
 												Log out
 											</Link>
 										</li>

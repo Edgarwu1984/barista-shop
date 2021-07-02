@@ -1,0 +1,32 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+.disabled {
+	display: none;
+}
+
+.message {
+	position: fixed;
+	top: 2rem;
+	max-width: max-content;
+	height: min-content;
+
+	.success,
+	.danger {
+		text-align: center;
+		padding: 1rem 2rem;
+		margin: 0 2rem;
+		color: white;
+	}
+
+	.success {
+		border: 1px solid rgb(110, 190, 56);
+		background-color: rgb(150, 236, 164);
+	}
+
+	.danger {
+		border: 1px solid rgb(190, 56, 56);
+		background-color: rgb(236, 150, 150);
+	}
+}

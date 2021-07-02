@@ -55,11 +55,18 @@ header {
 				&-item {
 					font-size: 1.5rem;
 					margin-bottom: 2rem;
-					a {
+					a,
+					p {
+						color: $primary-light;
 						position: relative;
 						font-size: 1.2rem;
 						font-family: 'Marcellus', serif;
 						text-transform: uppercase;
+
+						&:hover {
+							color: $primary;
+						}
+
 						.arrow {
 							position: absolute;
 							top: 0.2rem;

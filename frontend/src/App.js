@@ -13,12 +13,14 @@ import CartPage from 'pages/cart';
 import ProductsPage from 'pages/products/products';
 import SingleProductPage from 'pages/products/singleProduct';
 import LoginPage from 'pages/login';
+import RegisterPage from 'pages/register';
 
 function App() {
 	return (
 		<Router>
 			<Switch>
 				<Route path='/login' component={LoginPage} />
+				<Route path='/register' component={RegisterPage} />
 				<Route exact path='/' component={HomePage} />
 				<Route exact path='/shop' component={ShopPage} />
 				<Route exact path='/shop/coffee' component={ProductsPage} />

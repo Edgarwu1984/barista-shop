@@ -87,13 +87,14 @@
 	}
 
 	.login {
+		position: relative;
 		background-color: $light;
 		height: 40%;
 		width: 100%;
 
 		@media (min-width: $xl) {
 			height: 100%;
-			width: 60%;
+			max-width: 1200px;
 		}
 
 		.form {
@@ -109,12 +110,9 @@
 				padding: 4rem 1rem;
 			}
 			@media (min-width: $md) {
-				width: 60%;
-			}
-			@media (min-width: $md) {
+				width: 600px;
 				padding: 4rem 2rem;
 			}
-
 			@media (min-width: $xl) {
 				position: relative;
 				top: 0%;
