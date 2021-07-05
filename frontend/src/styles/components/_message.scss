@@ -8,15 +8,29 @@
 
 .message {
 	position: fixed;
-	top: 2rem;
-	max-width: max-content;
-	height: min-content;
+	top: 1rem;
+	left: 50%;
+	transform: translateX(-50%);
+	max-width: 500px;
+	height: auto;
+	// margin: auto;
+	z-index: 99;
+
+	.quit__btn {
+		position: absolute;
+		right: 0;
+		top: 0.5rem;
+		border: none;
+		background: none;
+		color: white;
+		cursor: pointer;
+	}
 
 	.success,
 	.danger {
 		text-align: center;
 		padding: 1rem 2rem;
-		margin: 0 2rem;
+		// margin: 0 2rem;
 		color: white;
 	}
 

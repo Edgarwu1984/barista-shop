@@ -8,6 +8,7 @@ import {
 	FaStarHalfAlt,
 	FaRegStar,
 	FaTrashAlt,
+	FaTimes,
 } from 'react-icons/fa';
 
 import { FiSearch, FiShoppingCart } from 'react-icons/fi';
@@ -24,6 +25,7 @@ export {
 	FaStarHalfAlt,
 	FaRegStar,
 	FaTrashAlt,
+	FaTimes,
 	FiSearch,
 	FiShoppingCart,
 	BiUser,

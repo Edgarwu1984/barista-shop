@@ -101,10 +101,10 @@
 	grid-template-columns: repeat(1, 1fr);
 	justify-items: center;
 	gap: 2.5rem;
+	// & > * {
+	// 	grid-column: span 2 / -1;
+	// }
 
-	@media (min-width: $md) {
-		grid-template-columns: repeat(2, 1fr);
-	}
 	@media (min-width: $lg) {
 		grid-template-columns: repeat(3, 1fr);
 	}

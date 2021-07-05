@@ -6,7 +6,7 @@
 	$background: $primary,
 	$border: $primary,
 	$hoverColor: $primary,
-	$hoverBG: $light,
+	$hoverBG: white,
 	$hoverBorder: $primary
 ) {
 	color: $color;
@@ -50,7 +50,7 @@
 }
 
 @mixin shadow($h: 0, $v: 4px, $blur: 12px, $spread: 0) {
-	box-shadow: $h $v $blur $spread rgba($dark, 0.2);
+	box-shadow: $h $v $blur $spread rgba($gray-400, 0.2);
 }
 
 @mixin backgroundImage(

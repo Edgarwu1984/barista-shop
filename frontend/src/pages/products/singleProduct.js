@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { listProductDetails } from '../../actions/productActions';
-import { addToCart } from 'actions/cartActions';
+import { listProductDetails } from '../../redux/actions/productActions';
+import { addToCart } from 'redux/actions/cartActions';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from 'components/layout/Layout';

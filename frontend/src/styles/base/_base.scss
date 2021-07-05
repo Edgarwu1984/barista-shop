@@ -17,6 +17,7 @@ html {
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background-color: $gray-50;
 }
 
 li {
@@ -74,4 +75,12 @@ hr {
 	left: -9999px;
 	width: 0;
 	height: 0;
+}
+
+.badge {
+	text-transform: uppercase;
+	color: $primary;
+	border: 1px solid $primary;
+	border-radius: 0.25rem;
+	padding: 0.07rem 0.3rem;
 }

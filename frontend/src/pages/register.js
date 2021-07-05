@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../actions/userLoginActions';
+import { register } from '../redux/actions/userActions';
 import { logo } from 'assets';
 import Message from 'components/Message';
+import Divider from 'components/layout/Divider';
 
 function RegisterPage({ location, history }) {
 	const currentYear = new Date().getFullYear();
@@ -42,6 +43,7 @@ function RegisterPage({ location, history }) {
 					<img src={logo} alt='logo' />
 					<h1>Barista Coffee Shop</h1>
 				</div>
+				<Divider />
 				<div className='site__intro-body'>
 					<p className='lead'>Shopping with variety coffee products.</p>
 				</div>
@@ -111,13 +113,13 @@ function RegisterPage({ location, history }) {
 							</Link>
 						</p>
 					</div>
+					<div className='copyright__info'>
+						<p>
+							Copyright &copy; {currentYear} Barista | All Rights Reserved |
+							Built by Edgar Wu
+						</p>
+					</div>
 				</form>
-				<div className='copyright__info'>
-					<p>
-						Copyright &copy; {currentYear} Barista | All Rights Reserved | Built
-						by Edgar Wu
-					</p>
-				</div>
 			</div>
 		</div>
 	);

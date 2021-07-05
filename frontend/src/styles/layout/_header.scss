@@ -170,7 +170,6 @@ header {
 		width: max-content;
 		padding: 1rem 1.5rem;
 		background-color: $dark;
-		@include shadow();
 
 		&-item {
 			margin-bottom: 1rem;

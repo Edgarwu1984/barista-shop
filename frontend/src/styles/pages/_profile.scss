@@ -1,0 +1,53 @@
+/** @format */
+
+@use '../abstracts' as *;
+
+.profile__wrapper {
+	@include shadow();
+	background-color: white;
+	min-height: 460px;
+	margin-top: -5rem;
+	margin-bottom: 5rem;
+	padding: 2rem;
+}
+
+.grid__child {
+	width: 100%;
+	// padding: 2rem;
+	// background-color: yellow;
+	&-title {
+		border-bottom: 1px solid $gray-200;
+		padding: 1rem 0rem 2rem 0rem;
+		margin-bottom: 1rem;
+		@include flexbox($content: space-between);
+	}
+	ul {
+		padding: 1rem 0;
+		li {
+			margin-bottom: 1rem;
+			strong {
+				margin-right: 1rem;
+			}
+		}
+	}
+}
+
+.span {
+	grid-column: span 2/-1;
+}
+
+.current__info {
+	background-color: rgba($gray-200, 0.2);
+	border: 1px solid $gray-200;
+	padding: 1rem !important;
+	margin-top: 0;
+
+	li {
+		&:first-child {
+			margin-bottom: 1rem;
+		}
+		strong {
+			margin-right: 1rem;
+		}
+	}
+}

@@ -28,3 +28,30 @@
 		}
 	}
 }
+
+.form {
+	background-color: white;
+	min-width: max-content;
+	margin-bottom: 5rem;
+	padding: 0rem;
+
+	@media (min-width: $md) {
+		padding: 2rem;
+	}
+
+	&__group {
+		@include flexbox($direction: column, $items: flex-start);
+		margin: 1.5rem;
+		margin-bottom: 1rem;
+		&-label {
+			justify-self: flex-start;
+			font-size: 1rem;
+			font-weight: 600;
+			margin-right: auto;
+			margin-bottom: 0.5rem;
+		}
+		&-control {
+			width: 100%;
+		}
+	}
+}

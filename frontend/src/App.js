@@ -14,6 +14,7 @@ import ProductsPage from 'pages/products/products';
 import SingleProductPage from 'pages/products/singleProduct';
 import LoginPage from 'pages/login';
 import RegisterPage from 'pages/register';
+import ProfilePage from 'pages/profile';
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 			<Switch>
 				<Route path='/login' component={LoginPage} />
 				<Route path='/register' component={RegisterPage} />
+				<Route path='/profile' component={ProfilePage} />
 				<Route exact path='/' component={HomePage} />
 				<Route exact path='/shop' component={ShopPage} />
 				<Route exact path='/shop/coffee' component={ProductsPage} />
