@@ -3,99 +3,78 @@
 @use '../abstracts' as *;
 
 .login__page {
-	position: relative;
-	@include flexbox($direction: column);
-	height: 100vh;
+  background-image: url('../../assets/images/bg1.jpg');
+  @include backgroundImage(
+    $position: bottom,
+    $height: 100%,
+    $gradient: 'true',
+    $overlayOpacity: 0.3
+  );
 
-	@media (min-width: $xl) {
-		@include flexbox;
-	}
+  @media (min-width: $md) {
+    @include backgroundImage(
+      $position: bottom,
+      $height: 100vh,
+      $gradient: 'true',
+      $overlayOpacity: 0.3
+    );
+  }
 
-	.site__intro {
-		position: relative;
-		color: $light;
-		background-image: url('../../assets/images/bg1.jpg');
-		@include backgroundImage(
-			$position: bottom,
-			$height: 60%,
-			$gradient: 'true',
-			$overlayOpacity: 0.3
-		);
+  &-wrapper {
+    height: 100%;
+    width: 100%;
+    @media (min-width: $lg) {
+      @include flexbox($direction: column);
+    }
+    @media (min-width: $xl) {
+      @include flexbox($content: space-between);
+    }
+  }
 
-		@media (min-width: $xl) {
-			@include backgroundImage(
-				$position: bottom,
-				$height: 100%,
-				$overlayOpacity: 0.3
-			);
-		}
+  .site__info {
+    color: $light;
+    text-align: center;
+    padding: 2rem;
+    margin-top: auto;
 
-		&-title {
-			@include flexbox;
-			padding: 1rem;
-			z-index: 1;
-			height: min-content;
-			h1 {
-				display: none;
-			}
-			img {
-				display: none;
-			}
+    .divider {
+      margin: 1.5rem auto;
+    }
 
-			@media (min-width: $md) {
-				height: min-content;
-				h1 {
-					display: unset;
-					font-size: 2.5rem;
-					text-transform: uppercase;
-					margin-left: 1rem;
-				}
-				img {
-					margin-bottom: 0;
-				}
-			}
-			@media (min-width: $lg) {
-				margin-top: 4rem;
-				h1 {
-					font-size: 3rem;
-					margin-left: 1rem;
-				}
-				img {
-					width: 5rem;
-					height: 5rem;
-				}
-			}
-			@media (min-width: $xl) {
-				h1 {
-					font-size: 4rem;
-					margin-left: 1rem;
-				}
-				img {
-					width: 6rem;
-					height: 6rem;
-				}
-			}
-		}
-		&-body {
-			margin-bottom: 50%;
-			@media (min-width: $xl) {
-				margin-bottom: 10%;
-			}
-		}
-	}
+    &-title {
+      @include flexbox();
+      h1 {
+      }
+      img {
+        height: 5rem;
+        margin-right: 1rem;
+        display: none;
+        @media (min-width: $md) {
+          display: block;
+        }
+      }
+    }
 
-	.login {
-		.copyright__info {
-			padding: 1rem 2rem;
-			p {
-				font-size: 0.7rem;
-			}
-			@media (min-width: $md) {
-				p {
-					font-size: 0.9rem;
-				}
-				margin-top: 3rem;
-			}
-		}
-	}
+    @media (min-width: $lg) {
+      margin-bottom: 4rem;
+    }
+    @media (min-width: $xl) {
+      margin: auto;
+    }
+  }
+
+  .form-panel {
+    background-color: white;
+    padding: 2rem;
+    width: 100%;
+
+    @media (min-width: $md) {
+      padding: 3rem;
+      width: 500px;
+      margin: auto;
+    }
+    @media (min-width: $lg) {
+      width: 600px;
+    }
+  }
 }

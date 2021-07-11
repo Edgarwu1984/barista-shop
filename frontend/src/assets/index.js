@@ -16,30 +16,32 @@ import bg6 from './images/bg6.png';
 import bg7 from './images/bg7.png';
 import bg8 from './images/bg8.png';
 import bg9 from './images/bg9.jpg';
+import bg10 from './images/bg10.jpg';
 import feature1 from './images/bg_feature1.png';
 import feature2 from './images/bg_feature2.png';
 import cup from './images/cup.png';
 import pot from './images/pot.png';
 
 export {
-	icon1,
-	icon2,
-	icon3,
-	icon4,
-	icon5,
-	icon6,
-	logo,
-	bg1,
-	bg2,
-	bg3,
-	bg4,
-	bg5,
-	bg6,
-	bg7,
-	bg8,
-	bg9,
-	cup,
-	pot,
-	feature1,
-	feature2,
+  icon1,
+  icon2,
+  icon3,
+  icon4,
+  icon5,
+  icon6,
+  logo,
+  bg1,
+  bg2,
+  bg3,
+  bg4,
+  bg5,
+  bg6,
+  bg7,
+  bg8,
+  bg9,
+  bg10,
+  cup,
+  pot,
+  feature1,
+  feature2,
 };

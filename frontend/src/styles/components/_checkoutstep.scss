@@ -1,0 +1,32 @@
+@use '../abstracts' as *;
+
+.checkout__step {
+  @include flexbox;
+  margin-bottom: 2rem;
+  &-item {
+    @include flexbox;
+    margin: 0 0.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    a {
+      color: $dark;
+    }
+    p {
+      color: $gray-400;
+    }
+
+    &::after {
+      content: ' > ';
+      margin-left: 1rem;
+    }
+
+    &:last-child::after {
+      content: none;
+    }
+  }
+
+  .active {
+    color: $primary;
+    font-weight: 700;
+  }
+}

@@ -2,106 +2,107 @@
 @use './variables' as *;
 
 @mixin button(
-	$color: $light,
-	$background: $primary,
-	$border: $primary,
-	$hoverColor: $primary,
-	$hoverBG: white,
-	$hoverBorder: $primary
+  $color: $light,
+  $background: $primary,
+  $border: $primary,
+  $hoverColor: $primary,
+  $hoverBG: white,
+  $hoverBorder: $primary
 ) {
-	color: $color;
-	background: $background;
-	border: 1px solid $border;
-	font-size: 0.8rem;
-	font-family: 'Marcellus', serif;
-	text-transform: uppercase;
-	word-spacing: 0.2rem;
-	padding: 0.5rem 1.2rem;
-	outline: none;
-	cursor: pointer;
-	&:hover {
-		transition: all 0.3s ease;
-		color: $hoverColor;
-		background-color: $hoverBG;
-		border: 1px solid $hoverBorder;
-	}
+  color: $color;
+  background: $background;
+  border: 1px solid $border;
+  font-size: 0.8rem;
+  font-family: 'Marcellus', serif;
+  text-align: center;
+  text-transform: uppercase;
+  word-spacing: 0.2rem;
+  padding: 0.5rem 1.2rem;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.3s ease;
+    color: $hoverColor;
+    background-color: $hoverBG;
+    border: 1px solid $hoverBorder;
+  }
 
-	@media (min-width: $md) {
-		font-size: 0.9rem;
-		padding: 0.5rem 1.2rem;
-	}
-	@media (min-width: $md) {
-		font-size: 0.9rem;
-		padding: 0.7rem 1.2rem;
-	}
+  @media (min-width: $md) {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.2rem;
+  }
+  @media (min-width: $md) {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.2rem;
+  }
 }
 
 @mixin flexbox(
-	$direction: row,
-	$content: center,
-	$items: center,
-	$wrap: nowrap
+  $direction: row,
+  $content: center,
+  $items: center,
+  $wrap: nowrap
 ) {
-	display: flex;
-	flex-direction: $direction;
-	flex-wrap: $wrap;
-	justify-content: $content;
-	align-items: $items;
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $content;
+  align-items: $items;
 }
 
 @mixin shadow($h: 0, $v: 4px, $blur: 12px, $spread: 0) {
-	box-shadow: $h $v $blur $spread rgba($gray-400, 0.2);
+  box-shadow: $h $v $blur $spread rgba($gray-400, 0.2);
 }
 
 @mixin backgroundImage(
-	$height: 100%,
-	$position: center,
-	$overlayOpacity: 0.4,
-	$gradient: 'false'
+  $height: 100%,
+  $position: center,
+  $overlayOpacity: 0.4,
+  $gradient: 'false'
 ) {
-	position: relative;
-	height: $height;
-	background-repeat: no-repeat;
-	background-position: $position;
-	background-size: cover;
-	width: 100%;
-	&::before {
-		content: '';
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		background-color: rgba(#000, $overlayOpacity);
-		@if $gradient == 'true' {
-			background: linear-gradient(
-				0deg,
-				rgba(0, 0, 0, 0) 80%,
-				rgba(#000, 1) 100%
-			);
-			background-color: rgba(#000, $overlayOpacity);
-		}
-	}
+  position: relative;
+  height: $height;
+  background-repeat: no-repeat;
+  background-position: $position;
+  background-size: cover;
+  width: 100%;
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(#000, $overlayOpacity);
+    @if $gradient == 'true' {
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0) 80%,
+        rgba(#000, 1) 100%
+      );
+      background-color: rgba(#000, $overlayOpacity);
+    }
+  }
 }
 
 @mixin triangle-left($size: 4rem) {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	clip-path: polygon(0 0, 0% 90%, 90% 0);
-	height: $size;
-	width: $size;
-	background-color: $primary;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  clip-path: polygon(0 0, 0% 90%, 90% 0);
+  height: $size;
+  width: $size;
+  background-color: $primary;
 }
 
 @mixin featured-bg(
-	$position: right bottom,
-	$imageUrl: '../../assets/images/bg_feature1.png'
+  $position: right bottom,
+  $imageUrl: '../../assets/images/bg_feature1.png'
 ) {
-	background-repeat: no-repeat;
-	background-position: $position;
-	background-image: none;
+  background-repeat: no-repeat;
+  background-position: $position;
+  background-image: none;
 
-	@media (min-width: $xl) {
-		background-image: url($imageUrl);
-	}
+  @media (min-width: $xl) {
+    background-image: url($imageUrl);
+  }
 }

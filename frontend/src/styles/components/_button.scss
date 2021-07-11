@@ -1,81 +1,91 @@
 /** @format */
 @use '../abstracts' as *;
 
+button:disabled {
+  border: 1px solid $gray-400;
+  background-color: $gray-400;
+  &:hover {
+    background-color: $gray-400;
+    cursor: not-allowed;
+    color: $light;
+  }
+}
+
 .btn {
-	@include button;
+  @include button;
 }
 .btn__disabled {
-	@include button($background: $gray-400, $border: $gray-400);
-	pointer-events: none;
+  @include button($background: $gray-400, $border: $gray-400);
+  pointer-events: none;
 }
 
 .btn__outline {
-	@include button(
-		$color: $primary,
-		$background: transparent,
-		$hoverColor: $light,
-		$hoverBG: $primary
-	);
+  @include button(
+    $color: $primary,
+    $background: transparent,
+    $hoverColor: $light,
+    $hoverBG: $primary
+  );
 }
 .btn__outline__disabled {
-	@include button(
-		$color: $gray-400,
-		$background: transparent,
-		$border: $gray-400
-	);
-	pointer-events: none;
+  @include button(
+    $color: $gray-400,
+    $background: transparent,
+    $border: $gray-400
+  );
+  pointer-events: none;
 }
 
 .btn__outline-light {
-	@include button(
-		$color: $light,
-		$border: $light,
-		$background: transparent,
-		$hoverColor: $light,
-		$hoverBG: $primary
-	);
+  @include button(
+    $color: $light,
+    $border: $light,
+    $background: transparent,
+    $hoverColor: $light,
+    $hoverBG: $primary
+  );
 }
 
 .btn-lg {
-	font-size: 1.3rem;
-	padding: 0.7rem 2rem;
+  font-size: 1.3rem;
+  padding: 0.7rem 2rem;
 }
 
 .btn-block {
-	display: block;
-	width: 100%;
+  display: block;
+  width: 100%;
 }
 
 .btn-back__top {
-	position: fixed;
-	right: 1rem;
-	bottom: 5%;
-	color: $primary;
-	background-color: darken($dark, 10%);
-	padding: 0.9rem 0.5rem 0.5rem 0.5rem;
-	font-size: 1.7rem;
-	outline: none;
-	border: none;
-	opacity: 100;
-	cursor: pointer;
-	z-index: 10;
+  position: fixed;
+  right: 1rem;
+  bottom: 5%;
+  color: $primary;
+  background-color: darken($dark, 10%);
+  padding: 0.9rem 0.5rem 0.5rem 0.5rem;
+  font-size: 1.7rem;
+  outline: none;
+  border: none;
+  opacity: 100;
+  cursor: pointer;
+  z-index: 10;
 }
 
 .btn-hamburger {
-	color: $primary;
-	font-size: 2rem;
-	background: none;
-	border: none;
-	outline: none;
-	cursor: pointer;
-	&:hover {
-		transition: all 0.3s ease;
-		color: $primary-light;
-	}
+  color: $primary;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.3s ease;
+    color: $primary-light;
+  }
 }
 
 .hidden {
-	transition: all 0.3s ease;
-	opacity: 0;
-	pointer-events: none;
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
 }

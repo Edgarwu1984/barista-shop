@@ -3,84 +3,150 @@
 @use '../abstracts' as *;
 
 .shopping__cart {
-	@media (min-width: $md) {
-		@include flexbox($direction: column-reverse);
-	}
-	@media (min-width: $lg) {
-		@include flexbox($items: flex-start);
-	}
+  @media (min-width: $md) {
+    @include flexbox($direction: column-reverse);
+  }
+  @media (min-width: $lg) {
+    @include flexbox($items: flex-start);
+  }
 
-	.cart__container {
-		width: 100%;
+  .cart__container {
+    width: 100%;
 
-		.empty {
-			background-color: $gray-50;
-			height: 20rem;
+    .empty {
+      background-color: $gray-50;
+      height: 20rem;
 
-			a {
-				margin-top: 1rem;
-				color: $primary;
-				text-decoration: underline;
-			}
-		}
+      a {
+        margin-top: 1rem;
+        color: $primary;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.cart__list {
+  &-item {
+    @include flexbox($content: space-between);
+    @include shadow;
+    margin-bottom: auto;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 2rem;
+    padding: 1rem 2rem;
 
-		.cart__list {
-			&-item {
-				@include flexbox($content: space-between);
-				@include shadow;
-				margin-bottom: auto;
-				width: 100%;
-				background-color: white;
-				margin-bottom: 2rem;
-				padding: 1rem 2rem;
+    img {
+      width: 160px;
+      height: auto;
+    }
 
-				img {
-					width: 160px;
-					height: auto;
-				}
+    .item__info {
+      margin: 0 2rem;
+      width: 100%;
+      h4 {
+        text-align: left;
+      }
+    }
 
-				.item__info {
-					margin: 0 2rem;
-					width: 100%;
-					h4 {
-						text-align: left;
-					}
-				}
+    .remove__btn {
+      border: none;
+      background: none;
+      color: $primary-dark;
+      cursor: pointer;
+      &:hover {
+        transition: all 0.3s ease;
+        color: $primary-light;
+      }
+    }
+  }
+}
 
-				.remove__btn {
-					border: none;
-					background: none;
-					color: $primary-dark;
-					cursor: pointer;
-					&:hover {
-						transition: all 0.3s ease;
-						color: $primary-light;
-					}
-				}
-			}
-		}
-	}
-	.checkout {
-		align-self: flex-start;
-		background-color: white;
-		border: 1px solid $gray-200;
-		height: min-content;
-		padding: 2rem;
+.checkout {
+  align-self: flex-start;
+  background-color: white;
+  border: 1px solid $gray-200;
+  height: min-content;
+  padding: 2rem;
 
-		h4 {
-			@include flexbox($content: space-between);
-			width: 100%;
-			margin-bottom: 1rem;
-		}
+  h4 {
+    @include flexbox($content: space-between);
+    width: 100%;
+    margin-bottom: 1rem;
+  }
 
-		@media (min-width: $md) {
-			width: 100%;
-			margin-left: 0;
-			margin-bottom: 4rem;
-		}
-		@media (min-width: $lg) {
-			width: 30rem;
-			margin-left: 3rem;
-		}
-	}
+  @media (min-width: $md) {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 4rem;
+  }
+  @media (min-width: $lg) {
+    width: 30rem;
+    margin-left: 3rem;
+  }
+}
+
+.shipping {
+  justify-content: center;
+  flex-wrap: wrap-reverse;
+
+  & > * {
+    margin: 0 2rem;
+    background-color: white;
+    padding: 2rem;
+  }
+
+  &__form {
+    width: 100%;
+    .flex {
+      flex-direction: column;
+      & > * {
+        width: 100%;
+      }
+    }
+
+    @media (min-width: $lg) {
+      .flex {
+        flex-direction: row;
+        width: 100%;
+        & > * {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media (min-width: $lg) {
+    flex-wrap: nowrap;
+  }
+
+  .summary {
+    height: max-content;
+    width: 100%;
+    margin-bottom: 3rem;
+    @media (min-width: $lg) {
+      width: max-content;
+      margin-bottom: 0;
+    }
+
+    &__item {
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+
+      &-name {
+        width: 70%;
+      }
+    }
+
+    .total {
+      text-align: right;
+    }
+  }
+}
+
+.promotion-info {
+  text-align: center;
+  margin: 2rem auto;
+  padding: 1rem;
+  color: $primary;
+  background-color: rgba($primary, 0.1);
 }
