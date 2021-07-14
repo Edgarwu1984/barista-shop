@@ -1,6 +1,8 @@
 /** @format */
 
 import axios from 'axios';
+import { CART_RESET } from 'redux/constants/cartConstants';
+import { ORDER_MY_RESET } from 'redux/constants/orderConstants';
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -57,11 +59,10 @@ export const login = (email, password) => async dispatch => {
 // Logout
 export const logout = () => async dispatch => {
   localStorage.removeItem('userInfo');
-  localStorage.removeItem('cartItems');
-  localStorage.removeItem('shippingAddress');
-  localStorage.removeItem('paymentMethod');
-  dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: ORDER_MY_RESET });
+  dispatch({ type: CART_RESET });
+  dispatch({ type: USER_LOGOUT });
 };
 
 // Register
@@ -168,12 +169,16 @@ export const updateUserProfile = user => async (dispatch, getState) => {
 
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout());
+    }
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
-      payload:
-        error.response && error.response.data.messages
-          ? error.response.data.messages
-          : error.messages,
+      payload: message,
     });
   }
 };

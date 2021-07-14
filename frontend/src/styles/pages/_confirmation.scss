@@ -1,0 +1,21 @@
+@use '../abstracts' as *;
+
+.confirmation__container {
+  height: 100vh;
+  @include flexbox();
+}
+
+.confirmation__card {
+  background-color: white;
+  padding: 4rem;
+  @include shadow;
+  text-align: center;
+
+  h3 {
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .check_mark {
+    color: rgb(50, 205, 76);
+  }
+}

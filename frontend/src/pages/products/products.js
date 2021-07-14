@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { listChildProduct } from '../../redux/actions/productActions';
-import ScrollToTop from 'utils/ScrollToTop';
 import Hero from 'components/layout/Hero';
 import Layout from 'components/layout/Layout';
 import Divider from 'components/layout/Divider';
@@ -25,8 +24,6 @@ function ProductsPage({ match, history }) {
       dispatch(listChildProduct('equipment'));
     }
   }, [dispatch, match]);
-
-  ScrollToTop();
 
   return (
     <Layout title='Barista - Coffee'>

@@ -12,10 +12,10 @@ export default function CheckoutSteps({ step1, step2, step3 }) {
         )}
       </li>
       <li className='checkout__step-item'>
-        {step2 ? <NavLink to='/checkout'>Checkout</NavLink> : <p>Checkout</p>}
+        {step2 ? <NavLink to='/shipping'>Shipping</NavLink> : <p>Shipping</p>}
       </li>
       <li className='checkout__step-item'>
-        {step3 ? <NavLink to='/place-order'>Finish</NavLink> : <p>Finish</p>}
+        {step3 ? <NavLink to='/checkout'>Checkout</NavLink> : <p>Checkout</p>}
       </li>
     </nav>
   );

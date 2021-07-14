@@ -7,12 +7,14 @@ import {
   updateUserProfile,
   resetProfile,
 } from '../redux/actions/userActions';
+import { listMyOrders } from '../redux/actions/orderActions';
 import { toast } from 'react-toastify';
 import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Divider from 'components/layout/Divider';
 import Loader from 'components/Loader';
-import { bg8 } from 'assets';
+import { bg11 } from 'assets';
+import { Link } from 'react-router-dom';
 
 function ProfilePage({ history }) {
   const dispatch = useDispatch();
@@ -32,12 +34,16 @@ function ProfilePage({ history }) {
   const userUpdateProfile = useSelector(state => state.userUpdateProfile);
   const { success, updateError } = userUpdateProfile;
 
+  const orderListMy = useSelector(state => state.orderListMy);
+  const { loading: loadingOrders, error: errorMyOrders, orders } = orderListMy;
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/');
     } else {
-      if (!user || !user.name) {
+      if (!user || !user.name || !orders) {
         dispatch(getUserDetails('profile'));
+        dispatch(listMyOrders());
       } else if (success) {
         dispatch(resetProfile());
         toast.success('Profile has been updated.');
@@ -46,7 +52,11 @@ function ProfilePage({ history }) {
         toast.error(updateError);
       }
     }
-  }, [dispatch, history, userInfo, user, success, updateError]);
+  }, [dispatch, history, userInfo, user, success, updateError, orders]);
+
+  if (errorMyOrders) {
+    toast.error(errorMyOrders);
+  }
 
   const submitHandler = e => {
     e.preventDefault();
@@ -72,33 +82,36 @@ function ProfilePage({ history }) {
 
   return (
     <Layout>
-      <Hero bgImage={bg8} height='400px'>
+      <Hero bgImage={bg11} height='400px'>
         <div className='title-center'>
           <h1 className='mb-4'>Profile</h1>
           <Divider />
         </div>
       </Hero>
-      <div className='container wrapper'>
-        <div className='grid-3'>
+      <div className='container offset-top'>
+        <div className='welcome__info'>
+          <h2>Hello, {user.name}</h2>{' '}
+          {user.isAdmin && <span className='badge'>Admin</span>}{' '}
+        </div>
+        <div className='profile__container'>
           {loading ? (
             <Loader />
           ) : (
-            <div className='grid__child'>
-              <div className='grid__child-title'>
-                <h3>Hi, {user.name}</h3>{' '}
-                {user.isAdmin && <span className='badge'>Admin</span>}{' '}
-              </div>
+            <div className='profile__section profile'>
+              <h4 className='profile__section-title section-title mb-2'>
+                Personal Details
+              </h4>
               {isProfileEditMode ? (
                 <form className='form' onSubmit={submitHandler}>
                   <div className='form__group current__info'>
-                    <li>
+                    <p>
                       <strong className='mr-2'>Username:</strong>
                       {userInfo.name}
-                    </li>
-                    <li>
+                    </p>
+                    <p>
                       <strong className='mr-2'>Email:</strong>
                       {userInfo.email}
-                    </li>
+                    </p>
                   </div>
                   <div className='form__group'>
                     <label className='form__group-label'>New Username</label>
@@ -175,44 +188,93 @@ function ProfilePage({ history }) {
                   </div>
                 </form>
               ) : (
-                <ul>
-                  <li>
+                <div>
+                  <p>
                     <strong className='mr-2'>Username:</strong>
                     {userInfo && userInfo.name}
-                  </li>
-                  <li>
+                  </p>
+                  <p>
                     <strong className='mr-2'>Email:</strong>
                     {userInfo && userInfo.email}
-                  </li>
-                  <li>
+                  </p>
+                  <div>
                     <button
-                      className='btn mt-2'
+                      className='btn btn-sm mt-2'
                       onClick={() => setIsProfileEditMode(true)}
                     >
                       Edit Profile
                     </button>
-                  </li>
-                  <li>
+                  </div>
+                  <div>
                     <button
-                      className='btn mt-1'
+                      className='btn btn-sm mt-1'
                       onClick={() => setIsPasswordEditMode(true)}
                     >
                       Reset Password
                     </button>
-                  </li>
-                </ul>
+                  </div>
+                </div>
               )}
             </div>
           )}
 
-          <div className='grid__child span'>
-            <div className='grid__child-title'>
-              <h3>My Order</h3>
-            </div>
-            <ul>
-              <li></li>
-            </ul>
-          </div>
+          <section className='profile__section orders'>
+            <h4 className='profile__section-title section-title mb-2'>
+              My Orders
+            </h4>
+            {loadingOrders ? (
+              <Loader />
+            ) : (
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>DATE</th>
+                    <th>TOTAL</th>
+                    <th>PAID</th>
+                    <th>DELIVERED</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {orders.map(order => (
+                    <tr key={order._id}>
+                      <td>{order._id}</td>
+                      <td>{order.createdAt.substring(0, 10)}</td>
+                      <td>$ {order.totalPrice.toFixed(2)}</td>
+                      {order.isPaid ? (
+                        <td>{order.paidAt.substring(0, 10)}</td>
+                      ) : (
+                        <td>
+                          {' '}
+                          <span className='text-danger'>Not Paid</span>{' '}
+                        </td>
+                      )}
+                      {order.isDelivered ? (
+                        <td>{order.deliveredAt.substring(0, 10)}</td>
+                      ) : (
+                        <td>
+                          {' '}
+                          <span className='text-danger'>
+                            Not Delivered
+                          </span>{' '}
+                        </td>
+                      )}
+                      <td>
+                        <Link
+                          className='btn btn__outline btn-sm'
+                          to={`/orders/${order._id}`}
+                        >
+                          Details
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </section>
         </div>
       </div>
     </Layout>

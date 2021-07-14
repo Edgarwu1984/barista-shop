@@ -17,6 +17,7 @@ import bg7 from './images/bg7.png';
 import bg8 from './images/bg8.png';
 import bg9 from './images/bg9.jpg';
 import bg10 from './images/bg10.jpg';
+import bg11 from './images/bg11.jpg';
 import feature1 from './images/bg_feature1.png';
 import feature2 from './images/bg_feature2.png';
 import cup from './images/cup.png';
@@ -40,6 +41,7 @@ export {
   bg8,
   bg9,
   bg10,
+  bg11,
   cup,
   pot,
   feature1,

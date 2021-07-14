@@ -2,52 +2,51 @@
 
 @use '../abstracts' as *;
 
-.profile__wrapper {
-	@include shadow();
-	background-color: white;
-	min-height: 460px;
-	margin-top: -5rem;
-	margin-bottom: 5rem;
-	padding: 2rem;
+.welcome__info {
+  background-color: white;
+  padding: 2rem;
+  // margin-bottom: 2rem;
+  h2 {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $gray-300;
+  }
 }
 
-.grid__child {
-	width: 100%;
-	// padding: 2rem;
-	// background-color: yellow;
-	&-title {
-		border-bottom: 1px solid $gray-200;
-		padding: 1rem 0rem 2rem 0rem;
-		margin-bottom: 1rem;
-		@include flexbox($content: space-between);
-	}
-	ul {
-		padding: 1rem 0;
-		li {
-			margin-bottom: 1rem;
-			strong {
-				margin-right: 1rem;
-			}
-		}
-	}
+.profile__container {
+  @include flexbox($items: flex-start, $direction: column);
+  background-color: white;
+  padding: 0rem;
+
+  @media (min-width: $lg) {
+    @include flexbox($items: flex-start);
+    padding: 2rem;
+  }
 }
 
-.span {
-	grid-column: span 2/-1;
+.profile__section {
+  padding: 1rem;
 }
 
-.current__info {
-	background-color: rgba($gray-200, 0.2);
-	border: 1px solid $gray-200;
-	padding: 1rem !important;
-	margin-top: 0;
+.profile {
+  min-width: 30rem;
+  margin-bottom: 2rem;
+}
 
-	li {
-		&:first-child {
-			margin-bottom: 1rem;
-		}
-		strong {
-			margin-right: 1rem;
-		}
-	}
+.orders {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+  overflow-x: scroll;
+
+  th {
+    background-color: $gray-100;
+    padding: 0.7rem 0;
+  }
+  td {
+    padding: 1rem 0.25rem;
+  }
 }

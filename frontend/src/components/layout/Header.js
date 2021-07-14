@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/actions/userActions';
 import { toast } from 'react-toastify';
@@ -17,6 +17,7 @@ import {
 import { logo } from 'assets';
 
 export default function Header() {
+  let history = useHistory();
   const [showEvent, setShowEvent] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -28,7 +29,8 @@ export default function Header() {
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
-  // console.log(userInfo);
+  // Calculate cart item number
+  const cartItemAmount = cartItems.reduce((acc, item) => acc + item.qty, 0);
 
   useEffect(() => {
     window.addEventListener('scroll', handleEvent);
@@ -48,6 +50,7 @@ export default function Header() {
   const handleMenu = () => setShowMenu(!showMenu);
 
   const handleLogout = () => {
+    history.push('/');
     dispatch(resetProfile());
     dispatch(logout());
     toast.success('Logged out');
@@ -115,8 +118,8 @@ export default function Header() {
               </li>
             )}
             <li className='nav__menu-item'>
-              {cartItems.length > 0 && (
-                <span className='item__count'>{cartItems.length}</span>
+              {cartItemAmount > 0 && (
+                <span className='item__count'>{cartItemAmount}</span>
               )}
               <Link to='/cart'>
                 <FiShoppingCart size='1.5rem' />

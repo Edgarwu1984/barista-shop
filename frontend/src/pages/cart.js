@@ -1,11 +1,10 @@
 /** @format */
 
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../redux/actions/cartActions';
 import { toast } from 'react-toastify';
-import ScrollToTop from 'utils/ScrollToTop';
 import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Divider from 'components/layout/Divider';
@@ -13,12 +12,8 @@ import { FaTrashAlt } from 'lib/icons';
 import { bg10 } from 'assets';
 import CheckoutSteps from 'components/CheckoutSteps';
 
-function CartPage({ match, location, history }) {
-  const productId = match.params.id;
-
-  const qty = location.search
-    ? Number(location.search.split('&')[1].split('=')[1])
-    : 1;
+function CartPage() {
+  let history = useHistory();
 
   const dispatch = useDispatch();
 
@@ -26,23 +21,13 @@ function CartPage({ match, location, history }) {
 
   const { cartItems, error } = cart;
 
-  const category = location.search.split('&')[0].split('=')[1]; // Get added item's category
-
-  useEffect(() => {
-    if (productId) {
-      dispatch(addToCart(productId, qty, category));
-    }
-  }, [dispatch, productId, qty, category]);
-
-  ScrollToTop();
-
   const removeFromCartHandler = id => {
     dispatch(removeFromCart(id));
     toast.success('Product removed.');
   };
 
   const checkoutHandler = () => {
-    history.push('/login?redirect=checkout');
+    history.push('/login?redirect=shipping');
   };
 
   if (error) {

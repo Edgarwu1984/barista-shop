@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails } from '../../redux/actions/productActions';
 import { addToCart } from 'redux/actions/cartActions';
-import ScrollToTop from 'utils/ScrollToTop';
 import { toast } from 'react-toastify';
 
 import Layout from 'components/layout/Layout';
@@ -25,7 +24,6 @@ function SingleProductPage({ match }) {
 
   const { cartItems } = useSelector(state => state.cart);
 
-  // console.log(cartItems);
   const { loading, error, product } = productDetails;
 
   const checkCart = () => {
@@ -41,15 +39,13 @@ function SingleProductPage({ match }) {
     dispatch(listProductDetails(category, productId));
   }, [dispatch, productId, category]);
 
-  ScrollToTop();
-
   useEffect(() => {
     checkCart();
   });
 
   const addToCartHandler = () => {
     if (productId) {
-      dispatch(addToCart(productId, qty, category));
+      dispatch(addToCart(productId, +qty, category));
       toast.success('New Product added.');
     }
   };
@@ -119,7 +115,7 @@ function SingleProductPage({ match }) {
                 {product.countInStock > 0 && (
                   <input
                     type='number'
-                    min='0'
+                    min={1}
                     max={product.countInStock}
                     value={qty}
                     onChange={e => setQty(e.target.value)}

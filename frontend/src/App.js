@@ -17,7 +17,9 @@ import SingleProductPage from 'pages/products/singleProduct';
 import LoginPage from 'pages/login';
 import RegisterPage from 'pages/register';
 import ProfilePage from 'pages/profile';
-import CheckOutPage from 'pages/checkout';
+import ShippingPage from 'pages/shipping';
+import ConfirmationPage from 'pages/confirmation';
+import CheckoutPage from 'pages/checkout';
 
 function App() {
   return (
@@ -38,7 +40,9 @@ function App() {
         <Route path='/login' component={LoginPage} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/profile' component={ProfilePage} />
-        <Route path='/checkout' component={CheckOutPage} />
+        <Route path='/shipping' component={ShippingPage} />
+        <Route path='/confirm/:id' component={ConfirmationPage} />
+        <Route path='/checkout/:id' component={CheckoutPage} />
         <Route exact path='/' component={HomePage} />
         <Route exact path='/shop' component={ShopPage} />
         <Route exact path='/shop/coffee' component={ProductsPage} />

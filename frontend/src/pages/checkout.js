@@ -1,261 +1,178 @@
 /** @format */
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  saveShippingAddress,
-  savePaymentMethods,
-} from '../redux/actions/cartActions';
-import { createOrder } from '../redux/actions/orderActions';
+import { getOrderDetails, payOrder } from '../redux/actions/orderActions';
+import { toast } from 'react-toastify';
+import { PayPalButton } from 'react-paypal-button-v2';
 import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Divider from 'components/layout/Divider';
-import { toast } from 'react-toastify';
-
 import { bg10 } from 'assets';
+import Loader from 'components/Loader';
+import LocalTimeFormatter from 'utils/LocalTimeFormatter';
 import CheckoutSteps from 'components/CheckoutSteps';
 
-function CheckOutPage({ history }) {
+function CheckoutPage({ match, history }) {
+  const orderId = match.params.id;
+
+  const [sdkReady, setSdkReady] = useState(false);
+
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart);
-  const { shippingAddress, cartItems } = cart;
-  const userLogin = useSelector(state => state.userLogin);
-  const { userInfo } = userLogin;
+  const orderDetails = useSelector(state => state.orderDetails);
+  const { loading, order, error } = orderDetails;
 
-  const [address, setAddress] = useState(shippingAddress.address);
-  const [suburb, setSuburb] = useState(shippingAddress.suburb);
-  const [state, setState] = useState(shippingAddress.state);
-  const [postCode, setPostCode] = useState(shippingAddress.postCode);
-  const [paymentMethod, setPaymentMethod] = useState('PayPal');
-
-  // Calculate Prices
-  const totalItemPrice = cartItems
-    .reduce((acc, item) => acc + item.price * item.qty, 0)
-    .toFixed(2);
-
-  const shippingPrice = (totalItemPrice > 50 ? 0 : 20).toFixed(2);
-
-  const taxPrice = Number(0.1 * totalItemPrice).toFixed(2);
-
-  const totalPrice = (+totalItemPrice + +shippingPrice + +taxPrice).toFixed(2);
-
-  const orderCreate = useSelector(state => state.orderCreate);
-  const { order, success, error } = orderCreate;
+  const orderPay = useSelector(state => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
 
   useEffect(() => {
-    if (success) {
-      history.push(`/order/${order._id}`);
-    }
-  }, [history, success, order]);
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get('/api/config/paypal');
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
 
-  useEffect(() => {
-    if (address || state || suburb || postCode || paymentMethod) {
-      dispatch(saveShippingAddress({ address, postCode, suburb, state }));
-      dispatch(savePaymentMethods(paymentMethod));
+    if (!order || orderId !== order._id) {
+      dispatch(getOrderDetails(orderId));
+    } else if (successPay) {
+      history.push(`/confirm/${orderId}`);
+    } else if (!order.isPaid) {
+      if (!window.paypal) {
+        addPayPalScript();
+      } else {
+        setSdkReady(true);
+      }
     }
-  }, [address, state, suburb, postCode, paymentMethod, dispatch]);
+  }, [dispatch, order, orderId, successPay, history]);
 
-  const submitHandler = e => {
-    e.preventDefault();
-    dispatch(
-      createOrder({
-        orderItems: cartItems,
-        itemsPrice: totalItemPrice,
-        shippingAddress: shippingAddress,
-        paymentMethod: paymentMethod,
-        taxPrice: taxPrice,
-        shippingPrice: shippingPrice,
-        totalPrice: totalPrice,
-      })
-    );
-
-    if (error) {
-      toast.error(error);
-    }
-    // history.push('/payment');
+  const successPaymentHandler = paymentResult => {
+    dispatch(payOrder(orderId, paymentResult));
   };
+
+  if (error) {
+    toast.error(error);
+  }
 
   return (
     <Layout>
-      <Hero bgImage={bg10} height='300px'>
+      <Hero bgImage={bg10} height='360px'>
         <div className='title-center'>
-          <h1 className='mb-4'>Check Out</h1>
+          <h1 className='mt-4'>Your Order</h1>
           <Divider />
         </div>
       </Hero>
-
-      <div className='container py-3'>
-        <CheckoutSteps step1 step2 />
-        <div className='flex shipping'>
-          <form className='shipping__form'>
-            <h3 className='mb-1'>Billing Details</h3>
-            <div className='flex space-between'>
-              <div className='form__group mr-2'>
-                <p className='form__group-title'>Name</p>
-                <input
-                  className='form__group-control'
-                  id='name'
-                  type='text'
-                  defaultValue={userInfo.name}
-                  disabled
-                />
-              </div>
-              <div className='form__group'>
-                <p className='form__group-title'>Email</p>
-                <input
-                  className='form__group-control'
-                  id='name'
-                  type='email'
-                  defaultValue={userInfo.email}
-                  disabled
-                />
-              </div>
+      <div className='container wrapper'>
+        <CheckoutSteps step1 step2 step3 />
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className='order'>
+            <div className='order-details'>
+              <section className='details__section'>
+                <h3 className='mb-1 section-title'>Shipping Details</h3>
+                <p>
+                  <strong>Order Number: </strong>
+                  {order._id}
+                </p>
+                <p>
+                  <strong>Name: </strong>
+                  {order.user.name}
+                </p>
+                <p>
+                  <strong>Email: </strong>
+                  {order.user.email}
+                </p>
+                <p>
+                  <strong>Address: </strong>
+                  {Object.values(order.shippingAddress).join(' ')}
+                </p>
+              </section>
+              <section className='details__section'>
+                <h3 className='mb-1 section-title'>Payment Method</h3>
+                <p>
+                  <strong>Method: </strong>
+                  {order.paymentMethod}
+                </p>
+                <p>
+                  <strong>Status: </strong>
+                  {order.isPaid ? (
+                    <span>
+                      <strong>Paid At:</strong>{' '}
+                      {LocalTimeFormatter(order.paidAt)}
+                    </span>
+                  ) : (
+                    <span>Not Paid</span>
+                  )}
+                </p>
+              </section>
+              <section className='details__section'>
+                <h3 className='mb-1 section-title'>Order Items</h3>
+                <ul className='order__list'>
+                  {order.orderItems.map(item => (
+                    <li className='order__list-item' key={item._id}>
+                      <div className='item__info'>
+                        <img
+                          className='item__info-image'
+                          src={item.image}
+                          alt={item.name}
+                        />
+                        <p className='item__info-name'>{item.name}</p>
+                      </div>
+                      <p>
+                        {item.qty} x ${item.price.toFixed(2)} = $
+                        {(item.qty * item.price).toFixed(2)}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
             </div>
-
-            <div className='form__group'>
-              <p className='form__group-title'>Address</p>
-              <input
-                className='form__group-control'
-                id='address'
-                type='text'
-                defaultValue={address}
-                required
-                onChange={e => setAddress(e.target.value)}
-              />
-            </div>
-            <div className='flex space-between'>
-              <div className='form__group mr-2'>
-                <p className='form__group-title'>Suburb</p>
-                <select
-                  className='form__group-control'
-                  id='cities'
-                  defaultValue={suburb}
-                  required
-                  onChange={e => setSuburb(e.target.value)}
-                >
-                  <option value='' hidden>
-                    - Select Suburb -
-                  </option>
-                  <option value='Berwick'>Berwick</option>
-                  <option value='Boxhill'>Boxhill</option>
-                  <option value='Blackburn'>Blackburn</option>
-                  <option value='Doncaster'>Doncaster</option>
-                  <option value='Doncaster East'>Doncaster East</option>
-                  <option value='Melbourne'>Melbourne</option>
-                </select>
+            <div className='order-summary'>
+              <h3 className='mb-1 section-title'>Order Summary</h3>
+              <div className='summary__list'>
+                <p>
+                  <strong>Gross Price: </strong>${' '}
+                  {order.orderItems
+                    .reduce((acc, item) => acc + item.price * item.qty, 0)
+                    .toFixed(2)}
+                </p>
+                <p>
+                  <strong>Shipping Price: </strong>${' '}
+                  {order.shippingPrice.toFixed(2)}
+                </p>
+                <p>
+                  <strong>GST: </strong>$ {order.taxPrice.toFixed(2)}
+                </p>
+                <p>
+                  <strong>Total Price: </strong>$ {order.totalPrice.toFixed(2)}
+                </p>
               </div>
-              <div className='form__group mr-2'>
-                <p className='form__group-title'>State</p>
-                <select
-                  className='form__group-control'
-                  id='states'
-                  defaultValue={state}
-                  required
-                  onChange={e => setState(e.target.value)}
-                >
-                  <option value='' hidden>
-                    - Select State -
-                  </option>
-                  <option value='VIC'>VIC</option>
-                  <option value='NSW'>NSW</option>
-                  <option value='ACT'>ACT</option>
-                  <option value='NT'>NT</option>
-                  <option value='SA'>SA</option>
-                  <option value='WA'>WA</option>
-                  <option value='TAS'>TAS</option>
-                </select>
-              </div>
-              <div className='form__group'>
-                <p className='form__group-title'>Postcode</p>
-                <input
-                  className='form__group-control'
-                  type='number'
-                  id='postcode'
-                  defaultValue={postCode}
-                  required
-                  onChange={e => setPostCode(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <h3 className='mb-1 mt-3'>Payment Methods</h3>
-            <div className='form__group'>
-              <div className='radio'>
-                <input
-                  type='radio'
-                  id='PayPal'
-                  name='paymentMethod'
-                  value='PayPal'
-                  checked
-                  onChange={e => setPaymentMethod(e.target.value)}
-                />
-                <label className='radio-label'>PayPal</label>
-                <img
-                  className='radio-img'
-                  src='/images/paypal.png'
-                  alt='paypal'
-                />
-              </div>
-            </div>
-          </form>
-
-          <div className='summary'>
-            <h3 className='mb-1'>Order Summary</h3>
-            {cartItems.length === 0 ? (
-              <h3>Empty cart.</h3>
-            ) : (
-              cartItems.map(item => (
-                <div
-                  className='flex space-between summary__item'
-                  key={item.product}
-                >
-                  <span className='summary__item-name'>
-                    {item.qty} x {item.name}
-                  </span>
-                  <span className='summary__item-price'>
-                    $ {(item.price * item.qty).toFixed(2)}
-                  </span>
+              {!order.isPaid && (
+                <div className='mt-3'>
+                  {loadingPay && <Loader />}
+                  {!sdkReady ? (
+                    <Loader />
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    />
+                  )}
                 </div>
-              ))
-            )}
-            <hr />
-            <div className='flex space-between summary__item'>
-              <span className='summary__item-name'>Total Item Price:</span>
-              <span className='summary__item-price'>$ {totalItemPrice}</span>
-            </div>
-            <div className='flex space-between summary__item'>
-              <span className='summary__item-name'>Delivery Fee:</span>
-              <span className='summary__item-price'>$ {shippingPrice}</span>
-            </div>
-            <div className='flex space-between summary__item'>
-              <span className='summary__item-name'>GST:</span>
-              <span className='summary__item-price'>$ {taxPrice}</span>
-            </div>
-            <h4 className='total'>Total: $ {totalPrice}</h4>
-
-            <div className='form__group mt-3'>
-              {!address || !state || !suburb || !postCode || !paymentMethod ? (
-                <button
-                  className='btn btn-block'
-                  disabled
-                  onClick={submitHandler}
-                >
-                  Place Order
-                </button>
-              ) : (
-                <button className='btn btn-block' onClick={submitHandler}>
-                  Place Order
-                </button>
               )}
-              <div className='summary__item promotion-info'>
-                Get Free Delivery when you shopping over $50.
-              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </Layout>
   );
 }
 
-export default CheckOutPage;
+export default CheckoutPage;

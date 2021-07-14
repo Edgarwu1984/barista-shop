@@ -24,6 +24,10 @@ h4 {
   font-size: 1.3rem;
 }
 
+strong {
+  font-weight: 600;
+}
+
 .lead {
   font-size: 1rem;
   margin-bottom: 1rem;
@@ -36,13 +40,14 @@ h4 {
 .section-title {
   position: relative;
   text-transform: uppercase;
+  padding-left: 1.25rem;
   &::before {
     position: absolute;
     content: ' ';
     height: 60%;
     width: 0.3rem;
     top: 50%;
-    left: -1rem;
+    left: 0;
     transform: translateY(-50%);
     background-color: $primary;
   }
@@ -90,4 +95,12 @@ p {
   h4 {
     font-size: 1.5rem;
   }
+}
+
+.text-success {
+  color: green;
+}
+
+.text-danger {
+  color: rgb(219, 43, 43);
 }
