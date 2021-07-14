@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getUserDetails,
@@ -14,7 +15,6 @@ import Hero from 'components/layout/Hero';
 import Divider from 'components/layout/Divider';
 import Loader from 'components/Loader';
 import { bg11 } from 'assets';
-import { Link } from 'react-router-dom';
 
 function ProfilePage({ history }) {
   const dispatch = useDispatch();

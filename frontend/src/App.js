@@ -20,6 +20,7 @@ import ProfilePage from 'pages/profile';
 import ShippingPage from 'pages/shipping';
 import ConfirmationPage from 'pages/confirmation';
 import CheckoutPage from 'pages/checkout';
+import OrderPage from 'pages/order';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path='/login' component={LoginPage} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/profile' component={ProfilePage} />
+        <Route path='/orders/:id' component={OrderPage} />
         <Route path='/shipping' component={ShippingPage} />
         <Route path='/confirm/:id' component={ConfirmationPage} />
         <Route path='/checkout/:id' component={CheckoutPage} />
