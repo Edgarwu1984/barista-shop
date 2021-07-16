@@ -101,8 +101,13 @@ export default function Header() {
                 </p>
                 <ul className='nav__dropdown'>
                   <li className='nav__dropdown-item'>
-                    <NavLink to='/profile'>{userInfo.name}</NavLink>
+                    <Link to='/profile'>{userInfo.name}</Link>
                   </li>
+                  {userInfo && userInfo.isAdmin && (
+                    <li className='nav__dropdown-item'>
+                      <Link to='/admin/dashboard'>dashboard</Link>
+                    </li>
+                  )}
                   <li className='nav__dropdown-item'>
                     <Link to='#' onClick={handleLogout}>
                       Log out

@@ -9,7 +9,7 @@ import Layout from 'components/layout/Layout';
 import Divider from 'components/layout/Divider';
 import Product from 'components/Product';
 import ContactForm from 'components/ContactForm';
-import { bg3 } from 'assets';
+import { bg2, bg3, bg4 } from 'assets';
 
 function ProductsPage({ match, history }) {
   const category = match.path.split('/')[2];
@@ -26,8 +26,20 @@ function ProductsPage({ match, history }) {
   }, [dispatch, match]);
 
   return (
-    <Layout title='Barista - Coffee'>
-      <Hero bgImage={bg3}>
+    <Layout
+      title={`Barista - ${
+        category.charAt(0).toUpperCase() + category.slice(1)
+      }`}
+    >
+      <Hero
+        bgImage={
+          match.path === '/shop/coffee'
+            ? bg3
+            : match.path === '/shop/equipment'
+            ? bg4
+            : bg2
+        }
+      >
         <div className='center'>
           <h1 className='uppercase'>{category}</h1>
           <Divider />

@@ -2,97 +2,97 @@
 @use '../abstracts' as *;
 
 .hero {
-	@include backgroundImage($gradient: 'true');
+  @include backgroundImage($gradient: 'true');
 
-	.hero__wrapper {
-		color: $light;
-		height: 100%;
-		@include flexbox($direction: column);
+  .hero__wrapper {
+    color: $light;
+    height: 100%;
+    @include flexbox($direction: column);
 
-		.title-right,
-		.title-center {
-			@include flexbox($direction: column);
+    .title-right,
+    .title-center {
+      @include flexbox($direction: column);
 
-			h1 {
-				font-size: 2.5rem;
-			}
-			p {
-				max-width: 70%;
-				text-align: center;
-				color: $gray-300;
-				font-size: 1.1rem;
-				margin: 1rem 0 3rem 0;
-			}
+      h1 {
+        font-size: 2.5rem;
+      }
+      p {
+        max-width: 70%;
+        text-align: center;
+        color: $gray-300;
+        font-size: 1.1rem;
+        margin: 1rem 0 3rem 0;
+      }
 
-			.btn-lg {
-				font-size: 1rem;
-				padding: 0.7rem 1.5rem;
-			}
-		}
+      .btn-lg {
+        font-size: 1rem;
+        padding: 0.7rem 1.5rem;
+      }
+    }
 
-		.title-right {
-			max-width: 100%;
-		}
+    .title-right {
+      max-width: 100%;
+    }
 
-		.title-center {
-			width: 100%;
-			margin: 0 auto;
-			h1 {
-				font-size: 2.3rem;
-			}
-		}
+    .title-center {
+      width: 100%;
+      margin: 0 auto;
+      h1 {
+        font-size: 2.3rem;
+      }
+    }
 
-		@media (min-width: $md) {
-			.title-right,
-			.title-center {
-				h1 {
-					font-size: 4rem;
-				}
-				p {
-					max-width: 70%;
-				}
-			}
-			.title-right {
-				max-width: 100%;
-			}
-			.title-center {
-				h1 {
-					font-size: 3rem;
-				}
-			}
-		}
+    @media (min-width: $md) {
+      .title-right,
+      .title-center {
+        h1 {
+          font-size: 3rem;
+        }
+        p {
+          max-width: 70%;
+        }
+      }
+      .title-right {
+        max-width: 100%;
+      }
+      .title-center {
+        h1 {
+          font-size: 3rem;
+        }
+      }
+    }
 
-		@media (min-width: $lg) {
-			.title-right,
-			.title-center {
-				h1 {
-					font-size: 4.5rem;
-				}
-				.btn-lg {
-					font-size: 1.3rem;
-					padding: 0.7rem 2rem;
-				}
-			}
-		}
-		@media (min-width: $xl) {
-			.title-right,
-			.title-center {
-				h1 {
-					font-size: 6.5rem;
-				}
-				p {
-					max-width: 100%;
-				}
-			}
-			.title-right {
-				max-width: 50%;
-				margin-left: auto;
-			}
-			.title-center {
-				h1 {
-					font-size: 4rem;
-				}
-			}
-		}
-	}
+    @media (min-width: $lg) {
+      .title-right,
+      .title-center {
+        h1 {
+          font-size: 3.5rem;
+        }
+        .btn-lg {
+          font-size: 1.3rem;
+          padding: 0.7rem 2rem;
+        }
+      }
+    }
+    @media (min-width: $xl) {
+      .title-right,
+      .title-center {
+        h1 {
+          font-size: 6.5rem;
+        }
+        p {
+          max-width: 100%;
+        }
+      }
+      .title-right {
+        max-width: 50%;
+        margin-left: auto;
+      }
+      .title-center {
+        h1 {
+          font-size: 4rem;
+        }
+      }
+    }
+  }
 }

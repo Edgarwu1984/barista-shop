@@ -97,7 +97,7 @@ function RegisterPage({ location, history }) {
             <input
               className='form__group-control btn'
               type='submit'
-              value='Login'
+              value='Sign Up'
             />
           </div>
           <div className='form__group'>

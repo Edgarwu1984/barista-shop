@@ -35,18 +35,3 @@
 .orders {
   width: 100%;
 }
-
-table {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 2rem;
-  overflow-x: scroll;
-
-  th {
-    background-color: $gray-100;
-    padding: 0.7rem 0;
-  }
-  td {
-    padding: 1rem 0.25rem;
-  }
-}

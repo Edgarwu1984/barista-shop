@@ -90,8 +90,10 @@ function ProfilePage({ history }) {
       </Hero>
       <div className='container offset-top'>
         <div className='welcome__info'>
-          <h2>Hello, {user.name}</h2>{' '}
-          {user.isAdmin && <span className='badge'>Admin</span>}{' '}
+          <h2>
+            Hello, {user.name}{' '}
+            {user.isAdmin && <span className='badge'>Admin</span>}{' '}
+          </h2>{' '}
         </div>
         <div className='profile__container'>
           {loading ? (

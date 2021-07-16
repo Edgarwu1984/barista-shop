@@ -16,6 +16,12 @@ function ShopPage({ history }) {
   const productList = useSelector(state => state.productList);
   const { loading, error, products } = productList;
 
+  const coffees = products.filter(product => product.category === 'coffee');
+
+  const equipments = products.filter(
+    product => product.category === 'equipment'
+  );
+
   useEffect(() => {
     dispatch(listProduct());
   }, [dispatch]);
@@ -71,19 +77,18 @@ function ShopPage({ history }) {
                 <h3>{error}</h3>
               ) : (
                 <div className='grid-4'>
-                  {!products ? (
+                  {!coffees ? (
                     <h3>No products.</h3>
                   ) : (
-                    products.map(
-                      product =>
-                        product.category === 'coffee' && (
-                          <Product
-                            key={product._id}
-                            product={product}
-                            history={history}
-                          />
-                        )
-                    )
+                    coffees
+                      .slice(0, 4)
+                      .map(product => (
+                        <Product
+                          key={product._id}
+                          product={product}
+                          history={history}
+                        />
+                      ))
                   )}
                 </div>
               )}
@@ -104,19 +109,18 @@ function ShopPage({ history }) {
                 <h3>{error}</h3>
               ) : (
                 <div className='grid-4'>
-                  {!products ? (
-                    <h3>No products.</h3>
+                  {!equipments ? (
+                    <h3>No equipments.</h3>
                   ) : (
-                    products.map(
-                      product =>
-                        product.category === 'equipment' && (
-                          <Product
-                            key={product._id}
-                            product={product}
-                            history={history}
-                          />
-                        )
-                    )
+                    equipments
+                      .slice(0, 4)
+                      .map(equipment => (
+                        <Product
+                          key={equipment._id}
+                          product={equipment}
+                          history={history}
+                        />
+                      ))
                   )}
                 </div>
               )}
