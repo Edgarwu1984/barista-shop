@@ -14,12 +14,21 @@ import ProductList from 'components/ProductList';
 
 function DashboardPage({ history }) {
   const dispatch = useDispatch();
+
+  // Get User List && Handle User
+  const userLogin = useSelector(state => state.userLogin);
+  const { userInfo } = userLogin;
+
   const userList = useSelector(state => state.userList);
   const { loading: usersLoading, error: usersError, users } = userList;
 
-  const userDelete = useSelector(state => state.userDelete);
-  const { success: successDelete } = userDelete;
+  const userUpdate = useSelector(state => state.userUpdate);
+  const { success: updateUserSuccess } = userUpdate;
 
+  const userDelete = useSelector(state => state.userDelete);
+  const { success: successUserDelete } = userDelete;
+
+  // Get Product List && Handle Product
   const productList = useSelector(state => state.productList);
   const {
     loading: productsLoading,
@@ -27,23 +36,24 @@ function DashboardPage({ history }) {
     products,
   } = productList;
 
-  const userUpdate = useSelector(state => state.userUpdate);
-  const { success: successUpdate } = userUpdate;
-
-  const userLogin = useSelector(state => state.userLogin);
-  const { userInfo } = userLogin;
+  const productDelete = useSelector(state => state.productDelete);
+  const { success: deleteProductSuccess } = productDelete;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listUsers());
-      dispatch(listProduct());
-    } else if (successUpdate) {
-      dispatch(listUsers());
-      dispatch(listProduct());
-    } else {
+    if (!userInfo && !userInfo.isAdmin) {
       history.push('/');
+    } else {
+      dispatch(listUsers());
+      dispatch(listProduct());
     }
-  }, [dispatch, userInfo, history, successDelete, successUpdate]);
+  }, [
+    dispatch,
+    userInfo,
+    history,
+    successUserDelete,
+    updateUserSuccess,
+    deleteProductSuccess,
+  ]);
 
   if (usersError || productsError) {
     toast.error(usersError);

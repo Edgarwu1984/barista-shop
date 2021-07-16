@@ -3,14 +3,18 @@
 import express from 'express';
 const router = express.Router();
 import {
-	getProducts,
-	getCoffees,
-	getEquipments,
-	getSingleCoffee,
-	getSingleEquipment,
+  getProducts,
+  getCoffees,
+  getEquipments,
+  getSingleCoffee,
+  getSingleEquipment,
+  deleteProductById,
 } from '../controllers/productController.js';
+import { protect, isAdmin } from '../middleware/authMiddleware.js';
 
 router.route('/').get(getProducts);
+
+router.route('/:id').delete(protect, isAdmin, deleteProductById);
 
 router.route('/coffee').get(getCoffees);
 

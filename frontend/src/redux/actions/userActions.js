@@ -291,7 +291,7 @@ export const deleteUser = id => async (dispatch, getState) => {
     dispatch({
       type: USER_DELETE_SUCCESS,
     });
-    dispatch({ type: USER_LIST_RESET });
+    // dispatch({ type: USER_LIST_RESET });
   } catch (error) {
     dispatch({
       type: USER_DELETE_FAIL,
