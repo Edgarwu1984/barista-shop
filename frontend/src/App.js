@@ -22,6 +22,7 @@ import ConfirmationPage from 'pages/confirmation';
 import CheckoutPage from 'pages/checkout';
 import OrderPage from 'pages/order';
 import DashboardPage from 'pages/dashboard';
+import ProductEditPage from 'pages/products/productEdit';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path='/register' component={RegisterPage} />
         <Route path='/profile' component={ProfilePage} />
         <Route path='/admin/dashboard' component={DashboardPage} />
+        <Route path='/admin/products/:id/edit' component={ProductEditPage} />
         <Route path='/orders/:id' component={OrderPage} />
         <Route path='/shipping' component={ShippingPage} />
         <Route path='/confirm/:id' component={ConfirmationPage} />

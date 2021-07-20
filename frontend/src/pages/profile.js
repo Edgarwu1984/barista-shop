@@ -37,11 +37,14 @@ function ProfilePage({ history }) {
   const orderListMy = useSelector(state => state.orderListMy);
   const { loading: loadingOrders, error: errorMyOrders, orders } = orderListMy;
 
+  const orderDeliver = useSelector(state => state.orderDeliver);
+  const { success: deliverSuccess } = orderDeliver;
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/');
     } else {
-      if (!user || !user.name || !orders) {
+      if (!user || !user.name || !orders || deliverSuccess) {
         dispatch(getUserDetails('profile'));
         dispatch(listMyOrders());
       } else if (success) {
@@ -52,7 +55,16 @@ function ProfilePage({ history }) {
         toast.error(updateError);
       }
     }
-  }, [dispatch, history, userInfo, user, success, updateError, orders]);
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    user,
+    success,
+    updateError,
+    orders,
+    deliverSuccess,
+  ]);
 
   if (errorMyOrders) {
     toast.error(errorMyOrders);

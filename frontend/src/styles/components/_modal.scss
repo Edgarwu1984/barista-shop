@@ -6,7 +6,7 @@
   width: max-content;
   height: auto;
   padding: 2rem;
-  overflow: hidden;
+  // overflow: hidden;
 
   &__header {
     display: flex;
@@ -39,8 +39,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100vh;
+  bottom: 0;
+  margin: 0;
+  right: 0;
+
   background-color: rgba(0, 0, 0, 0.7);
   @include flexbox();
   z-index: 999;

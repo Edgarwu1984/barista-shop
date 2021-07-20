@@ -1,6 +1,7 @@
 /** @format */
 
 import expressAsyncHandler from 'express-async-handler';
+import Product from '../models/productModel.js';
 import Products from '../models/productModel.js';
 
 // @description Fetch all Products
@@ -10,6 +11,66 @@ import Products from '../models/productModel.js';
 const getProducts = expressAsyncHandler(async (req, res) => {
   const products = await Products.find({});
   res.json(products);
+});
+
+// @description Get Product by ID
+// @route GET /api/products/:id
+// @access Public
+
+const getProductById = expressAsyncHandler(async (req, res) => {
+  const product = await Products.findById(req.params.id);
+
+  if (product) {
+    res.json(product);
+  } else {
+    res.status(404);
+    throw new Error('Product not Found.');
+  }
+});
+
+// @description Create Product
+// @route POST /api/products
+// @access Private/Admin
+
+const createProduct = expressAsyncHandler(async (req, res) => {
+  const product = new Product({
+    name: 'Product name',
+    category: 'Uncategorized',
+    image: '/images/products/sample.jpg',
+    description: 'Product description',
+    price: 0,
+    countInStock: 0,
+    numReviews: 0,
+    user: req.user._id,
+  });
+
+  const createdProduct = await product.save();
+  res.status(201).json(createdProduct);
+});
+
+// @description Update Product
+// @route PUT /api/products/:id
+// @access Private/Admin
+
+const updateProduct = expressAsyncHandler(async (req, res) => {
+  const { name, category, image, description, price, countInStock } = req.body;
+
+  const product = await Products.findById(req.params.id);
+
+  if (product) {
+    product.name = name;
+    product.category = category;
+    product.image = image;
+    product.description = description;
+    product.price = price;
+    product.countInStock = countInStock;
+
+    const updatedProduct = await product.save();
+    res.json(updatedProduct);
+  } else {
+    res.status(404);
+    throw new Error('Product not found.');
+  }
 });
 
 // @description Delete Product by ID
@@ -28,75 +89,10 @@ const deleteProductById = expressAsyncHandler(async (req, res) => {
   }
 });
 
-// @description Fetch All Coffee
-// @route GET /api/products/coffee
-// @access Public
-const getCoffees = expressAsyncHandler(async (req, res) => {
-  const coffees = await Products.find({ category: 'coffee' });
-
-  if (coffees) {
-    res.json(coffees);
-  } else {
-    // res.status(404).json({ message: 'Product not found' });
-    // We have setup custom error handler middleware, so we can throw a new Error
-    res.status(404);
-    throw new Error('Oops..Products not found.');
-  }
-});
-
-// @description Fetch All Equipments
-// @route GET /api/products/equipment
-// @access Public
-const getEquipments = expressAsyncHandler(async (req, res) => {
-  const equipments = await Products.find({ category: 'equipment' });
-
-  if (equipments) {
-    res.json(equipments);
-  } else {
-    res.status(404);
-    throw new Error('Oops..Products not found.');
-  }
-});
-
-// @description Fetch single coffee
-// @route GET /api/products/coffee/:id
-// @access Public
-const getSingleCoffee = expressAsyncHandler(async (req, res) => {
-  const coffee = await Products.findOne({
-    category: 'coffee',
-    _id: req.params.id,
-  });
-
-  if (coffee) {
-    res.json(coffee);
-  } else {
-    res.status(404);
-    throw new Error('Oops..Coffee not found.');
-  }
-});
-
-// @description Fetch single equipment
-// @route GET /api/products/equipment/:id
-// @access Public
-const getSingleEquipment = expressAsyncHandler(async (req, res) => {
-  const equipment = await Products.findOne({
-    category: 'equipment',
-    _id: req.params.id,
-  });
-
-  if (equipment) {
-    res.json(equipment);
-  } else {
-    res.status(404);
-    throw new Error('Oops..Equipment not found.');
-  }
-});
-
 export {
   getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
   deleteProductById,
-  getCoffees,
-  getEquipments,
-  getSingleCoffee,
-  getSingleEquipment,
 };

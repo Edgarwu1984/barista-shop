@@ -1,26 +1,41 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrderDetails } from 'redux/actions/orderActions';
+import { deliverOrder, getOrderDetails } from 'redux/actions/orderActions';
 import Divider from 'components/layout/Divider';
 import Hero from 'components/layout/Hero';
 import Layout from 'components/layout/Layout';
 import Loader from 'components/Loader';
 import LocalTimeFormatter from 'utils/LocalTimeFormatter';
 import { bg10 } from '../assets';
+import { toast } from 'react-toastify';
 
-function OrderPage({ match, history }) {
+function OrderPage({ match }) {
   const orderId = match.params.id;
   const dispatch = useDispatch();
+
+  const userLogin = useSelector(state => state.userLogin);
+  const { userInfo } = userLogin;
 
   const orderDetails = useSelector(state => state.orderDetails);
   const { loading, order, error } = orderDetails;
 
+  const orderDeliver = useSelector(state => state.orderDeliver);
+  const { success: deliverSuccess } = orderDeliver;
+
+  if (error) {
+    toast.error(error);
+  }
+
   useEffect(() => {
-    if (!order || orderId !== order._id) {
+    if (!order || orderId !== order._id || deliverSuccess) {
       dispatch(getOrderDetails(orderId));
     }
-  }, [dispatch, order, orderId]);
+  }, [dispatch, order, orderId, deliverSuccess]);
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order));
+  };
 
   return (
     <Layout title='Order Details'>
@@ -56,6 +71,12 @@ function OrderPage({ match, history }) {
                 <p>
                   <strong>Address: </strong>
                   {Object.values(order.shippingAddress).join(' ')}
+                </p>
+                <p>
+                  <strong>Deliver Status: </strong>
+                  {order.isDelivered
+                    ? `Delivered at ${LocalTimeFormatter(order.deliveredAt)}`
+                    : 'Not Delivered'}
                 </p>
               </section>
               <section className='details__section'>
@@ -119,6 +140,13 @@ function OrderPage({ match, history }) {
                   <strong>Total Price: </strong>$ {order.totalPrice.toFixed(2)}
                 </p>
               </div>
+              {userInfo.isAdmin && !order.isDelivered ? (
+                <div className='mt-3'>
+                  <button className='btn btn-block' onClick={deliverHandler}>
+                    Deliver Order
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
         )}

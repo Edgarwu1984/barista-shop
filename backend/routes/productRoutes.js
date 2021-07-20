@@ -4,25 +4,20 @@ import express from 'express';
 const router = express.Router();
 import {
   getProducts,
-  getCoffees,
-  getEquipments,
-  getSingleCoffee,
-  getSingleEquipment,
+  getProductById,
+  updateProduct,
+  createProduct,
   deleteProductById,
 } from '../controllers/productController.js';
 import { protect, isAdmin } from '../middleware/authMiddleware.js';
 
-router.route('/').get(getProducts);
+router.route('/').get(getProducts).post(protect, isAdmin, createProduct);
 
-router.route('/:id').delete(protect, isAdmin, deleteProductById);
-
-router.route('/coffee').get(getCoffees);
-
-router.route('/equipment').get(getEquipments);
-
-router.route('/coffee/:id').get(getSingleCoffee);
-
-router.route('/equipment/:id').get(getSingleEquipment);
+router
+  .route('/:id')
+  .get(getProductById)
+  .put(protect, isAdmin, updateProduct)
+  .delete(protect, isAdmin, deleteProductById);
 
 export default router;
 

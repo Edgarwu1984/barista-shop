@@ -10,6 +10,7 @@ import Divider from 'components/layout/Divider';
 import Product from 'components/Product';
 import ContactForm from 'components/ContactForm';
 import { bg2, bg3, bg4 } from 'assets';
+import Loader from 'components/Loader';
 
 function ProductsPage({ match, history }) {
   const category = match.path.split('/')[2];
@@ -18,10 +19,10 @@ function ProductsPage({ match, history }) {
   const { loading, error, products } = childProductList;
 
   useEffect(() => {
-    if (match.path === '/shop/coffee') {
-      dispatch(listChildProduct('coffee'));
-    } else if (match.path === '/shop/equipment') {
-      dispatch(listChildProduct('equipment'));
+    const category = match.path.split('/')[2];
+
+    if (match.path === `/shop/${category}`) {
+      dispatch(listChildProduct(category));
     }
   }, [dispatch, match]);
 
@@ -61,25 +62,19 @@ function ProductsPage({ match, history }) {
           <div className='wrapper'>
             <main>
               {loading ? (
-                <div className='center'>
-                  <img src='/images/loader.svg' alt='loading' />
-                  <p>Loading....</p>
-                </div>
+                <Loader />
               ) : error ? (
                 <h3>{error}</h3>
               ) : (
                 <div className='grid-4'>
-                  {!products ? (
-                    <h3>No products.</h3>
-                  ) : (
+                  {products &&
                     products.map(product => (
                       <Product
                         key={product._id}
                         product={product}
                         history={history}
                       />
-                    ))
-                  )}
+                    ))}
                 </div>
               )}
             </main>

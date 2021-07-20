@@ -171,6 +171,21 @@
 
 .flex {
   display: flex;
+  & > * {
+    width: 100%;
+  }
+  flex-direction: column;
+  @media (min-width: $lg) {
+    flex-direction: row;
+  }
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.content-center {
+  justify-content: center;
 }
 
 .space-between {

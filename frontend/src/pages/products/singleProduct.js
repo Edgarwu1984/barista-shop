@@ -11,6 +11,7 @@ import Layout from 'components/layout/Layout';
 import Hero from 'components/layout/Hero';
 import Rating from 'components/Rating';
 import { bg5 } from 'assets';
+import Loader from 'components/Loader';
 
 function SingleProductPage({ match }) {
   const [qty, setQty] = useState(1);
@@ -36,8 +37,10 @@ function SingleProductPage({ match }) {
   };
 
   useEffect(() => {
-    dispatch(listProductDetails(category, productId));
-  }, [dispatch, productId, category]);
+    if (!product._id || product._id !== match.params.id) {
+      dispatch(listProductDetails(productId));
+    }
+  }, [dispatch, product, match, productId]);
 
   useEffect(() => {
     checkCart();
@@ -45,7 +48,7 @@ function SingleProductPage({ match }) {
 
   const addToCartHandler = () => {
     if (productId) {
-      dispatch(addToCart(productId, +qty, category));
+      dispatch(addToCart(productId, +qty));
       toast.success('New Product added.');
     }
   };
@@ -54,7 +57,7 @@ function SingleProductPage({ match }) {
     <Layout>
       <Hero bgImage={bg5} height='400px'>
         {loading ? (
-          <h2>loading..</h2>
+          <Loader />
         ) : error ? (
           <h2>{error}</h2>
         ) : (
@@ -62,10 +65,7 @@ function SingleProductPage({ match }) {
         )}
       </Hero>
       {loading ? (
-        <div className='center'>
-          <img src='/images/loader.svg' alt='loading' />
-          <p>Loading....</p>
-        </div>
+        <Loader />
       ) : error ? (
         <div className='container'>
           <div className='wrapper center' style={{ height: '35vh' }}>

@@ -11,6 +11,8 @@ import Tabs from 'components/Tabs';
 import UserList from 'components/UserList';
 import { listProduct } from 'redux/actions/productActions';
 import ProductList from 'components/ProductList';
+import OrderList from 'components/OrderList';
+import { listOrders } from 'redux/actions/orderActions';
 
 function DashboardPage({ history }) {
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ function DashboardPage({ history }) {
   const { success: updateUserSuccess } = userUpdate;
 
   const userDelete = useSelector(state => state.userDelete);
-  const { success: successUserDelete } = userDelete;
+  const { success: deleteUserSuccess } = userDelete;
 
   // Get Product List && Handle Product
   const productList = useSelector(state => state.productList);
@@ -36,28 +38,42 @@ function DashboardPage({ history }) {
     products,
   } = productList;
 
+  const productCreate = useSelector(state => state.productCreate);
+  const { success: createSuccess } = productCreate;
+
+  const productUpdate = useSelector(state => state.productUpdate);
+  const { success: updateProductSuccess } = productUpdate;
+
   const productDelete = useSelector(state => state.productDelete);
   const { success: deleteProductSuccess } = productDelete;
 
+  // Get Order List && Handle Order
+  const orderList = useSelector(state => state.orderList);
+  const { loading: ordersLoading, error: ordersError, orders } = orderList;
+
   useEffect(() => {
-    if (!userInfo && !userInfo.isAdmin) {
-      history.push('/');
-    } else {
+    if (userInfo && userInfo.isAdmin) {
       dispatch(listUsers());
       dispatch(listProduct());
+      dispatch(listOrders());
+    } else {
+      history.push('/');
     }
   }, [
     dispatch,
     userInfo,
     history,
-    successUserDelete,
     updateUserSuccess,
+    deleteUserSuccess,
+    createSuccess,
+    updateProductSuccess,
     deleteProductSuccess,
   ]);
 
-  if (usersError || productsError) {
+  if (usersError || productsError || ordersError) {
     toast.error(usersError);
     toast.error(productsError);
+    toast.error(ordersError);
   }
 
   return (
@@ -74,10 +90,14 @@ function DashboardPage({ history }) {
             {usersLoading ? <Loader /> : <UserList users={users} />}
           </div>
           <div label='Products'>
-            {productsLoading ? <Loader /> : <ProductList products={products} />}
+            {productsLoading ? (
+              <Loader />
+            ) : (
+              <ProductList products={products} history={history} />
+            )}
           </div>
           <div label='Orders'>
-            <h4>Orders</h4>
+            {ordersLoading ? <Loader /> : <OrderList orders={orders} />}
           </div>
         </Tabs>
       </div>
